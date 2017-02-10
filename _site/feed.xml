@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.4.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-02-10T14:59:17-05:00</updated><id>http://localhost:4000//</id><title type="html">Mauricio Caceres</title><subtitle>Hi! I am a research assistant based in Cambridge, MA. I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University.
+This is my personal website, meant to force myself to speed along some coding projects I've had in the back-burner throughout the past year.
+</subtitle><entry><title type="html">Installing Arch: Setting up the system</title><link href="http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI.html" rel="alternate" type="text/html" title="Installing Arch: Setting up the system" /><published>2017-02-10T08:28:24-05:00</published><updated>2017-02-10T08:28:24-05:00</updated><id>http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI</id><content type="html" xml:base="http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI.html">&lt;p&gt;I am a fan of &lt;a href=&quot;https://en.wikipedia.org/wiki/GNU/Linux&quot;&gt;GNU/Linux&lt;/a&gt; (or
+just “Linux” if you hate Richard Stallman). My first Linux distro was
+&lt;a href=&quot;https://www.ubuntu.com/&quot;&gt;Ubuntu&lt;/a&gt; but, alas, it was not meant to be.
+Though Ubuntu is truly awesome for putting ease of use front and center,
+over time my idea of “ease of use” started to drift from Ubuntu’s idea
+of ease of use.&lt;/p&gt;
+
+&lt;p&gt;These days I have gravitated towards Arch. The
+&lt;a href=&quot;https://wiki.archlinux.org&quot;&gt;Arch wiki&lt;/a&gt; is awesome
+and a half, and they have a full &lt;a href=&quot;https://wiki.archlinux.org/index.php/Beginners%27_guide&quot;&gt;installation
+guide&lt;/a&gt;
+available. However, there is a specific setup I like most and this is
+meant to summarize that setup into an easy-to-follow step-by-step guide.&lt;/p&gt;
+
+&lt;p&gt;Commands between &lt;code class=&quot;highlighter-rouge&quot;&gt;[encryption-lvm]&lt;/code&gt; tags need only be run if you want
+to set up encryption with LVM and they are run in lieu of commands
+in &lt;code class=&quot;highlighter-rouge&quot;&gt;[standatd]&lt;/code&gt; tags (LVM is recommended; easiest guide I found is
+&lt;a href=&quot;http://www.brandonkester.com/tech/2013/03/16/full-disk-encryption
+-in-arch-linux-with-uefi.html&quot;&gt;here&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&quot;step-1-partition-and-format-the-drive&quot;&gt;Step 1: Partition and format the drive&lt;/h2&gt;
+
+&lt;p&gt;Some basic sanity checks&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls /sys/firmware/efi/efivars &lt;span class=&quot;c&quot;&gt;# Should be populated&lt;/span&gt;
+wifi-menu                    &lt;span class=&quot;c&quot;&gt;# Will connect automatically&lt;/span&gt;
+timedatectl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-ntp &lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;timedatectl status
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now partition the disk (EFI)&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# I use parted; alternatively use gdisk or cdisk&lt;/span&gt;
+parted /dev/sda
+mklabel gpt
+mkpart ESP fat32 1MiB 513MiB
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;1 boot on
+
+&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+mkpart primary ext4 513MiB 100%
+&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# [standard]&lt;/span&gt;
+mkpart primary linux-swap 513MiB 8.5GiB
+mkpart primary ext4 8.5GiB 100%
+&lt;span class=&quot;c&quot;&gt;# [standard]&lt;/span&gt;
+
+quit
+mkfs.vfat /dev/sda1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Format drive and mount&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+cryptsetup luksFormat /dev/sda2
+cryptsetup open --type luks /dev/sda2 lvm
+pvcreate /dev/mapper/lvm
+vgcreate vol0 /dev/mapper/lvm
+lvcreate --name lvswap -L 6GB vol0
+lvcreate --name lvroot -l 100%FREE vol0
+mkswap /dev/mapper/vol0-lvswap
+swapon /dev/mapper/vol0-lvswap
+mkfs.ext4 /dev/mapper/vol0-lvroot
+mount /dev/mapper/vol0-lvroot /mnt
+&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# [standard]&lt;/span&gt;
+mkfs.ext4 /dev/sda3
+mkswap /dev/sda2
+swapon /dev/sda2
+mount /dev/sda3 /mnt
+&lt;span class=&quot;c&quot;&gt;# [standard]&lt;/span&gt;
+
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
+pacstrap -i /mnt base base-devel
+&lt;span class=&quot;c&quot;&gt;# If you get a PGP key error, do&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# dirmngr &amp;lt;/dev/null&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# pacman-key --populate archlinux&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# pacman-key --refresh-keys&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Then retun pacstrap&lt;/span&gt;
+genfstab -U /mnt &amp;gt; /mnt/etc/fstab
+cp /etc/netctl/yournetworkname /mnt/etc/netctl/yournetworkname
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you want to mount extra partitions, make sure you mounted them here. For instance, &lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir  /mnt/mnt/large &amp;amp;&amp;amp; mount /dev/sdY1 /mnt/mnt/large&lt;/code&gt; or something, &lt;em&gt;BEFORE&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;genfstab&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;step-2-chroot-and-install-base-system&quot;&gt;Step 2: Chroot and install base system&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arch-chroot /mnt /bin/bash
+
+locale-gen
+localectl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-locale &lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
+vi /etc/locale.gen &lt;span class=&quot;c&quot;&gt;# Uncomment en_US.UTF-8&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8 &amp;gt; /etc/locale.conf
+&lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cat /etc/locale.conf&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+locale-gen
+
+tzselect
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+hwclock --systohc --utc
+
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;vm.swappiness&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10 &amp;gt; /etc/sysctl.d/99-sysctl.conf
+vi /etc/pacman.conf &lt;span class=&quot;c&quot;&gt;# Uncomment multilib&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;hostname &amp;gt; /etc/hostname
+vi /etc/hosts
+&lt;span class=&quot;c&quot;&gt;# Copy the 127.0.0.1 and replace localhost with hostname&lt;/span&gt;
+
+pacman -Sy
+pacman -S iw wpa_supplicant dialog intel-ucode
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;step-3-configure-the-boot-loader&quot;&gt;Step 3: Configure the boot loader&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Pro-tip:&lt;/strong&gt;&lt;/em&gt; I have occasionally messed up my bootloader; when that happens I fire up a live arch USB, mount my partitions (using lvm if applicable), chroot into the system, and fix the bootloader here.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bootctl install
+cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;blkid /dev/sdb2&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &amp;gt;&amp;gt; /boot/loader/entries/arch.conf
+&lt;span class=&quot;c&quot;&gt;# File should look like this&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   title   Arch Lnux&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   linux   /vmlinuz-linux&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   initrd  /initramfs-linux.img&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   options cryptdevice=UUID=&amp;lt;INSERT-UUID-HERE&amp;gt;:lvm:allow-discards resume=/dev/mapper/vol0-lvswap root=/dev/mapper/vol0-lvroot rw quiet&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# [standard]&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   options root=PARTUUID=&amp;lt;INSERT-PARTUUID-HERE&amp;gt; rootfstype=ext4 rw&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# [standard]&lt;/span&gt;
+
+bootctl update
+&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# vi /etc/mkinitcpio.conf&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   Add &quot;keymap encrypt lvm2 resume&quot; to HOOKS=&quot;...&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#   HOOKS=&quot;base udev autodetect modconf block keymap encrypt lvm2 resume filesystems keyboard fsck&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+
+mkinitcpio -p linux
+passwd
+&lt;span class=&quot;nb&quot;&gt;exit
+&lt;/span&gt;umount -R /mnt/boot
+umount -R /mnt
+reboot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;step-4-set-up-your-own-user-account&quot;&gt;Step 4: Set up your own user account&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;useradd -m -s /bin/bash user
+passwd user
+visudo &lt;span class=&quot;c&quot;&gt;# Add to end of file: user ALL=(ALL) ALL&lt;/span&gt;
+pacman -S sudo bash-completion git rfkill
+&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Log in and install install pacaur. You can use &lt;code class=&quot;highlighter-rouge&quot;&gt;pacaur&lt;/code&gt; (though I think using &lt;code class=&quot;highlighter-rouge&quot;&gt;yaourt&lt;/code&gt; is more standard) to query the &lt;a href=&quot;aur.archlinux.org&quot;&gt;Arch User Repositories (AUR)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir ~/Documents
+mkdir ~/Downloads
+mkdir ~/Pictures
+mkdir ~/Music
+mkdir ~/Videos
+
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Downloads
+git clone https://aur.archlinux.org/package-query
+git clone https://aur.archlinux.org/yaourt
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;package-query
+makepkg -si
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ../yaourt
+makepkg -si
+
+&lt;span class=&quot;c&quot;&gt;# yaourt is supposedly standard but can be very annoying.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# I've been trying out pacaur&lt;/span&gt;
+gpg --recv-keys 1EB2638FF56C0C53
+yaourt -S pacaur
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can now follow my preferred setup or go to &lt;a href=&quot;http://https://wiki.archlinux.org/index.php/General_recommendations&quot;&gt;the recommendations page&lt;/a&gt;&lt;/p&gt;</content><summary type="html">I am a fan of GNU/Linux (or
+just “Linux” if you hate Richard Stallman). My first Linux distro was
+Ubuntu but, alas, it was not meant to be.
+Though Ubuntu is truly awesome for putting ease of use front and center,
+over time my idea of “ease of use” started to drift from Ubuntu’s idea
+of ease of use.</summary></entry></feed>

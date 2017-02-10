@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Installing Arch: Setting up the system</title>
+  <meta name="description" content="I am a fan of GNU/Linux (or just “Linux” if you hate Richard Stallman). My first Linux distro was Ubuntu but, alas, it was not meant to be. Though Ubuntu is ...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI.html">
+  <link rel="alternate" type="application/rss+xml" title="Mauricio Caceres" href="/feed.xml">
+  
+  
+
+  <link href="/assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Mauricio Caceres</a>
+
+    <nav class="site-nav">
+      <span class="menu-icon">
+        <svg viewBox="0 0 18 15" width="18px" height="15px">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </span>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/coding">Coding</a>
+          
+        
+          
+          <a class="page-link" href="/assets/cv.pdf">CV</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/research/">Research</a>
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Installing Arch: Setting up the system</h1>
+    <p class="post-meta"><time datetime="2017-02-10T08:28:24-05:00" itemprop="datePublished">Feb 10, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>I am a fan of <a href="https://en.wikipedia.org/wiki/GNU/Linux">GNU/Linux</a> (or
+just “Linux” if you hate Richard Stallman). My first Linux distro was
+<a href="https://www.ubuntu.com/">Ubuntu</a> but, alas, it was not meant to be.
+Though Ubuntu is truly awesome for putting ease of use front and center,
+over time my idea of “ease of use” started to drift from Ubuntu’s idea
+of ease of use.</p>
+
+<p>These days I have gravitated towards Arch. The
+<a href="https://wiki.archlinux.org">Arch wiki</a> is awesome
+and a half, and they have a full <a href="https://wiki.archlinux.org/index.php/Beginners%27_guide">installation
+guide</a>
+available. However, there is a specific setup I like most and this is
+meant to summarize that setup into an easy-to-follow step-by-step guide.</p>
+
+<p>Commands between <code class="highlighter-rouge">[encryption-lvm]</code> tags need only be run if you want
+to set up encryption with LVM and they are run in lieu of commands
+in <code class="highlighter-rouge">[standatd]</code> tags (LVM is recommended; easiest guide I found is
+<a href="http://www.brandonkester.com/tech/2013/03/16/full-disk-encryption
+-in-arch-linux-with-uefi.html">here</a>).</p>
+
+<h2 id="step-1-partition-and-format-the-drive">Step 1: Partition and format the drive</h2>
+
+<p>Some basic sanity checks</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>ls /sys/firmware/efi/efivars <span class="c"># Should be populated</span>
+wifi-menu                    <span class="c"># Will connect automatically</span>
+timedatectl <span class="nb">set</span>-ntp <span class="nb">true
+</span>timedatectl status
+</code></pre>
+</div>
+
+<p>Now partition the disk (EFI)</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># I use parted; alternatively use gdisk or cdisk</span>
+parted /dev/sda
+mklabel gpt
+mkpart ESP fat32 1MiB 513MiB
+<span class="nb">set </span>1 boot on
+
+<span class="c"># [encryption-lvm]</span>
+mkpart primary ext4 513MiB 100%
+<span class="c"># [encryption-lvm]</span>
+
+<span class="c"># [standard]</span>
+mkpart primary linux-swap 513MiB 8.5GiB
+mkpart primary ext4 8.5GiB 100%
+<span class="c"># [standard]</span>
+
+quit
+mkfs.vfat /dev/sda1
+</code></pre>
+</div>
+
+<p>Format drive and mount</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># [encryption-lvm]</span>
+cryptsetup luksFormat /dev/sda2
+cryptsetup open --type luks /dev/sda2 lvm
+pvcreate /dev/mapper/lvm
+vgcreate vol0 /dev/mapper/lvm
+lvcreate --name lvswap -L 6GB vol0
+lvcreate --name lvroot -l 100%FREE vol0
+mkswap /dev/mapper/vol0-lvswap
+swapon /dev/mapper/vol0-lvswap
+mkfs.ext4 /dev/mapper/vol0-lvroot
+mount /dev/mapper/vol0-lvroot /mnt
+<span class="c"># [encryption-lvm]</span>
+
+<span class="c"># [standard]</span>
+mkfs.ext4 /dev/sda3
+mkswap /dev/sda2
+swapon /dev/sda2
+mount /dev/sda3 /mnt
+<span class="c"># [standard]</span>
+
+mkdir /mnt/boot
+mount /dev/sda1 /mnt/boot
+pacstrap -i /mnt base base-devel
+<span class="c"># If you get a PGP key error, do</span>
+<span class="c"># dirmngr &lt;/dev/null</span>
+<span class="c"># pacman-key --populate archlinux</span>
+<span class="c"># pacman-key --refresh-keys</span>
+<span class="c"># Then retun pacstrap</span>
+genfstab -U /mnt &gt; /mnt/etc/fstab
+cp /etc/netctl/yournetworkname /mnt/etc/netctl/yournetworkname
+</code></pre>
+</div>
+
+<p><strong>NOTE:</strong> If you want to mount extra partitions, make sure you mounted them here. For instance, <code class="highlighter-rouge">mkdir  /mnt/mnt/large &amp;&amp; mount /dev/sdY1 /mnt/mnt/large</code> or something, <em>BEFORE</em> <code class="highlighter-rouge">genfstab</code>.</p>
+
+<h2 id="step-2-chroot-and-install-base-system">Step 2: Chroot and install base system</h2>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>arch-chroot /mnt /bin/bash
+
+locale-gen
+localectl <span class="nb">set</span>-locale <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+vi /etc/locale.gen <span class="c"># Uncomment en_US.UTF-8</span>
+<span class="nb">echo </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8 &gt; /etc/locale.conf
+<span class="nb">export</span> <span class="sb">`</span>cat /etc/locale.conf<span class="sb">`</span>
+locale-gen
+
+tzselect
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+hwclock --systohc --utc
+
+<span class="nb">echo </span>vm.swappiness<span class="o">=</span>10 &gt; /etc/sysctl.d/99-sysctl.conf
+vi /etc/pacman.conf <span class="c"># Uncomment multilib</span>
+
+<span class="nb">echo </span>hostname &gt; /etc/hostname
+vi /etc/hosts
+<span class="c"># Copy the 127.0.0.1 and replace localhost with hostname</span>
+
+pacman -Sy
+pacman -S iw wpa_supplicant dialog intel-ucode
+</code></pre>
+</div>
+
+<h2 id="step-3-configure-the-boot-loader">Step 3: Configure the boot loader</h2>
+
+<p><em><strong>Pro-tip:</strong></em> I have occasionally messed up my bootloader; when that happens I fire up a live arch USB, mount my partitions (using lvm if applicable), chroot into the system, and fix the bootloader here.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>bootctl install
+cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
+<span class="nb">echo</span> <span class="sb">`</span>blkid /dev/sdb2<span class="sb">`</span> &gt;&gt; /boot/loader/entries/arch.conf
+<span class="c"># File should look like this</span>
+<span class="c">#   title   Arch Lnux</span>
+<span class="c">#   linux   /vmlinuz-linux</span>
+<span class="c">#   initrd  /initramfs-linux.img</span>
+<span class="c"># [encryption-lvm]</span>
+<span class="c">#   options cryptdevice=UUID=&lt;INSERT-UUID-HERE&gt;:lvm:allow-discards resume=/dev/mapper/vol0-lvswap root=/dev/mapper/vol0-lvroot rw quiet</span>
+<span class="c"># [encryption-lvm]</span>
+<span class="c"># [standard]</span>
+<span class="c">#   options root=PARTUUID=&lt;INSERT-PARTUUID-HERE&gt; rootfstype=ext4 rw</span>
+<span class="c"># [standard]</span>
+
+bootctl update
+<span class="c"># [encryption-lvm]</span>
+<span class="c"># vi /etc/mkinitcpio.conf</span>
+<span class="c">#   Add "keymap encrypt lvm2 resume" to HOOKS="..."</span>
+<span class="c">#   HOOKS="base udev autodetect modconf block keymap encrypt lvm2 resume filesystems keyboard fsck"</span>
+<span class="c"># [encryption-lvm]</span>
+
+mkinitcpio -p linux
+passwd
+<span class="nb">exit
+</span>umount -R /mnt/boot
+umount -R /mnt
+reboot
+</code></pre>
+</div>
+
+<h2 id="step-4-set-up-your-own-user-account">Step 4: Set up your own user account</h2>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>useradd -m -s /bin/bash user
+passwd user
+visudo <span class="c"># Add to end of file: user ALL=(ALL) ALL</span>
+pacman -S sudo bash-completion git rfkill
+<span class="nb">exit</span>
+</code></pre>
+</div>
+
+<p>Log in and install install pacaur. You can use <code class="highlighter-rouge">pacaur</code> (though I think using <code class="highlighter-rouge">yaourt</code> is more standard) to query the <a href="aur.archlinux.org">Arch User Repositories (AUR)</a>.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>mkdir ~/Documents
+mkdir ~/Downloads
+mkdir ~/Pictures
+mkdir ~/Music
+mkdir ~/Videos
+
+<span class="nb">cd</span> ~/Downloads
+git clone https://aur.archlinux.org/package-query
+git clone https://aur.archlinux.org/yaourt
+<span class="nb">cd </span>package-query
+makepkg -si
+<span class="nb">cd</span> ../yaourt
+makepkg -si
+
+<span class="c"># yaourt is supposedly standard but can be very annoying.</span>
+<span class="c"># I've been trying out pacaur</span>
+gpg --recv-keys 1EB2638FF56C0C53
+yaourt -S pacaur
+</code></pre>
+</div>
+
+<p>You can now follow my preferred setup or go to <a href="http://https://wiki.archlinux.org/index.php/General_recommendations">the recommendations page</a></p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <!-- <h2 class="footer&#45;heading">Mauricio Caceres</h2> -->
+    <h2 class="footer-heading">Contact</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Mauricio Caceres
+            
+            </li>
+            
+            <li><a href="mailto:mauricio.caceres.bravo@gmail.com">mauricio.caceres.bravo@gmail.com</a></li>
+            
+        </ul>
+<!-- 
+      </div>
+-->
+
+        <!-- 
+                <ul class="social-media-list">
+                  
+
+                  
+                  <li>
+                    <a href="https://github.com/mcaceresb"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">mcaceresb</span></a>
+
+                  </li>
+                  
+
+                  
+
+                  
+                  <li>
+                    <a href="https://medium.com/@mcaceresb"><span class="icon"><i class="fa fa-medium" aria-hidden="true"></i></span><span class="username"> mcaceresb</span></a>
+
+                  </li>
+                  
+                </ul>
+         -->
+
+<!-- 
+         <div class="footer-col footer-col-3">
+-->
+             <ul class="social-media-list">
+                 
+
+                 
+                 <li>
+                     <a href="https://github.com/mcaceresb"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">mcaceresb</span></a>
+
+                 </li>
+                 
+
+                 
+
+                 
+                 <li>
+                     <a href="https://medium.com/@mcaceresb"><span class="icon"><i class="fa fa-medium" aria-hidden="true"></i></span><span class="username"> mcaceresb</span></a>
+
+                 </li>
+                 
+             </ul>
+         </div>
+
+
+
+    </div>
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

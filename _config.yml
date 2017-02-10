@@ -1,1 +1,37 @@
-theme: jekyll-theme-slate
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Mauricio Caceres
+email: mauricio.caceres.bravo@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+    Hi! I am a research assistant based in Cambridge, MA. I double-majored in
+    mathematics and economics at the University of Utah and I have a Master's
+    degree in economics from Columbia University.
+
+    This is my personal website, meant to force myself to speed along some
+    coding projects I've had in the back-burner throughout the past year.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+github_username: mcaceresb
+medium_username: mcaceresb
+
+# Build settings
+markdown: kramdown
+theme: minima
+gems:
+  - jekyll-feed
+exclude:
+  - Gemfile
+  - Gemfile.lock

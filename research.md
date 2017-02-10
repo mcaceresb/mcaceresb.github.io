@@ -9,5 +9,4 @@ I am an aspiring researcher and have applied for economics PhD programs for the 
 ### Publications
 
 [The effects on insurance costs of restricting undocumented immigrants’ access to driver licenses](http://onlinelibrary.wiley.com/doi/10.1002/soej.12022/full) (with [Kenneth P. Jameson](http://content.csbs.utah.edu/~jameson)). _Southern Economic Journal_, 81, no. 4: 907–927.
-Cáceres, Mauricio and Jameson, Kenneth. P. (2015), 
 - Winner of the Southern Economic Association’s [2015 Georgescu-Roegen Prize](https://www.southerneconomic.org/the-georgescu-roegen-prize) for best academic article.

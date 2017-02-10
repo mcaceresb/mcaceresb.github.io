@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.4.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-02-10T14:59:17-05:00</updated><id>http://localhost:4000//</id><title type="html">Mauricio Caceres</title><subtitle>Hi! I am a research assistant based in Cambridge, MA. I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University.
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.4.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-02-10T15:21:58-05:00</updated><id>http://localhost:4000//</id><title type="html">Mauricio Caceres</title><subtitle>Hi! I am a research assistant based in Cambridge, MA. I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University.
 This is my personal website, meant to force myself to speed along some coding projects I've had in the back-burner throughout the past year.
 </subtitle><entry><title type="html">Installing Arch: Setting up the system</title><link href="http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI.html" rel="alternate" type="text/html" title="Installing Arch: Setting up the system" /><published>2017-02-10T08:28:24-05:00</published><updated>2017-02-10T08:28:24-05:00</updated><id>http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI</id><content type="html" xml:base="http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI.html">&lt;p&gt;I am a fan of &lt;a href=&quot;https://en.wikipedia.org/wiki/GNU/Linux&quot;&gt;GNU/Linux&lt;/a&gt; (or
 just “Linux” if you hate Richard Stallman). My first Linux distro was
@@ -23,6 +23,7 @@ in &lt;code class=&quot;highlighter-rouge&quot;&gt;[standatd]&lt;/code&gt; tags 
 &lt;h2 id=&quot;step-1-partition-and-format-the-drive&quot;&gt;Step 1: Partition and format the drive&lt;/h2&gt;
 
 &lt;p&gt;Some basic sanity checks&lt;/p&gt;
+
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls /sys/firmware/efi/efivars &lt;span class=&quot;c&quot;&gt;# Should be populated&lt;/span&gt;
 wifi-menu                    &lt;span class=&quot;c&quot;&gt;# Will connect automatically&lt;/span&gt;
 timedatectl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-ntp &lt;span class=&quot;nb&quot;&gt;true
@@ -31,6 +32,7 @@ timedatectl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-ntp &lt;span class
 &lt;/div&gt;
 
 &lt;p&gt;Now partition the disk (EFI)&lt;/p&gt;
+
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# I use parted; alternatively use gdisk or cdisk&lt;/span&gt;
 parted /dev/sda
 mklabel gpt
@@ -52,6 +54,7 @@ mkfs.vfat /dev/sda1
 &lt;/div&gt;
 
 &lt;p&gt;Format drive and mount&lt;/p&gt;
+
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
 cryptsetup luksFormat /dev/sda2
 cryptsetup open --type luks /dev/sda2 lvm

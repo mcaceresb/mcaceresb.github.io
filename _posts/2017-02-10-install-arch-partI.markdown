@@ -29,6 +29,7 @@ Step 1: Partition and format the drive
 --------------------------------------
 
 Some basic sanity checks
+
 ```bash
 ls /sys/firmware/efi/efivars # Should be populated
 wifi-menu                    # Will connect automatically
@@ -37,6 +38,7 @@ timedatectl status
 ```
 
 Now partition the disk (EFI)
+
 ```bash
 # I use parted; alternatively use gdisk or cdisk
 parted /dev/sda
@@ -58,6 +60,7 @@ mkfs.vfat /dev/sda1
 ```
 
 Format drive and mount
+
 ```bash
 # [encryption-lvm]
 cryptsetup luksFormat /dev/sda2

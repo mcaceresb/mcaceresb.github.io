@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/arch/linux/install/2017/02/10/install-arch-partI.html</loc>
+<lastmod>2017-02-10T08:28:24-05:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/about/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/beta-redirect/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/blog/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/coding</loc>
+</url>
+<url>
+<loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/research/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/assets/cv.pdf</loc>
+<lastmod>2017-02-10T13:30:21-05:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/assets/icons/power-icon/power-icon.pdf</loc>
+<lastmod>2017-02-11T03:13:28-05:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/assets/icons/tablefill-icon/power-icon.pdf</loc>
+<lastmod>2017-02-11T03:13:28-05:00</lastmod>
+</url>
+</urlset>

@@ -38,7 +38,7 @@ of Economic Research in Cambridge, MA. This is my personal website,
 meant to force myself to speed along some projects I've had in the
 back-burner throughout the past year.
 
-Currently the site mainly points to [some of my coding projects]({{ "/coding/" | relateive_url }}),
+Currently the site mainly points to [some of my coding projects]({{ "/coding" | relateive_url }}),
 but the idea is to eventually host a blog and my personal research
 projects. Having a place to publish them should encourage me
 to work more consistently on them.

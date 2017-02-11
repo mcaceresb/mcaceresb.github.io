@@ -11,7 +11,7 @@ I use a lot of [Stata](https://stata.com) these days. Here's some foo I've writt
 - [stata-power](https://github.com/mcaceresb/stata-power): Notes and programs to do parametric and simulated power calculations.
 - [stata-benchmark](https://github.com/mcaceresb/stata-benchmark): Simple hack to benchmark (time) Stata programs.
 - [stata-todatetime](https://github.com/mcaceresb/stata-todatetime): Simple wrapper to convert Stata strings to date-time.
-- [stata-matrix-utils](https://github.com/mcaceresb/stata-matrix-utils): Various utilities to work with Stata matrices.
+- [stata-matrix-tools](https://github.com/mcaceresb/stata-matrix-tools): Various utilities to work with Stata matrices.
 
 Some other interesting projects:
 

@@ -27,11 +27,13 @@ url: https://mcaceresb.github.io # the base hostname & protocol for your site, e
 github_username: mcaceresb
 medium_username: mcaceresb
 google_analytics: UA-91854317-1
+highlighter: pygments
 
 # Build settings
 markdown: kramdown
 theme: minima
 gems:
+  - jekyll-gist
   - jekyll-sitemap
   - jekyll-feed
 exclude:

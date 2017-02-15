@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Writing my first Stata plugin: A real wold use case</title>
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/stata/plugins/2017/02/14/writing-stata-plugins-example.html">
+  <link rel="alternate" type="application/rss+xml" title="Mauricio Cáceres Bravo" href="/feed.xml">
+  
+  
+
+  <link href="/assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Mauricio Cáceres Bravo</a>
+
+    <nav class="site-nav">
+      <span class="menu-icon">
+        <svg viewBox="0 0 18 15" width="18px" height="15px">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </span>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/beta-redirect/">Beta</a>
+          
+        
+          
+          <a class="page-link" href="/blog/">Blog</a>
+          
+        
+          
+          <a class="page-link" href="/coding">Coding</a>
+          
+        
+          
+          <a class="page-link" href="/assets/cv.pdf">CV</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/research/">Research</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Writing my first Stata plugin: A real wold use case</h1>
+    <p class="post-meta"><time datetime="2017-02-14T20:13:24-05:00" itemprop="datePublished">Feb 14, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<p>I’m not the biggest fan of Stata. Though I use it every day for RA work,
+and Stata does shine when all you want to do is explore one data set (or
+a series of data sets that are easy to merge), it’s become increasingly
+apparent over time that whenever I want to do something complex or
+computationally intensive, it pales.</p>
+
+<p><a href="www.stata.com/features/overview/introduction-to-mata/">Mata</a> makes many
+of the rougher corners of Stata rather bearable. However, optimizing
+Stata for a speedy run is really difficult. Enter <a href="www.stata.com/plugins/">Stata plugins</a>.</p>
+
+<h2 id="what-are-stata-plugins">What are Stata plugins?</h2>
+
+<p>A Stata plugin is pre-recompiled code, written in C or C++, that can
+interact with Stata using the “Stata Plugin Interface (SPI).” Stata
+provides a C source file and header that allows a C program to interact
+with Stata’s data sets and matrices.</p>
+
+<p>The implementation is relatively crude. Stata can write/read to/from
+C one observation at a time from/to existing variables and matrices.
+<a href="www.stata.com/plugins/">Stata has pretty good documentation</a> for the
+functionality of their plugins, and I will not repeat all of it here.</p>
+
+<p>A simple hello world program would be as follows:</p>
+<ul>
+  <li>Get a C compiler (<code>gcc</code>, the GNU Compiler Collection, is standard and should be included on Mac and Linux; look into <a href="http://www.mingw.org">MinGW</a> if you are on Windows to use <code>gcc</code>).</li>
+  <li>Download the Stata Splugin Interface (SPI) version 2 (Stata &lt;= 13) or 3 (Stata &gt;= 14).
+    <ul>
+      <li>Version 2: <a href="http://www.stata.com/plugins/version2/stplugin.c">stplugin.c</a>, <a href="http://www.stata.com/plugins/version2/stplugin.h">stplugin.h</a></li>
+      <li>Version 3: <a href="http://www.stata.com/plugins/stplugin.c">stplugin.c</a>, <a href="http://www.stata.com/plugins/stplugin.h">stplugin.h</a></li>
+    </ul>
+  </li>
+  <li>Create hello.c (Note you should have stplugin.h and stplugin.c in the same directory).</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cp">#include</span> <span class="cpf">&quot;stplugin.h&quot;</span><span class="cp"></span>
+
+<span class="n">STDLL</span> <span class="nf">stata_call</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="n">SF_display</span> <span class="p">(</span><span class="s">&quot;Hello World</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>Now from the command line, run</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>gcc -shared -fPIC -DSYSTEM<span class="o">=</span>OPUNIX stplugin.c hello.c -o hello.plugin <span class="c1"># Linux</span>
+gcc -bundle -DSYSTEM<span class="o">=</span>APPLEMAC stplugin.c hello.c -o hello.plugin     <span class="c1"># Mac</span></code></pre></figure>
+
+<ul>
+  <li>Last, from Stata navigate to your working directory and run</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-stata" data-lang="stata"><span></span><span class="k">program</span> hello,<span class="k"> plugin</span> using(<span class="s">&quot;./hello.plugin&quot;</span>)<span class="k"></span>
+<span class="k">plugin</span> call hello</code></pre></figure>
+
+<h2 id="is-it-worth-the-hassle">Is it worth the hassle?</h2>
+
+<p>Stata says that it’s only worth it if you are replacing a lot of interpreted
+ado-code and the task is not very complex. Though I agree on the latter
+(complex tasks will likely take more time to code in C than the time they
+will save) I <em>strongly</em> disagree on the former.</p>
+
+<p>Perhaps most people realize this, but my understanding of for loops in
+Stata is that they are run as if you printed each block within the for
+loop however many times you tell it to execute. Thus</p>
+
+<figure class="highlight"><pre><code class="language-stata" data-lang="stata"><span></span><span class="k">forvalues</span> i = <span class="m">1</span> / <span class="m">1000</span> {
+    <span class="c1">// Stuff to do</span>
+}</code></pre></figure>
+
+<p>may look like three lines of code, but it’s really equivalent to 1000.
+The reason I started using Stata plugins was to speed up a simulation.
+The C code is longer and the base case are only a handful of lines in
+Stata, but it’s painfully slow because the bulk of the computation takes
+place inside a loop that does a simulation.</p>
+
+<p>Below I document a real-world use case where C was 50 times faster than
+Stata, so for me the work was definitely worthwhile.</p>
+
+<h2 id="a-real-world-use-case">A real world use case</h2>
+
+<p>Several of the projects I work on are Randomized Control Trials. It is
+standard to conduct a power analysis for such projects in order to put
+together a proposal, etc. Having a well-powered trial is essential for
+the success of an RCT.</p>
+
+<p>Since RCTs can give you a truly independent treatment variable, we can
+recover the treatment effect via simple OLS. Though parametric methods
+are well known and widely used to estimate power under this setup,
+they rely on strong assumptions. When clustering or stratification are
+involved, specially when the number of clusters is not very large,
+parametric calculations can be inaccurate.</p>
+
+<p>One suggestion I got was to <em>simulate</em> power. I won’t outline the full
+rationale (<a href="https://github.com/mcaceresb/stata-power/blob/master/notes/power-simulation-notes.pdf">read about it here</a>), but the crux of the idea is to simulate a large number of
+coefficients $b$ for the equation:</p>
+
+<script type="math/tex; mode=display">Y_{ij} = a + b T_{ij} + g X_{ij} + e_{ij}</script>
+
+<p>where at each step of the simulation, $T_{ij}$ is simulated so that
+there are $NP$ individuals/clusters in treatment and $(1 - P)N$
+in control. Since treatment is assigned randomly, the resulting
+distribution is a sample of the true distribution of $b$ under the null
+$H_0: b = 0$.</p>
+
+<p>This does not tell us anything about power by itself, but the confidence
+interval can be used as the basis of an iterative procedure to simulate
+power. Hence coding the simulation efficiently is crucial.</p>
+
+<h2 id="why-write-a-plugin">Why write a plugin?</h2>
+
+<p>The problem above is actually very simple to implement. In pseudo-code:</p>
+
+<figure class="highlight"><pre><code class="language-stata" data-lang="stata"><span></span>function simci (X, y, P, reps)
+{
+<span class="k">    n</span> = rows(X)
+    b = zeros(reps)
+    T = ones(<span class="nf">ceil(</span>n * P)) \ zeros(<span class="nf">floor(</span>n * (<span class="m">1</span> - P)))
+
+<span class="k">    for</span> (r = <span class="m">1</span>; r &lt;= reps; r++)
+    {
+        XT   = shuffle(T), X
+        b[r] = (<span class="nf">inv(</span>XT&#39; * XT) * (XT&#39; * y))[<span class="m">1</span>]
+    }
+
+<span class="k">    return</span> (b)
+}</code></pre></figure>
+
+<p>Though simple, doing this <em><strong>efficiently</strong></em> is impossible in
+Stata. There are three prominent issues:</p>
+<ol>
+  <li>
+    <p>There is no way to shuffle a vector in Stata. That’s not a thing.
+Variables all exist in relation to each other and sorting one
+variable randomly will sort the entire data set. Shuffling an entire
+data set is much slower than shuffling one vector.</p>
+  </li>
+  <li>
+    <p>There is no way to compute just the regression coefficients in Stata.
+Stata’s <code>regress</code> computes a host of things along with the least
+squares solution This adds unnecessary overhead. (I have asked about
+how to do this before; the suggestion I got was to run <code>quietly
+regress, notable</code> which just controls what Stata outputs, not what it
+computes).</p>
+  </li>
+  <li>
+    <p>It’s not obvious how to store the results, specially with Stata/IC.
+Though the buffer versions of Stata should be able to handle most
+simulations after setting a larger <code>matsize</code>, the fact matrix sizes
+are capped (and in Stata/IC capped at 800), makes the function
+difficult to code.</p>
+  </li>
+</ol>
+
+<p>The solution in Stata would look like this</p>
+
+<figure class="highlight"><pre><code class="language-stata" data-lang="stata"><span></span><span class="k">program</span> stataSimci, rclass sortpreserve
+<span class="k">    syntax varlist</span> [if] [in] , [ Ptreat(real <span class="m">0.5</span>) reps(int <span class="m">100</span>) ]
+
+<span class="k">    gettoken</span> depvar controls:<span class="k"> varlist</span>
+<span class="k">    marksample</span> touse
+    _rmcoll <span class="nv">`controls&#39;</span><span class="k"> if</span> <span class="nv">`touse&#39;</span>
+<span class="k">    local</span> controls `<span class="nf">r(</span>varlist)&#39;
+
+<span class="k">    qui</span> {
+<span class="k">    preserve</span>
+<span class="k">        keep if</span> <span class="nv">`touse&#39;</span>
+<span class="k">        local</span> NP = <span class="nf">ceil(</span>`=_N&#39; * <span class="nv">`ptreat&#39;</span>)
+
+<span class="k">        tempname</span> b
+<span class="k">        tempvar</span> treatment randsort
+<span class="k">        gen</span> byte   <span class="nv">`treatment&#39;</span> = .
+<span class="k">        gen</span> double <span class="nv">`randsort&#39;</span>  = .
+
+<span class="k">        forvalues</span> r = <span class="m">1</span> / <span class="nv">`reps&#39;</span> {
+<span class="k">            replace</span> <span class="nv">`randsort&#39;</span>  = <span class="nf">runiform(</span>)
+<span class="k">            sort</span> <span class="nv">`randsort&#39;</span>
+<span class="k">            replace</span> <span class="nv">`treatment&#39;</span> = (_n &lt;= <span class="nv">`NP&#39;</span>)
+<span class="k">            regress</span> <span class="nv">`depvar&#39;</span> <span class="nv">`treatment&#39;</span> <span class="nv">`controls&#39;</span><span class="k"> if</span> <span class="nv">`touse&#39;</span>
+<span class="k">            matrix</span> <span class="nv">`b&#39;</span> = <span class="nf">nullmat(</span><span class="nv">`b&#39;</span>) \ `:di _b[<span class="nv">`treatment&#39;</span>]&#39;
+        }
+<span class="k">    restore</span>
+    }
+
+<span class="k">    return matrix</span> b = <span class="nv">`b&#39;</span>
+end
+
+<span class="k">sysuse</span> auto,<span class="k"> clear</span>
+stataSimci price mpg foreign, p(<span class="m">0.5</span>) reps(<span class="m">10</span>)<span class="k"></span>
+<span class="k">matrix list</span> <span class="nf">r(</span>b)</code></pre></figure>
+
+<p>This is a hugely inefficient program!</p>
+
+<h2 id="wait-cant-mata-handle-these-things">Wait, can’t Mata handle these things?</h2>
+
+<p>Right, Mata is the elephant in the room. If you don’t know,
+<a href="http://www.stata.com/features/overview/introduction-to-mata/">Mata</a> is
+a programming language that is shipped with every version of Stata and
+it can interact with Stata relatively easily. If you have ever used an
+object-oriented programming language then you will recognize Mata as a
+more standard programming language than Stata.</p>
+
+<p>Mata does afford us <em>some</em> efficiency, but not a lot (yes, I know about
+<code>.mlib</code> files and that technically Stata compiles mata into bytecode
+when read into memory, but I have never found the speed improvement to
+be significant).</p>
+
+<p>In this case, Mata will run faster largely because it can</p>
+<ol>
+  <li>
+    <p>Shuffle just a single vector.</p>
+  </li>
+  <li>
+    <p>Get the OLS coefficients without any additional computations.</p>
+  </li>
+</ol>
+
+<p>The implementation is very straightforward:</p>
+
+<figure class="highlight"><pre><code class="language-stata" data-lang="stata"><span></span><span class="k">program</span> mataSimci, rclass sortpreserve
+<span class="k">    syntax varlist</span> [if] [in] , [ Ptreat(real <span class="m">0.5</span>) reps(int <span class="m">100</span>) ]
+<span class="k">    gettoken</span> depvar controls:<span class="k"> varlist</span>
+<span class="k">    marksample</span> touse
+    _rmcoll <span class="nv">`controls&#39;</span><span class="k"> if</span> <span class="nv">`touse&#39;</span>
+<span class="k">    local</span> controls `<span class="nf">r(</span>varlist)&#39;
+<span class="k">    mata</span>: b = simci(<span class="s">&quot;</span><span class="nv">`depvar&#39;</span><span class="s">&quot;</span>, <span class="s">&quot;</span><span class="nv">`controls&#39;</span><span class="s">&quot;</span>, <span class="s">&quot;</span><span class="nv">`touse&#39;</span><span class="s">&quot;</span>, <span class="nv">`ptreat&#39;</span>, <span class="nv">`reps&#39;</span>)
+<span class="k">    mata</span>: st_matrix(<span class="s">&quot;b&quot;</span>, b)
+<span class="k">    return matrix</span> b = b
+end
+
+<span class="k">mata</span>:
+real colvector function simci(string<span class="k"> scalar</span> depvar,
+                              string<span class="k"> scalar</span> controls,
+                              string<span class="k"> scalar</span> touse,
+                              real<span class="k"> scalar</span> P,
+                              real<span class="k"> scalar</span> reps)
+{
+    real<span class="k"> scalar n</span>
+    real colvector b, T, y
+    real<span class="k"> matrix</span> X
+
+    y = X = .
+    st_view(y, ., depvar,   touse)
+    st_view(X, ., controls, touse)
+
+<span class="k">    n</span> = rows(X)
+    b = <span class="nf">J(</span>reps, <span class="m">1</span>, missingof(X))
+    T = <span class="nf">J(ceil(</span>n * P), <span class="m">1</span>, <span class="m">1</span>) \ <span class="nf">J(floor(</span>n * (<span class="m">1</span> - P)), <span class="m">1</span>, <span class="m">0</span>)
+
+<span class="k">    for</span> (r = <span class="m">1</span>; r &lt;= reps; r++)
+    {
+        XT   = (jumble(T), X)
+        b[r] = (<span class="nf">invsym(</span>cross(XT, <span class="m">1</span>, XT, <span class="m">1</span>)) *<span class="k"> cross</span>(XT, <span class="m">1</span>, y, <span class="m">0</span>))[<span class="m">1</span>]
+    }
+
+<span class="k">    return</span>(b)
+}
+end
+
+<span class="k">sysuse</span> auto,<span class="k"> clear</span>
+mataSimci price mpg foreign, p(<span class="m">0.5</span>) reps(<span class="m">10</span>)<span class="k"></span>
+<span class="k">matrix list</span> <span class="nf">r(</span>b)</code></pre></figure>
+
+<p>There are two problems:</p>
+<ol>
+  <li>
+    <p>Matrix operations in Mata are not terribly fast (certainly not
+compered to a compiled language like C or even a JIT-compiled
+language like Julia). Yes, I know Mata uses LAPACK and BLAS
+underneath, but it’s still largely an interpreted language.</p>
+  </li>
+  <li>
+    <p>There is no reason to run the loop sequentially! It is conceptually
+trivial to parallelize the loop. Granted, parallelism is not trivial
+but the fact it cannot be done, even in Stata/MP, is frustrating.</p>
+  </li>
+</ol>
+
+<h2 id="how-does-the-solution-in-c-look-like">How does the solution in C look like?</h2>
+
+<p>C is certainly harder to write, and Stata’s primitive interaction with
+C makes it so getting the results back from C is annoying. BUT there is
+a MASSIVE speed improvement. For this particular use case it’s an order
+of magnitude (around 10x) over Mata (and that implementation was already
+faster than Stata).</p>
+
+<p>Writing the wrapper for this is not too hard thanks to the GNU
+Scientific Library. Noting the 0-based indexing:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;omp.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;gsl/gsl_blas.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;gsl/gsl_linalg.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;gsl/gsl_matrix_double.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;gsl/gsl_permutation.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;gsl/gsl_randist.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;gsl/gsl_rng.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;stplugin.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// These functions are to be used after reading Stata data into X, y.</span>
+<span class="c1">// Crucially, in this example the first column of X must be empty.</span>
+
+<span class="kt">int</span> <span class="nf">simci</span> <span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span>
+           <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
+           <span class="k">const</span> <span class="kt">double</span> <span class="n">P</span><span class="p">,</span>
+           <span class="k">const</span> <span class="kt">int</span> <span class="n">reps</span><span class="p">,</span>
+           <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">b</span><span class="p">);</span>
+<span class="kt">double</span> <span class="nf">sim_ols</span><span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span> <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">);</span>
+
+<span class="c1">// This function would read the data from stata</span>
+<span class="n">STDLL</span> <span class="nf">stata_call</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+
+    <span class="c1">// Initialize the variables to use</span>
+    <span class="n">ST_int</span>      <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="p">;</span>
+    <span class="n">ST_double</span>   <span class="n">z</span> <span class="p">;</span>
+    <span class="n">ST_retcode</span>  <span class="n">rc</span> <span class="p">;</span>
+
+    <span class="c1">// Get P and number of reps. Note the 0-based indexing! So the</span>
+    <span class="c1">// functiona ssumes P and reps were the 2nd and 3rd argument.</span>
+    <span class="kt">double</span> <span class="n">P</span>    <span class="o">=</span> <span class="n">strtod</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="kt">double</span> <span class="n">reps</span> <span class="o">=</span> <span class="n">strtod</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">SF_in2</span><span class="p">();</span>
+    <span class="k">const</span> <span class="kt">int</span>    <span class="n">k</span> <span class="o">=</span> <span class="n">SF_nvars</span><span class="p">();</span>
+    <span class="n">gsl_matrix</span> <span class="o">*</span><span class="n">X</span>  <span class="o">=</span> <span class="n">gsl_matrix_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">y</span>  <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="c1">// Not sure if there is another way to read data vs the double loop.</span>
+    <span class="c1">// Again, careful with the 0-based indexing!</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">SF_in1</span><span class="p">();</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">SF_in2</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">SF_ifobs</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="c1">// Variables 2 through k are covariates</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Note we leave the first column empty</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="n">SF_vdata</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">z</span><span class="p">))</span> <span class="p">)</span> <span class="k">return</span><span class="p">(</span><span class="n">rc</span><span class="p">);</span>
+                <span class="n">gsl_matrix_set</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="c1">// Note we add the constant</span>
+            <span class="n">gsl_matrix_set</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span>  <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+
+            <span class="c1">// Variable 1 is the dependent variable</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="n">SF_vdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">z</span><span class="p">))</span> <span class="p">)</span> <span class="k">return</span><span class="p">(</span><span class="n">rc</span><span class="p">);</span>
+            <span class="n">gsl_vector_set</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span>  <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Now we call the simulation function and output the results into b</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">reps</span><span class="p">);</span>
+    <span class="n">simci</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">reps</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+
+    <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">X</span><span class="p">);</span>
+    <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">y</span><span class="p">);</span>
+
+    <span class="c1">// Note the first argument passed to the plugin call must be the</span>
+    <span class="c1">// name of a matrix that exists in Stata.</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">SF_mat_store</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gsl_vector_get</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="c1">// The method above is a hassle because Stata limits matrix size and</span>
+    <span class="c1">// the matrix has to exist. Some workarounds:</span>
+    <span class="c1">// - Space-delimited local macro, then read using mata: tokens()</span>
+    <span class="c1">// - Write to a temporary file then read using mata: cat()</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// This will output the results into b</span>
+<span class="kt">int</span> <span class="nf">simci</span> <span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span>
+           <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
+           <span class="k">const</span> <span class="kt">double</span> <span class="n">P</span><span class="p">,</span>
+           <span class="k">const</span> <span class="kt">int</span> <span class="n">reps</span><span class="p">,</span>
+           <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">-&gt;</span><span class="n">size1</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">k</span>    <span class="o">=</span> <span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">np</span>   <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">P</span><span class="p">);</span>
+
+    <span class="c1">// Set the random seed based on the time of day (seconds)</span>
+    <span class="n">srand</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+    <span class="n">gsl_rng</span> <span class="o">*</span><span class="n">rng</span> <span class="o">=</span> <span class="n">gsl_rng_alloc</span> <span class="p">(</span><span class="n">gsl_rng_default</span><span class="p">);</span>
+    <span class="n">gsl_rng_set</span> <span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">rand</span><span class="p">());</span>
+
+    <span class="c1">// Get vector of 1s and 0s</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">T</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">gsl_vector_set_zero</span> <span class="p">(</span><span class="n">T</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">gsl_vector_set</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Initialize elements for parallel loop</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">Tp</span> <span class="p">;</span>
+    <span class="n">gsl_matrix</span> <span class="o">*</span><span class="n">Xp</span> <span class="p">;</span>
+
+    <span class="c1">// Parallelize execution</span>
+    <span class="cp">#pragma omp parallel private(Xp, Tp) shared(y, b)</span>
+    <span class="p">{</span>
+        <span class="c1">// Allocate to each therad their own copy</span>
+        <span class="n">Tp</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">Xp</span> <span class="o">=</span> <span class="n">gsl_matrix_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+
+        <span class="n">gsl_vector_memcpy</span> <span class="p">(</span><span class="n">Tp</span><span class="p">,</span> <span class="n">T</span><span class="p">);</span>
+        <span class="n">gsl_matrix_memcpy</span> <span class="p">(</span><span class="n">Xp</span><span class="p">,</span> <span class="n">X</span><span class="p">);</span>
+
+        <span class="c1">// Parallel for loop through simulation</span>
+        <span class="cp">#pragma omp for</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">reps</span><span class="p">;</span> <span class="n">r</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">gsl_ran_shuffle</span> <span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">Tp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">size_t</span><span class="p">));</span>
+            <span class="n">gsl_matrix_set_col</span> <span class="p">(</span><span class="n">Xp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Tp</span><span class="p">);</span>
+            <span class="n">gsl_vector_set</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sim_ols</span><span class="p">(</span><span class="n">Xp</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Cleanup</span>
+        <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">Xp</span><span class="p">);</span>
+        <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">Tp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Cleanup</span>
+    <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">T</span><span class="p">);</span>
+    <span class="n">gsl_rng_free</span> <span class="p">(</span><span class="n">rng</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">double</span> <span class="nf">sim_ols</span><span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span> <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="c1">// Allocate memory to express the system as Ax = b</span>
+    <span class="n">gsl_matrix</span> <span class="o">*</span><span class="n">A</span> <span class="o">=</span> <span class="n">gsl_matrix_alloc</span> <span class="p">(</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">,</span> <span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">);</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">);</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">);</span>
+
+    <span class="c1">// Set A = X&#39; X and b = X&#39; y</span>
+    <span class="n">gsl_blas_dgemm</span> <span class="p">(</span><span class="n">CblasTrans</span><span class="p">,</span> <span class="n">CblasNoTrans</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span>
+    <span class="n">gsl_blas_dgemv</span> <span class="p">(</span><span class="n">CblasTrans</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+
+    <span class="c1">// Cholesky decomposition</span>
+    <span class="n">gsl_linalg_cholesky_decomp1</span> <span class="p">(</span><span class="n">A</span><span class="p">);</span>
+    <span class="n">gsl_linalg_cholesky_solve</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+
+    <span class="c1">// Cleanup</span>
+    <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">A</span><span class="p">);</span>
+    <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">b</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">gsl_vector_get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Save the code to <code>pluginSimci.c</code>. To compile <code>pluginSimci.plgin</code>, on top
+of <code>gcc</code> and the SPI, you will need</p>
+<ul>
+  <li>The <a href="https://www.gnu.org/software/gsl">GNU Scientific Library (GSL)</a></li>
+  <li><a href="http://www.openmp.org">OpenMP</a></li>
+</ul>
+
+<p>Again, you should have <code>stplugin.c</code> and <code>stplugin.h</code> in the same directory. Now on Linux/Unix, run</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wall -fopenmp -shared -fPIC -DSYSTEM=OPUNIX&quot;</span>
+gcc <span class="nv">$CFLAGS</span> -c -o stplugin.o    stplugin.c
+gcc <span class="nv">$CFLAGS</span> -c -o pluginSimci.o pluginSimci.c
+gcc <span class="nv">$CFLAGS</span> stplugin.o pluginSimci.o <span class="se">\</span>
+    -lgsl -lgslcblas -lm -o pluginSimci.plugin</code></pre></figure>
+
+<p>Depending on your system, you may also need to add <code>-std=c99</code> as a flag and point to the location of the <code>libgsl*so</code> files. For instance, I regularly SSH into a RedHat server, and to compile I ran</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-Wall -std=c99 -fopenmp -shared -fPIC -DSYSTEM=OPUNIX&quot;</span>
+gcc -I/usr/local/lib <span class="nv">$CFLAGS</span> -c -o stplugin.o    stplugin.c
+gcc -I/usr/local/lib <span class="nv">$CFLAGS</span> -c -o pluginSimci.o pluginSimci.c
+gcc -L/usr/local/lib <span class="nv">$CFLAGS</span>  stplugin.o pluginSimci.o <span class="se">\</span>
+    -lgsl -lgslcblas -lm -o pluginSimci.plugin</code></pre></figure>
+
+<p>To compile in other system, you should consult <a href="http://www.stata.com/plugins">Stata’s documentation</a>. Once compiled, from Stata:</p>
+
+<figure class="highlight"><pre><code class="language-stata" data-lang="stata"><span></span><span class="k">matrix</span> b = <span class="nf">J(</span><span class="m">10</span>, <span class="m">1</span>, .)<span class="k"></span>
+<span class="k">sysuse</span> auto<span class="k"></span>
+<span class="k">program</span> pluginSimci,<span class="k"> plugin</span> using(./pluginSimci<span class="m">.</span>plugin)<span class="k"></span>
+<span class="k">plugin</span> call pluginSimci price mpg foreign, b <span class="m">0.5</span> <span class="m">10</span><span class="k"></span>
+<span class="k">matrix list</span> b</code></pre></figure>
+
+<h2 id="timing-performance">Timing performance</h2>
+
+<p>I don’t really know of good Stata tools to profile performance. However,
+it’s not too hard to time how long a command takes to run. I wrote a
+simple wrapper for it, which we use with the programs above:</p>
+
+<figure class="highlight"><pre><code class="language-stata" data-lang="stata"><span></span>.<span class="k"> local</span> github https:<span class="c1">//raw.githubusercontent.com</span>
+.<span class="k"> net</span> install benchmark, from(<span class="nv">`github&#39;</span>/mcaceresb/stata-benchmark/master/)
+.<span class="k"> local</span> benchmark benchmark,<span class="k"> disp</span> reps(<span class="m">5</span>):<span class="k"> qui</span>
+
+.<span class="k"> set</span> seed <span class="m">42</span>
+.<span class="k"> set</span> matsize <span class="m">800</span>
+.<span class="k"> sysuse</span> auto,<span class="k"> clear</span>
+.<span class="k"> tempfile</span> auto
+.<span class="k"> save</span> <span class="nv">`auto&#39;</span>
+.<span class="k"> qui forvalues</span> i = <span class="m">1</span> / <span class="m">100</span> {
+.    <span class="k"> append</span> using <span class="nv">`auto&#39;</span>
+. }
+
+. <span class="nv">`benchmark&#39;</span> stataSimci  price mpg foreign, p(<span class="m">0.5</span>) reps(<span class="m">800</span>)
+<span class="m">1</span>: <span class="m">10.52</span> seconds
+<span class="m">2</span>: <span class="m">9.143</span> seconds
+<span class="m">3</span>: <span class="m">12.13</span> seconds
+<span class="m">4</span>: <span class="m">14.25</span> seconds
+<span class="m">5</span>: <span class="m">12.54</span> seconds
+Average over <span class="m">5</span> runs: <span class="m">11.7166</span> seconds
+
+. <span class="nv">`benchmark&#39;</span> mataSimci  price mpg foreign, p(<span class="m">0.5</span>) reps(<span class="m">800</span>)
+ <span class="m">2.546</span> seconds
+ <span class="m">2.692</span> seconds
+ <span class="m">2.68</span> seconds
+ <span class="m">2.368</span> seconds
+ <span class="m">2.426</span> seconds
+Average over <span class="m">5</span> runs: <span class="m">2.5424</span> seconds
+
+.<span class="k"> matrix</span> b = <span class="nf">J(</span><span class="m">800</span>, <span class="m">1</span>, .)
+. <span class="nv">`benchmark&#39;</span><span class="k"> plugin</span> call pluginSimci price mpg foreign, b <span class="m">0.5</span> <span class="m">800</span>
+<span class="m">1</span>: .<span class="m">283</span> seconds
+<span class="m">2</span>: .<span class="m">273</span> seconds
+<span class="m">3</span>: .<span class="m">262</span> seconds
+<span class="m">4</span>: .<span class="m">238</span> seconds
+<span class="m">5</span>: .<span class="m">288</span> seconds
+Average over <span class="m">5</span> runs: <span class="m">0.2688</span> seconds</code></pre></figure>
+
+<p>In the example Mata ran 5x vs Stata and the plugin ran 10x vs Mata. For
+a 50x speed improvement, I’d say the hassle was worth it! My real-world
+use-case for this was power simulations for a cluster-randomized trial
+where the underlying clusters were comprised of 200k observations
+overall. Running this in Mata took on the order of days. To have it run
+in hours was a massive boon.</p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <!-- 
+<head>
+<style>
+.image-cropper {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+    float: right;
+}
+</style>
+</head>
+-->
+
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <!-- <h2 class="footer&#45;heading">Mauricio Cáceres Bravo</h2> -->
+    <h2 class="footer-heading">Contact</h2>
+
+    <div class="footer-col-wrapper">
+
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Mauricio Cáceres Bravo
+            
+            </li>
+            
+            <li><a href="mailto:mauricio.caceres.bravo@gmail.com">mauricio.caceres.bravo@gmail.com</a></li>
+            
+        </ul>
+<!-- 
+      </div>
+-->
+
+        <!-- 
+                <ul class="social-media-list">
+                  
+
+                  
+                  <li>
+                    <a href="https://github.com/mcaceresb"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">mcaceresb</span></a>
+
+                  </li>
+                  
+
+                  
+
+                  
+                  <li>
+                    <a href="https://medium.com/@mcaceresb"><span class="icon"><i class="fa fa-medium" aria-hidden="true"></i></span><span class="username"> mcaceresb</span></a>
+
+                  </li>
+                  
+                </ul>
+         -->
+
+<!-- 
+         <div class="footer-col footer-col-3">
+-->
+             <ul class="social-media-list">
+                 
+
+                 
+                 <li>
+                     <a href="https://github.com/mcaceresb"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">mcaceresb</span></a>
+
+                 </li>
+                 
+
+                 
+
+                 
+                 <li>
+                     <a href="https://medium.com/@mcaceresb"><span class="icon"><i class="fa fa-medium" aria-hidden="true"></i></span><span class="username"> mcaceresb</span></a>
+
+                 </li>
+                 
+             </ul>
+         </div>
+
+<!-- 
+         <div class="footer-col footer-col-2">
+         </div>
+
+         <div class="footer-col footer-col-3 image-cropper" style="margin-top:-48px;">
+               <img src="/assets/me/mauricio-wm-ch.jpg" class="rounded" />
+         </div>
+-->
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

@@ -2,7 +2,7 @@
 layout: post
 title:  "Installing Arch: Setting up the system"
 date:   2017-02-10 08:28:24 -0500
-categories: arch linux install
+categories: linux arch install
 ---
 
 I am a fan of [GNU/Linux](https://en.wikipedia.org/wiki/GNU/Linux) (or

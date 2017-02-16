@@ -17,12 +17,13 @@ title: Mauricio Cáceres Bravo
 email: mauricio.caceres.bravo@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
     Hi! I am a research assistant at the National Bureau of Economic
-    Research (NBER), based in Cambridge, MA. I double-majored in
-    mathematics and economics at the University of Utah and I have a
-    Master's degree in economics from Columbia University in New York.
+    Research (NBER), based in Cambridge, MA. This is my personal
+    website, meant to force myself to speed along some coding projects
+    I've had in the back-burner throughout the past year.
 
-    This is my personal website, meant to force myself to speed along some
-    coding projects I've had in the back-burner throughout the past year.
+    I double-majored in mathematics and economics at the University
+    of Utah and I have a Master's degree in economics from Columbia
+    University in New York.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: https://mcaceresb.github.io # the base hostname & protocol for your site, e.g. http://example.com
 github_username: mcaceresb

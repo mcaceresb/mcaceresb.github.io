@@ -27,6 +27,7 @@ url: https://mcaceresb.github.io # the base hostname & protocol for your site, e
 github_username: mcaceresb
 medium_username: mcaceresb
 google_analytics: UA-91854317-1
+google_tags: GTM-5JHMCV7
 highlighter: pygments
 
 # Build settings

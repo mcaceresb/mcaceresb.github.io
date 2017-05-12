@@ -4,7 +4,7 @@ title: Research
 permalink: /research/
 ---
 
-I am an aspiring researcher and have applied for economics PhD programs for the Fall of 2017. My personal research interests include development, public, and urban economics. My first discrete piece of research was an undergraduate research project with Professor Kenneth P. Jameson, published in the Southern Economic Journal.
+I am an aspiring researcher and intend to pursue a PhD in economics. Some areas of interest to me are applied micro, public econ, and development. My first discrete piece of research was an undergraduate research project with Professor Kenneth P. Jameson, published in the Southern Economic Journal.
 
 ### Publications
 

@@ -1,0 +1,630 @@
+% ---------------------------------------------------------------------
+% Program: cv.tex
+% Author:  Mauricio Caceres <caceres@nber.org>
+% Created: Wed Mar 16 23:23:59 EDT 2016
+% Updated: Sat Apr 22 19:49:30 EDT 2017
+% Purpose: Curriculum Vitae
+
+\documentclass{article}
+
+% ---------------------------------------------------------------------
+% Packages
+
+\usepackage{array}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{environ}
+\usepackage{longtable}
+\usepackage{paralist}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{yfonts}
+\usepackage{changepage}
+\usepackage{hyperref}
+\usepackage{fontawesome}
+
+\hypersetup{
+  colorlinks,
+  allbordercolors=white,
+  allcolors=[rgb]{0.05 0.2 0.4},
+}
+
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% ---------------------------------------------------------------------
+% Geometry
+
+\geometry{
+  paperheight = 11in,
+  paperwidth  = 8.5in,
+  margin = 2cm,
+  top    = 1.0cm
+}
+
+% ---------------------------------------------------------------------
+% Display options
+
+\definecolor{yearscolor}{gray}{0.15}
+\definecolor{displaycolor}{gray}{0.075}
+\definecolor{infocolor}{gray}{0.15}
+\definecolor{linecolor}{gray}{0.6}
+
+\definecolor{titlescolor}{gray}{0.15}
+\definecolor{solidcolor}{gray}{0.6}
+\definecolor{bignamecolor}{gray}{0.15}
+
+\newcommand\displayoptions{
+  \pagestyle{empty}
+  \allowdisplaybreaks
+  \color{displaycolor}
+}
+
+% ---------------------------------------------------------------------
+% Fonts
+
+\usepackage{fontspec}
+
+% \fontspec{Arial}
+% \setmainfont{Arial}
+% \newfontfamily\mfont{Arial Bold}
+
+% \fontspec{Times New Roman}
+% \setmainfont{Times New Roman}
+% \newfontfamily\mfont{Times New Roman Bold}
+
+% \fontspec{Linux Libertine}
+% \setmainfont[Scale=1.1]{Linux Libertine}
+% \newfontfamily\mfont{Linux Libertine Bold}
+% \newcommand\mfont{\bfseries}
+
+% \fontspec{Open Sans}
+% \setmainfont{Open Sans Light}
+% \newfontfamily\mfont{Open Sans}
+
+\fontspec{Ubuntu}
+\setmainfont{Ubuntu Light}
+\newfontfamily\mfont{Ubuntu Medium}
+
+\newcommand\headfont{\bfseries\scshape}
+\newcommand\namefont{\Huge}
+\newcommand\infofont{\itshape\color{infocolor}}
+% \newcommand\titlestyle{\mfont\large}
+% \newcommand\liststyle{\mfont}
+\newcommand\titlestyle{\mfont}
+\newcommand\liststyle{\slshape}
+
+% ---------------------------------------------------------------------
+% Titles
+
+\def\thesubsection{} % No numbering
+\titleformat{\subsection}{
+  \color{titlescolor}
+  \headfont
+  \large
+  \bfseries
+}{\thesubsection}{0pt}{}
+
+% A of rule height and title width will display after the title
+\newcommand\mysubsectionstyleblock[1]{\vspace{12pt}
+  \vspace{0pt}
+  {
+    \textcolor{solidcolor}
+    {
+      \hspace{-24pt}
+      \rule[1.5pt]{2.525cm}{4.5pt}
+    }
+  }
+  \hspace{-4.75pt}
+  {
+    \color{titlescolor}
+    \headfont
+    \large
+    \bfseries #1
+  }
+}
+
+% A thin line of line width will display after the title
+\newcommand\mysubsectionstyleline[1]{\vspace{0pt}
+  %\vspace{-6pt}
+  {
+    \color{titlescolor}
+    \headfont
+    \Large
+    \bfseries
+    \hspace{-0.75cm} #1 \\[-6pt]
+  }
+  {
+    \textcolor{solidcolor}
+    {
+      \hspace{-0.35cm}\rule{\textwidth}{0.5pt}
+    }
+  }
+  % \vspace{-9pt}
+}
+
+\newcommand\mysubsection[1]{\mysubsectionstyleline{#1}}
+% \newcommand\mysubsection[1]{\mysubsectionstyleblock{#1}}
+
+% ---------------------------------------------------------------------
+% Name and contact information
+
+\newcommand{\bigname}[1]{\begin{raggedright}#1\end{raggedright}}
+\newcommand\letterspace{\hspace{1pt}}
+\newcommand{\name}{\namefont\color{bignamecolor}
+  M\letterspace
+  a\letterspace
+  u\letterspace
+  r\letterspace
+  i\letterspace
+  c\letterspace
+  i\letterspace
+  o\hspace{0pt}
+  %
+  M.\hspace{0pt}
+  %
+  C\letterspace
+  \'a\letterspace
+  c\letterspace
+  e\letterspace
+  r\letterspace
+  e\letterspace
+  s\hspace{0pt}
+  %
+  B\letterspace
+  r\letterspace
+  a\letterspace
+  v\letterspace
+  o
+}
+
+\newcommand{\smallname}{\Large\color{infocolor}
+  Mauricio M. C\'aceres Bravo
+}
+
+\definecolor{myblue}{RGB}{29,57,127}
+\newcommand{\seticon}[1]{\textcolor{myblue}{\csname #1\endcsname}}
+
+\newcommand{\phone}{}
+\newcommand{\github}{\href{https://github.com/mcaceresb}{mcaceresb}}
+\newcommand{\website}{\href{https://mcaceresb.github.io}{mcaceresb.github.io}}
+\newcommand{\email}{\href{mailto:mauricio.caceres.bravo@gmail.com}{mauricio.caceres.bravo@gmail.com}}
+\newcommand{\addr}{Cambridge, MA}
+% \renewcommand{\email}{caceres@nber.org}
+\newcommand{\sep}{{ }$\mid${ }}
+\newcommand{\bfsf}{\bfseries\myfont}
+\newcommand\itfont{\fontsize{12}{12}\itshape}
+
+% ---------------------------------------------------------------------
+% Various name displays
+
+\newcommand{\mynamed}{
+  \begin{center}
+    \hspace{-0.3cm}
+    {\name} \\\vspace{6pt}
+    \infofont \email \sep \website \sep \addr
+  \end{center}
+}
+
+\newcommand{\mynamedsmall}{
+  \begin{center}
+    \hspace{-0.3cm}
+    {\smallname} \\\vspace{6pt}
+    \small \infofont \email \sep \website \sep \addr
+  \end{center}
+}
+
+\newcommand{\mynamea}{
+  \noindent\hspace{-12pt}
+  \begin{minipage}[t]{\textwidth}
+    \raggedleft
+    \begin{tabular}{
+        % @{\hspace{72pt}}
+        % >{\RightStyle}
+        l@{\hspace{1cm}}
+        l@{\hspace{3pt}}l
+    }
+    \multirow{4}{*}{\name} & \seticon{faEnvelope}     & \infofont \email   \\[3pt]
+                           & \seticon{faMapMarker}    & \infofont \addr    \\[3pt]
+                           & \seticon{faHome}         & \infofont \website \\[3pt]
+                           & \seticon{faGithubSquare} & \infofont \github  % \\[3pt]
+  \end{tabular}
+  \end{minipage}
+  \vspace{12pt}
+}
+
+\newcommand{\mynameasmall}{
+  \noindent\hspace{-5.75pt}
+  \begin{minipage}[t]{\textwidth}
+  \raggedleft\small
+    \begin{tabular}{
+        @{\GeneralAlign\hspace{0pt}}
+        >{\RightStyle}
+      p{\textwidth}
+    }
+    {\smallname} \hfill \infofont \addr \\[-3.5pt]
+                 \hfill \infofont \phone \sep \email
+  \end{tabular}
+  \end{minipage}
+  \vspace{12pt}
+}
+
+\newcommand{\mynameb}{
+  \begin{raggedright}
+  \noindent\hspace{-5.75pt}
+    \name
+    \vspace{3pt}
+  \end{raggedright} \\
+  \begin{tabular}{
+      @{\GeneralAlign}
+      >{\RightStyle}
+   p{\LeftWidth}
+  }
+  \infofont \addr \\[-3.5pt]
+  \infofont \phone \sep \email
+  \end{tabular}
+  \vspace{12pt}
+}
+
+\newcommand{\mynamebsmall}{
+  \begin{raggedright}
+  \noindent\hspace{-5.75pt}
+    {\smallname}
+    \vspace{3pt}
+  \end{raggedright} \\[-6pt]
+  \begin{tabular}{
+      @{\GeneralAlign}
+      >{\RightStyle}
+   p{\LeftWidth}
+  }\small
+  \infofont \addr \\[-6pt]
+  \infofont \phone \sep \email
+  \end{tabular}
+  \vspace{12pt}
+}
+
+\newcommand{\mynamec}{
+  \begin{center}
+    \hspace{-0.3cm}
+    {\name} \\\vspace{6pt}
+    \infofont \addr \\[3pt]
+    \infofont \phone \sep \email
+  \end{center}
+}
+
+\newcommand{\mynamecsmall}{
+  \begin{center}
+    \hspace{-0.3cm}
+    {\smallname} \\\vspace{6pt}
+    \small\infofont \addr \\[3pt]
+    \infofont \phone \sep \email
+  \end{center}
+}
+
+% ---------------------------------------------------------------------
+% Document spacing
+
+% \newcommand\LeftWidth{3.75cm}
+% \newcommand\LeftStyle{\color{yearscolor}\raggedleft}
+%
+% \newcommand\RightWidth{13.55cm}
+% \newcommand\RightStyle{\color{displaycolor}}
+
+\newcommand\RightWidth{3.10cm}
+\newcommand\RightStyle{\color{yearscolor}}
+
+\newcommand\LeftWidth{13.95cm}
+\newcommand\LeftStyle{\color{displaycolor}}
+
+\newcommand\ColdAlign{\hspace{3.3cm}}
+\newcommand\MidSpace{\hspace{0.38cm}}
+\newcommand\GeneralAlign{\hspace{-0.105cm}}
+\newcommand\GeneralSubAlign{\hspace{0.6cm}}
+
+% Tabular
+\newcommand\SubItemSkip{-3pt}
+\newcommand\SmallSubItemSkip{-1.5pt}
+\newcommand\SubItemSkipMulti{4.5pt}
+\newcommand\SmallSubItemSkipMulti{1.5pt}
+
+\newcommand\ItemSkip{4.5pt}
+\newcommand\ItemSkipMulti{9pt}
+\newcommand\TinySkip{1.5pt}
+\newcommand\MedSkip{6pt}
+\newcommand\SectionSkip{\vspace{6pt}}
+
+% Longtable
+\renewcommand\ItemSkip{\ItemSkipMulti}
+\renewcommand\SubItemSkip{\SubItemSkipMulti}
+\renewcommand\SmallSubItemSkip{\SmallSubItemSkipMulti}
+
+% ---------------------------------------------------------------------
+% Misc
+
+% \NewEnviron{mytabular}{
+%   \begin{tabular}{@{\GeneralAlign}>{\LeftStyle}p{\LeftWidth}@{\MidSpace}>{\RightStyle}p{\RightWidth}}
+%     \BODY
+%   \end{tabular}
+% }
+
+\NewEnviron{mytabularb}{
+\begin{longtable}{@{\GeneralAlign}>{\LeftStyle}L{\LeftWidth}@{\MidSpace}>{\RightStyle}R{\RightWidth}}
+    \BODY
+\end{longtable}
+}
+
+\NewEnviron{mytabular}{
+\begin{longtable}{@{\GeneralAlign}>{\LeftStyle}p{\LeftWidth}@{\MidSpace}>{\RightStyle}r}
+    \BODY
+\end{longtable}
+}
+
+\newcommand\SetHideLevel{1pt}
+\NewEnviron{hidelevel}[1]{%
+  \newdimen\level\level=#1pt
+  \ifdim\level<\SetHideLevel
+    \BODY
+  \else
+  \fi
+}
+
+\def\mtab{\hspace{1em}}
+\def\smplus{\mtab$\normalsize\raisebox{0pt}+$\small}
+\def\smplusnotab{$\normalsize\raisebox{0pt}+$\small}
+
+% ---------------------------------------------------------------------
+% Sections
+
+\newcommand\mysubexperience{
+  % ---------------------------------------------------------------------
+  \mysubsection{Experience}
+
+  \begin{mytabular}
+    {\titlestyle National Bureau of Economic Research}, Cambridge, MA
+    % & Jun 2015 -- Present
+    \\[\SubItemSkip]
+    {\liststyle Research Assistant} for Joseph J. Doyle (MIT). Returns to medicare spending; various RCTs.
+    & Jun 2015 -- Present
+    \\[\SmallSubItemSkip]
+    {\liststyle Research Assistant} for Jason Abaluck (Yale). Discrete choice models with consideration sets.
+    & Aug 2016 -- Present
+    \\[\ItemSkip]
+    %
+    {\titlestyle Columbia University}, New York, NY
+    % & Sep 2014 -- May 2015
+    % & 2014 -- 2015
+    \\[\SubItemSkip]
+    {\liststyle Teaching Assistant} for J\'on Steinsson. Intermediate Macroeconomics.
+    & Jan 2015 -- May 2015
+    % & Spring 2015
+    \\[\SmallSubItemSkip]
+    {\liststyle Teaching Assistant} for Xavier Sala-i-Mart\'in. Intermediate Macroeconomics.
+    & Sep 2014 -- Dec 2014
+    % & Fall 2014
+    \\[\ItemSkip]
+    %
+    {\titlestyle Zions Bancorporation}, West Valley, UT
+    % & Sep 2012 -- Aug 2013
+    % & 2012 -- 2013
+    \\[\SubItemSkip]
+    {\liststyle Credit Risk Analyst.} Statistical modeling and analysis of retail lending credit risk
+    & Sep 2012 -- Aug 2013
+    % {Administered 20+ recurring processes (weekly, monthly, quarterly) using SAS.}
+    % {Handled client requests for reports and analytics using SAS and MS Office.}
+    % {Automated mission-critical reports using VBA, VBScript, and MS Batch. Improved average processing time from 2 weeks to 3 days.}
+    % {Automated mission-critical reports using VBA, VBScript, and MS Batch.}
+    % {Restructured the documentation for the team's recurring processes.}
+    % {Developed VBA-based dashboard in Excel to analyze loans at risk of default.}
+    \\[\ItemSkip]
+    %
+    {\titlestyle University of Utah}, Salt Lake City, UT
+    % & Aug 2011 -- May 2012
+    % & 2011 -- 2012
+    \\[\SubItemSkip]
+    {\liststyle Research Assistant} for Kenneth P. Jameson. The effects of the undocumented population.
+    & Aug 2011 -- May 2012
+    % & Fall 2011, Spring 2012
+    \\[\SmallSubItemSkip]
+    {\liststyle Research Assistant} for Richard Fowles. Motorcycle fatalities and helmet usage in Thailand.
+    & Jan 2012 -- May 2012
+    % & Spring 2012
+    % {Wrote papers and presentations on research subjects.}
+    % {Presented weekly progress reports using \LaTeX and MS Office.}
+    % {Performed statistical analysis on data using R.}
+    % {Performed panel data analysis using R.}
+    % {Presented weekly reports using \LaTeX, R, and MS Office.}
+    \\[\ItemSkip]
+    %
+    {\titlestyle Utah Community Research Group (CRG)}, Salt Lake City, UT
+    % & Spring 2012
+    \\[\SubItemSkip]
+    {\liststyle Analyst.} Survey-based market research for Overstock.com
+    & Jan 2012 -- May 2012
+    % & Spring 2012
+    % {Identified the key-drivers of consumer loyalty and purchase behavior using ANOVA, factor analysis and logistic regression.}
+    % {Identified the key-drivers of consumer loyalty and purchase behavior}
+    % {Collaborated using Google Docs, R, and Statistica.}
+    \\[\ItemSkip]
+    %
+    {\titlestyle Rice University}, Houston, TX
+    % {\titlestyle Rice University Summer Institute of Statistics}, Houston, TX
+    % & Summer 2011
+    \\[\SubItemSkip]
+    {\liststyle Research Assistant} for Javier Rojo. Survival analysis of liver transplantation patients.
+    & May 2011 -- Jul 2011
+    % & Summer 2011
+    % {Prepared weekly reports, a paper, and a presentation on research subject.}
+    % {Made extensive use of \LaTeX, R, and MS Office.}
+  \end{mytabular}
+}
+
+\newcommand\mysubeducation{
+  % ---------------------------------------------------------------------
+  \mysubsection{Education}
+
+  \begin{mytabular}
+  {\titlestyle Columbia University}, New York, NY
+  & 2013--2015
+  \\[\ItemSkip]
+  {\liststyle M.A. in Economics}
+  \\[\SmallSubItemSkip]
+  {\smplus\ Dean's Fellow} & 2013 -- 2015
+  \\[\SmallSubItemSkip]
+  {\smplus\ Provost Diversity Fellowship} & 2014
+  \\[\SmallSubItemSkip]
+  {\titlestyle University of Utah}, Salt Lake City, UT
+  & 2009 -- 2012
+  \\[\ItemSkip]
+  {\liststyle B.S. in Mathematics (Statistics)}, {\itshape Magna Cum Laude}
+  \\[\SubItemSkip]
+  {\mfont B.S. in Economics}, {\itshape Magna Cum Laude}
+  \\[\SmallSubItemSkip]
+  {\smplus\ Student Commencement Speaker} & 2013
+  \\[\SmallSubItemSkip]
+  {\smplus\ Undergraduate Research Scholar} & 2012
+  \\[\SmallSubItemSkip]
+  {\smplus\ Francis Family Foundation Assistantship Award} & 2011 -- 2012
+  \\[\SmallSubItemSkip]
+  {\smplus\ Mathematics Continuing Departmental Scholarship} & 2011 -- 2012
+  \\[\SmallSubItemSkip]
+  {\smplus\ Dean's list} & 2009 -- 2012
+  \\[\SmallSubItemSkip]
+  \end{mytabular}
+}
+
+\def\mpad{\ \ \ }
+\newcommand\mysubeducationb{
+  % ---------------------------------------------------------------------
+  \mysubsection{Education}
+
+  \vspace{6pt}\noindent
+  {\mfont M.A. in Economics}, 2015
+  \hfill
+  {\mfont Columbia University}, New York, NY
+  \mpad
+  \\[\SmallSubItemSkip]
+  {\smplus\ Dean's Fellow \hfill 2013 -- 2015}
+  \mpad
+  \\[\SmallSubItemSkip]
+  {\smplus\ Provost Diversity Fellowship \hfill 2014}
+  \mpad
+  \\[\ItemSkip]
+  %
+  {\mfont B.S. in Mathematics (Statistics)}, {\itshape Magna Cum Laude}, 2012
+  \hfill {\mfont University of Utah}, Salt Lake City, UT
+  \mpad
+  \\[\SmallSubItemSkip]
+  {\mfont B.S. in Economics}, {\itshape Magna Cum Laude},  2012
+  \\[\SmallSubItemSkip]
+  % {\smplus\small\ Valedictorian, Student Commencement Speaker \hfill 2013} \\[\SmallSubItemSkip]
+  {\smplus\ Student Commencement Speaker \hfill 2013}
+  \mpad
+  \\[\SmallSubItemSkip]
+  {\smplus\ Undergraduate Research Scholar \hfill 2012}
+  \mpad
+  \\[\SmallSubItemSkip]
+  {\smplus\ Francis Family Foundation Assistantship Award \hfill 2011 -- 2012}
+  \mpad
+  \\[\SmallSubItemSkip]
+  {\smplus\ Mathematics Departmental Scholarship \hfill 2011 -- 2012}
+  \mpad
+  \\[\SmallSubItemSkip]
+  {\smplus\ Dean's list \hfill 2009 -- 2012}
+  \mpad
+  \\[\SmallSubItemSkip]
+}
+
+\newcommand\mysubpubs{
+  % ---------------------------------------------------------------------
+  \mysubsection{Publications}
+
+  \vspace{9pt}\noindent
+    C\'aceres, Mauricio and Jameson, Kenneth. P. (2015), ``The effects on insurance costs of restricting undocumented immigrants' access to driver licenses.'' \textit{Southern Economic Journal}, 81, no. 4: 907–927. \\[2.5pt]
+  {\hspace{3pt}\smplus\ Southern Economic Association's 2015 Georgescu-Roegen Prize for best academic article.} \\
+}
+
+\newcommand\mysubpresentations{
+  % ---------------------------------------------------------------------
+  \mysubsection{Presentations}
+
+  \begin{mytabularb}
+    Southern Economic Association 83rd Annual Meetings
+    & Nov 2013
+    \\[\SubItemSkip]
+    %
+    % Overstock.com Utah headquarters
+    % & May 2012
+    % \\[\SubItemSkip]
+    %
+    University of Utah Spring 2012 Undergraduate Research Symposium
+    & Apr 2012
+    \\[\SubItemSkip]
+    %
+    National Conference on Undergraduate Research 2012
+    & Mar 2012
+    \\[\SubItemSkip]
+    %
+    Rice University Summer Institute of Statistics Research Presentations
+    & Jul 2011
+    \\[\SubItemSkip]
+  \end{mytabularb}}
+
+\newcommand\mysubcomputer{
+  % ---------------------------------------------------------------------
+  % \mysubsection{Computer Languages and Software}
+  \mysubsection{Computer Skills}
+
+  \begin{longtable}{@{\GeneralAlign}>{\RightStyle}p{\RightWidth}@{\MidSpace}>{\LeftStyle}p{\LeftWidth}}
+  Advanced
+    & Stata (including Mata), R, Python, SAS, \LaTeX, Julia
+    \\[\SubItemSkip]
+    &  MS Office (Excel, Word, PowerPoint), VBA (Excel)
+    \\[\SubItemSkip]
+    Intermediate & MATLAB, Git, SVN, Bash, VBScript, MS Batch, C
+    \\[\SubItemSkip]
+  \end{longtable}
+}
+
+\newcommand\mysublang{
+  % ---------------------------------------------------------------------
+  \mysubsection{Languages}
+
+  \begin{longtable}{@{\GeneralAlign}>{\RightStyle}p{\RightWidth}@{\MidSpace}>{\LeftStyle}p{\LeftWidth}}
+    Fluent & English and Spanish
+  \\[\SubItemSkip]
+  \end{longtable}
+}
+
+% ---------------------------------------------------------------------
+% Document
+
+\begin{document}
+
+\titlespacing{\subsection}{0pt}{12pt}{0pt}
+\displayoptions
+\mynamea
+
+\mysubexperience
+
+\mysubeducationb
+
+\mysubcomputer
+
+\mysublang
+
+\clearpage
+\mynamedsmall
+
+\mysubpubs
+
+\mysubpresentations
+
+% ---------------------------------------------------------------------
+\end{document}

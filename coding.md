@@ -8,6 +8,7 @@ I rather like coding and created this website mainly to force myself to speed al
 
 I use a lot of [Stata](https://stata.com) these days. Here's some foo I've written that's proved useful over time:
 
+- [stata-gtools](https://github.com/mcaceresb/stata-gtools): Faster implementation of Stata's collapse and egen using C plugins.
 - [stata-power](https://github.com/mcaceresb/stata-power): Notes and programs to do parametric and simulated power calculations.
 - [stata-benchmark](https://github.com/mcaceresb/stata-benchmark): Simple hack to benchmark (time) Stata programs.
 - [stata-todatetime](https://github.com/mcaceresb/stata-todatetime): Simple wrapper to convert Stata strings to date-time.

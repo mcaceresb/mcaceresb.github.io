@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Writing my first Stata plugin: A real wold use case"
+title:  "Writing my first Stata plugin: A real world use case"
 date:   2017-02-14 20:13:24 -0500
 categories: stata plugins
 ---

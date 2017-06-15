@@ -3,7 +3,7 @@
 % ---------------------------------------------------------------------
 \documentclass{article}
 
-\usepackage[left=1cm, paperwidth=17cm, paperheight=4.5cm]{geometry}
+% \usepackage{nberpreamble}
 \usepackage{color}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{fontspec}
@@ -36,16 +36,13 @@
   ytick       = {0}
 }
 
-\pagestyle{empty}
-
-\definecolor{linegray}{gray}{0.15}
-\definecolor{displaygray}{gray}{0.20}
+\definecolor{linegray}{gray}{0.125}
+\definecolor{displaygray}{gray}{0.175}
 % \definecolor{linegray}{gray}{0}
 % \definecolor{displaygray}{gray}{0}
 \newcommand{\logoWrapper}[1]{
     \begin{figure}
       \centering
-      \vspace{-0.2cm}
       \begin{tikzpicture}[scale=1]
       % Group data
       \draw [line width = 2.5pt, draw = linegray, fill=ForestGreen!8] ( 0.0,  1.0) -- (1.0,  1.0) -- (1.0,  0.5) -- ( 0.0,  0.5) -- ( 0.0,  1.0);
@@ -82,7 +79,51 @@
 
 \newcommand\cola{fill=red!20}
 \newcommand\colb{fill=blue!20}
+
+\logoWrapper{}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Style 1: Bold + Italic                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \logoWrapper{\node [above] at (6.85, -1.2)  {\fontsize{72}{81}  \selectfont \textbf{\textit{G}}\textit{tools}}}
+% \logoWrapper{\node [above] at (7.95, -1.7)  {\fontsize{96}{108} \selectfont \textbf{\textit{G}}\textit{tools}}}
+% \logoWrapper{\node [above] at (9.25, -2.075){\fontsize{124}{144}\selectfont \textbf{\textit{G}}\textit{tools}}}
+% \logoWrapper{\node [above] at (7.45, -1.55) {\fontsize{84}{96}  \selectfont \textbf{\textit{G}}\textit{tools}}}
+%
+% \clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Style 1.1: Bold + Italic                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\logoWrapper{\node [above] at (6.85, -1.2)  {\color{displaygray}\fontsize{72}{81}   \selectfont {\medium\textit{G}}\textit{tools}}}
+\logoWrapper{\node [above] at (7.95, -1.7)  {\color{displaygray}\fontsize{96}{108}  \selectfont {\medium\textit{G}}\textit{tools}}}
 \logoWrapper{\node [above] at (9.25, -2.075){\color{displaygray}\fontsize{124}{144} \selectfont {\medium\textit{G}}\textit{tools}}}
+\logoWrapper{\node [above] at (8.55, -1.850){\color{displaygray}\fontsize{108}{120} \selectfont {\medium\textit{G}}\textit{tools}}}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           Style 2: Italic                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \logoWrapper{\node [above] at (6.85, -1.2)  {\fontsize{72}{81}  \selectfont \textit{Gtools}}}
+% \logoWrapper{\node [above] at (7.95, -1.7)  {\fontsize{96}{108} \selectfont \textit{Gtools}}}
+% \logoWrapper{\node [above] at (9.25, -2.075){\fontsize{124}{144}\selectfont \textit{Gtools}}}
+% \logoWrapper{\node [above] at (7.45, -1.55) {\fontsize{84}{96}  \selectfont \textit{Gtools}}}
+%
+% \clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Style 3: Bold + Normal                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \logoWrapper{\node [above] at (7.15, -1.2)  {\fontsize{72}{81}  \selectfont {G}{tools}}}
+% \logoWrapper{\node [above] at (8.35, -1.7)  {\fontsize{96}{108} \selectfont {G}{tools}}}
+% \logoWrapper{\node [above] at (9.25, -2.075){\fontsize{124}{144}\selectfont {G}{tools}}}
+% \logoWrapper{\node [above] at (7.75, -1.55) {\fontsize{84}{96}  \selectfont {G}{tools}}}
 
 %----------------------------------------------------------------------
 \end{document}

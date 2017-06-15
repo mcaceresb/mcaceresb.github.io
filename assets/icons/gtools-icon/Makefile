@@ -1,22 +1,39 @@
-all:
+all: latex icon icontext alpha
+
+latex:
 	mkdir -p text
 	xelatex gtools-icon.tex
 	rm -f gtools-icon.aux
 	rm -f gtools-icon.log
 	rm -f gtools-icon.fls
 	rm -f gtools-icon.log
-	convert -density 300 gtools-icon.pdf\[1\] text/gtools-icon-text.svg
-	convert text/gtools-icon-text.svg  -crop 1680x390+535+2345 text/gtools-icon-text4.png
+
+icon:
 	convert -resize 600x173 gtools-icon4.png text/gtools-icon-600x173.png
 	convert -resize 700x162 gtools-icon4.png text/gtools-icon-700x.png
 	convert -resize 600x139 gtools-icon4.png text/gtools-icon-600x.png
 	convert -resize 50% gtools-icon4.png text/gtools-icon-50p.png
+
+icontext:
+	convert -density 300 gtools-icon.pdf\[1\] text/gtools-icon-text.svg
+	convert text/gtools-icon-text.svg  -crop 1680x390+535+2345 text/gtools-icon-text4.png
 	convert -resize 600x173 text/gtools-icon-text4.png text/gtools-icon-text-600x173.png
-	convert -resize 700x162 text/gtools-icon-text4.png text/gtools-icon-text-700x.png
 	convert -resize 600x139 text/gtools-icon-text4.png text/gtools-icon-text-600x.png
+	convert -resize 550x127 text/gtools-icon-text4.png text/gtools-icon-text-550x.png
 	convert -resize 500x116 text/gtools-icon-text4.png text/gtools-icon-text-500x.png
 	convert -resize 50% text/gtools-icon-text4.png text/gtools-icon-text-50p.png
+	convert -resize 35% text/gtools-icon-text4.png text/gtools-icon-text-35p.png
 	convert -resize 30% text/gtools-icon-text4.png text/gtools-icon-text-30p.png
+
+alpha:
+	convert text/gtools-icon-text-600x173.png -fuzz 0% -transparent white text/gtools-icon-text-600x173.png
+	convert text/gtools-icon-text-600x.png    -fuzz 0% -transparent white text/gtools-icon-text-600x.png
+	convert text/gtools-icon-text-550x.png    -fuzz 0% -transparent white text/gtools-icon-text-550x.png
+	convert text/gtools-icon-text-500x.png    -fuzz 0% -transparent white text/gtools-icon-text-500x.png
+	convert text/gtools-icon-text-50p.png     -fuzz 0% -transparent white text/gtools-icon-text-50p.png
+	convert text/gtools-icon-text-35p.png     -fuzz 0% -transparent white text/gtools-icon-text-35p.png
+	convert text/gtools-icon-text-30p.png     -fuzz 0% -transparent white text/gtools-icon-text-30p.png
+
 
 # (700.0 / 1350) * 400
 # (700.0 / 1615) * 420

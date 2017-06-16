@@ -12,4 +12,4 @@ all:
 	convert gtools-icon-text-open-sans.png -fuzz 0% -transparent white gtools-icon-text-open-sans.png
 	convert gtools-icon-text-ubuntu.svg gtools-icon-text-ubuntu.png
 	convert gtools-icon-text-ubuntu.png -fuzz 0% -transparent white gtools-icon-text-ubuntu.png
-	ln -sf gtools-icon-text-open-sans.png gtools-icon-text.png
+	cp -f gtools-icon-text-ubuntu.png gtools-icon-text.png

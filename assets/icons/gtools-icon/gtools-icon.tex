@@ -3,13 +3,30 @@
 % ---------------------------------------------------------------------
 \documentclass{article}
 
-\usepackage[left=0.15cm, paperwidth=15.5cm, paperheight=4cm]{geometry}
+\usepackage[left=0.15cm, paperwidth=16cm, paperheight=4cm]{geometry}
 \usepackage{color}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{fontspec}
+
 \fontspec{Open Sans}
 \setmainfont{Open Sans Light}
 \newfontfamily\medium{Open Sans}
+
+\newfontfamily\Ubuntu{Ubuntu Light}
+\newfontfamily\Umedium{Ubuntu Medium}
+
+\newfontfamily\Noto{Noto Sans}
+\newfontfamily\Nmedium{Noto Sans}
+
+\newfontfamily\PT{PT Sans}
+\newfontfamily\Pmedium{PT Sans Bold}
+
+\newfontfamily\Source{Source Sans Pro Light}
+\newfontfamily\Smedium{Source Sans Pro}
+
+\newfontfamily\Fira{Fira Sans Light}
+\newfontfamily\Fmedium{Fira Sans}
+
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usetikzlibrary{
@@ -38,8 +55,8 @@
 
 \pagestyle{empty}
 
-\definecolor{linegray}{gray}{0.15}
-\definecolor{displaygray}{gray}{0.20}
+\definecolor{linegray}{gray}{0.20}
+\definecolor{displaygray}{gray}{0.25}
 \newcommand{\logoWrapper}[1]{
     \begin{figure}
       \centering
@@ -80,7 +97,24 @@
 
 \newcommand\cola{fill=red!20}
 \newcommand\colb{fill=blue!20}
+
+% \clearpage
+\logoWrapper{\node [above] at (8.75, -2.075){\color{displaygray}\fontsize{124}{144} \selectfont {\textit{\Smedium G}}\textit{\Source tools}}}
+
+\clearpage
+\logoWrapper{\node [above] at (9.25, -2.075){\color{displaygray}\fontsize{124}{144} \selectfont {\textit{\Umedium G}}\textit{\Ubuntu tools}}}
+
+\clearpage
+\logoWrapper{\node [above] at (9.25, -2.075){\color{displaygray}\fontsize{124}{144} \selectfont {\textit{\Nmedium G}}\textit{\Noto tools}}}
+
+\clearpage
 \logoWrapper{\node [above] at (9.25, -2.075){\color{displaygray}\fontsize{124}{144} \selectfont {\medium\textit{G}}\textit{tools}}}
+
+% \clearpage
+% \logoWrapper{\node [above] at (9.25, -2.075){\color{displaygray}\fontsize{124}{144} \selectfont {\textit{\Pmedium G}}\textit{\PT tools}}}
+
+\clearpage
+\logoWrapper{\node [above] at (9.35, -2.075){\color{displaygray}\fontsize{124}{144} \selectfont {\textit{\Fmedium G}}\textit{\Fira tools}}}
 
 %----------------------------------------------------------------------
 \end{document}

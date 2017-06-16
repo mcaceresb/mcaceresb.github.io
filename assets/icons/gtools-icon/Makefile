@@ -5,6 +5,11 @@ all:
 	rm -f gtools-icon.log
 	rm -f gtools-icon.fls
 	rm -f gtools-icon.log
-	convert -density 600 gtools-icon.pdf\[0\] gtools-icon-text.svg
-	convert gtools-icon-text.svg gtools-icon-text.png
-	convert gtools-icon-text.png -fuzz 0% -transparent white gtools-icon-text.png
+	rm -f .latexrun.*
+	convert -density 600 gtools-icon.pdf\[0\] gtools-icon-text-open-sans.svg
+	convert -density 600 gtools-icon.pdf\[1\] gtools-icon-text-ubuntu.svg
+	convert gtools-icon-text-open-sans.svg gtools-icon-text-open-sans.png
+	convert gtools-icon-text-open-sans.png -fuzz 0% -transparent white gtools-icon-text-open-sans.png
+	convert gtools-icon-text-ubuntu.svg gtools-icon-text-ubuntu.png
+	convert gtools-icon-text-ubuntu.png -fuzz 0% -transparent white gtools-icon-text-ubuntu.png
+	ln -sf gtools-icon-text-open-sans.png gtools-icon-text.png

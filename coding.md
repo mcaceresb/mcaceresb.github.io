@@ -14,6 +14,8 @@ I use a lot of [Stata](https://stata.com) these days. Here's some foo I've writt
 - [stata-todatetime](https://github.com/mcaceresb/stata-todatetime): Simple wrapper to convert Stata strings to date-time.
 - [stata-matrix-tools](https://github.com/mcaceresb/stata-matrix-tools): Various utilities to work with Stata matrices.
 
+I also helped code the [`alogit`](https://ideas.repec.org/c/boc/bocode/s458341.html) stata command to estimate the model detailed by Abaluck and Adams' working paper, "What Do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses" ([link](http://www.nber.org/papers/w23566)).
+
 Some other interesting projects:
 
 - [gmail-download](https://github.com/mcaceresb/gmail-download): Download and sort all gmail e-mails into various formats using the Gmail API.

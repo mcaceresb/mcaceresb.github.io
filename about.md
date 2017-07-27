@@ -28,7 +28,6 @@ img {
 My name is Mauricio Cáceres Bravo. I was born in Lima, Peru, and moved
 to Utah when I was 17. I completed my undergraduate studies at the
 University of Utah, where I double-majored in economics and mathematics.
-
 After college I worked as a credit risk analyst for a local bank for a
 year before moving to New York for graduate school. I have a Master's
 degree in economics from Columbia University.
@@ -41,7 +40,6 @@ School of Management in New Haven.
 This is my personal website, meant to force myself to speed along some
 projects I've had in the back-burner throughout the past year (you can
 find links to some of my coding projects [under the code tab]({{ "/coding" | relateive_url }})).
-
 However, the idea is to eventually host a blog and my personal research
 projects. Having a place to publish them should encourage me to work
 more consistently on them.

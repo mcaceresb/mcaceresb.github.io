@@ -35,8 +35,8 @@
       "position": "Research Assistant",
       "location": "New Haven, CT",
       "website": "http://som.yale.edu/",
-      "startDate": "Jul 2017",
-      "endDate": "Present",
+      "start_Date": "Jul 2017",
+      "end_Date": "Present",
       "summary_short": "I am currently working as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
       "summary": "I am currently working as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
       "highlights": [
@@ -49,8 +49,8 @@
       "position": "Research Assistant",
       "location": "Cambridge, MA",
       "website": "http://www.nber.org/",
-      "startDate": "Jun 2015",
-      "endDate": "Jun 2017",
+      "start_Date": "Jun 2015",
+      "end_Date": "Jun 2017",
       "summary_short": [
           "Joseph J. Doyle (MIT). Returns to medicare spending; various RCTs.",
           "Jason Abaluck (Yale). Inattention in discrete choice models with consideration sets."
@@ -69,8 +69,8 @@
       "position": "Teaching Assistant",
       "location": "New York, NY",
       "website": "http://econ.columbia.edu/",
-      "startDate": "Sep 2014",
-      "endDate": "May 2015",
+      "start_Date": "Sep 2014",
+      "end_Date": "May 2015",
       "summary_short": [
           "Professor Xavier Sala-i-Martín. Intermediate Macroeconomics (Fall).",
           "Professor Jón Steinsson. Intermediate Macroeconomics (Spring)."
@@ -89,8 +89,8 @@
       "position": "Credit Risk Analyst",
       "location": "West Valley, UT",
       "website": "http://www.nber.org/",
-      "startDate": "Sep 2012",
-      "endDate": "Aug 2013",
+      "start_Date": "Sep 2012",
+      "end_Date": "Aug 2013",
       "summary_short": "Statistical modeling and analysis of retail lending credit risk.",
       "summary": "Statistical modeling and analysis of retail lending credit risk.",
       "highlights": [
@@ -103,8 +103,8 @@
       "position": "Research Assistant",
       "location": "Salt Lake City, UT",
       "website": "http://econ.utah.edu/",
-      "startDate": "Aug 2011",
-      "endDate": "May 2012",
+      "start_Date": "Aug 2011",
+      "end_Date": "May 2012",
       "summary_short": [
           "Kenneth P. Jameson. The effects of the undocumented population.",
           "Richard Fowles. Motorcycle fatalities and helmet usage in Thailand."
@@ -123,8 +123,8 @@
       "position": "Analyst",
       "location": "Salt Lake City, UT",
       "website": "http://www.utahcrg.utah.edu/",
-      "startDate": "Jan 2012",
-      "endDate": "May 2012",
+      "start_Date": "Jan 2012",
+      "end_Date": "May 2012",
       "summary_short": "Survey-based market research for Overstock.com",
       "summary": "Survey-based market research for Overstock.com",
       "highlights": [
@@ -137,8 +137,8 @@
       "position": "Research Assistant",
       "location": "Houston,TX",
       "website": "http://www.stat.rice.edu/~jrojo/RUSIS/",
-      "startDate": "May 2011",
-      "endDate": "Jun 2012",
+      "start_Date": "May 2011",
+      "end_Date": "Jun 2012",
       "summary_short": "Javier Rojo. Survival analysis of liver transplantation patients.",
       "summary": "Javier Rojo. Survival analysis of liver transplantation patients.",
       "highlights": [
@@ -153,8 +153,8 @@
       "area": "Economics",
       "degrees": "M.A. in Economics",
       "studyType": "Master of Arts",
-      "startDate": "Sep 2013",
-      "endDate": "May 2015",
+      "start_Date": "Sep 2013",
+      "end_Date": "May 2015",
       "_gpa": "3.428",
       "gpa": "",
       "awards": [
@@ -179,8 +179,8 @@
       "area": "Economics and Mathematics (Statistics)",
       "degrees": ["B.S. in Mathematics (Statistics)", "B.S. in Economics"],
       "studyType": "Bachelor",
-      "startDate": "Aug 2009",
-      "endDate": "Aug 2012",
+      "start_Date": "Aug 2009",
+      "end_Date": "Aug 2012",
       "gpa": "3.972",
       "awards": [
           "Magna Cum Laude",
@@ -324,19 +324,19 @@
   "presentations": [
     {
         "description": "Southern Economic Association 83rd Annual Meetings",
-        "date":        "Nov 2013"
+        "_date":        "Nov 2013"
     },
     {
         "description": "University of Utah Spring 2012 Undergraduate Research Symposium",
-        "date":        "Apr 2012"
+        "_date":        "Apr 2012"
     },
     {
         "description": "National Conference on Undergraduate Research 2012",
-        "date":        "Mar 2012"
+        "_date":        "Mar 2012"
     },
     {
         "description": "Rice University Summer Institute of Statistics Research Presentations",
-        "date":        "Jul 2011"
+        "_date":        "Jul 2011"
     }
   ],
   "interests": [

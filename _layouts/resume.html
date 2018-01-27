@@ -44,7 +44,7 @@ layout: default
         <h4 class="list-group-item-heading cv-bolditem">{{ work.company }}</h4>
         <p class="cv-position">{{ work.position }}</p>
         <div class="cv-date">
-          {{ work.startDate }}-{{ work.endDate }}
+          {{ work.start_Date }}-{{ work.end_Date }}
         </div>
         {% for summary in work.summary_short %}
           <p class="list-group-item-text cv-summary">{{ summary }}</p>
@@ -89,7 +89,7 @@ layout: default
         {% endfor %}
         </ul>
         <div class="cv-date">
-          {{ edu.endDate }}
+          {{ edu.end_Date }}
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@ layout: default
       </div>
       <div class="row-content">
         <h4 class="list-group-item-heading" style="font-size:18px;">{{ pres.description }}</h4>
-        <div class="cv-date">{{ pres.date }}</div>
+        <div class="cv-date">{{ pres._date }}</div>
       </div>
     </div>
   </div>

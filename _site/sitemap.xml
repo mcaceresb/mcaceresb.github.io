@@ -5,8 +5,8 @@
     <description>My personal website</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 27 Jan 2018 12:15:32 -0500</pubDate>
-    <lastBuildDate>Sat, 27 Jan 2018 12:15:32 -0500</lastBuildDate>
+    <pubDate>Sat, 27 Jan 2018 12:44:08 -0500</pubDate>
+    <lastBuildDate>Sat, 27 Jan 2018 12:44:08 -0500</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
     
       <item>
@@ -776,7 +776,7 @@ yaourt -S pacaur
         <title>Gtools</title>
         <description>Gtools</description>
         <link>http://localhost:4000https://gtools.readthedocs.io/</link>
-        <pubDate>Mon, 01 May 2017 00:00:00 -0400</pubDate>
+        <pubDate>Wed, 31 May 2017 00:00:00 -0400</pubDate>
         
         <category>Stata</category>
         
@@ -788,7 +788,7 @@ yaourt -S pacaur
         <title>alogit</title>
         <description>alogit</description>
         <link>http://localhost:4000https://sites.google.com/view/alogit/</link>
-        <pubDate>Wed, 31 Dec 1969 19:33:37 -0500</pubDate>
+        <pubDate>Fri, 30 Jun 2017 00:00:00 -0400</pubDate>
         
         <category>Stata</category>
         
@@ -800,7 +800,7 @@ yaourt -S pacaur
         <title>Stata Power</title>
         <description>Stata Power</description>
         <link>http://localhost:4000https://github.com/mcaceresb/stata-power</link>
-        <pubDate>Mon, 01 Feb 2016 00:00:00 -0500</pubDate>
+        <pubDate>Sun, 28 Feb 2016 00:00:00 -0500</pubDate>
         
         <category>Stata</category>
         
@@ -812,7 +812,7 @@ yaourt -S pacaur
         <title>Tablefill</title>
         <description>Tablefill</description>
         <link>http://localhost:4000https://github.com/mcaceresb/tablefill</link>
-        <pubDate>Wed, 31 Dec 1969 19:00:00 -0500</pubDate>
+        <pubDate>Fri, 31 Jul 2015 00:00:00 -0400</pubDate>
         
         <category>Python</category>
         

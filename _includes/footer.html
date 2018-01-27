@@ -1,119 +1,13 @@
-<!-- 
-<head>
-<style>
-.image-cropper {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-}
-img {
-    display: inline;
-    margin: 0 auto;
-    height: 100%;
-    width: auto;
-    float: right;
-}
-</style>
-</head>
--->
-
-<footer class="site-footer">
-
-  <div class="wrapper">
-
-    <!-- <h2 class="footer&#45;heading">{{ site.title | escape }}</h2> -->
-    <h2 class="footer-heading">Contact</h2>
-
-    <div class="footer-col-wrapper">
-
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li>
-            {% if site.author %}
-              {{ site.author | escape }}
-            {% else %}
-              {{ site.title | escape }}
-            {% endif %}
-            </li>
-            {% if site.email %}
-            <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-            {% endif %}
-        </ul>
-<!-- 
-      </div>
--->
-
-        <!-- 
-                <ul class="social-media-list">
-                  {% if site.linkedin_username %}
-                  <li>
-                    {% include icon-linkedin.html username=site.linkedin_username %}
-                  </li>
-                  {% endif %}
-
-                  {% if site.github_username %}
-                  <li>
-                    {% include icon-github.html username=site.github_username %}
-                  </li>
-                  {% endif %}
-
-                  {% if site.twitter_username %}
-                  <li>
-                    {% include icon-twitter.html username=site.twitter_username %}
-                  </li>
-                  {% endif %}
-
-                  {% if site.medium_username %}
-                  <li>
-                    {% include icon-medium.html username=site.medium_username %}
-                  </li>
-                  {% endif %}
-                </ul>
-         -->
-
-<!-- 
-         <div class="footer-col footer-col-3">
--->
-             <ul class="social-media-list">
-                 {% if site.linkedin_username %}
-                 <li>
-                     {% include icon-linkedin.html username=site.linkedin_username %}
-                 </li>
-                 {% endif %}
-
-                 {% if site.github_username %}
-                 <li>
-                     {% include icon-github.html username=site.github_username %}
-                 </li>
-                 {% endif %}
-
-                 {% if site.twitter_username %}
-                 <li>
-                     {% include icon-twitter.html username=site.twitter_username %}
-                 </li>
-                 {% endif %}
-
-                 {% if site.medium_username %}
-                 <li>
-                     {% include icon-medium.html username=site.medium_username %}
-                 </li>
-                 {% endif %}
-             </ul>
-         </div>
-
-<!-- 
-         <div class="footer-col footer-col-2">
-         </div>
-
-         <div class="footer-col footer-col-3 image-cropper" style="margin-top:-48px;">
-               <img src="{{ "/assets/me/mauricio-wm-ch.jpg" | relateive_url }}" class="rounded" />
-         </div>
--->
-
-    </div>
-
-  </div>
-
+<footer>
+  © 2018 {{ site.author }} - Powered by Jekyll.
 </footer>
+
+<div align="center">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-0000000000000000"
+    data-ad-slot="0000000000"
+    data-ad-format="auto"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>

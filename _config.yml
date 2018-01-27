@@ -1,45 +1,29 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: Mauricio Cáceres Bravo
-email: mauricio.caceres.bravo@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-    Hi! I am a research assistant at the Yale School of Management,
-    based in New Haven, CT. This is my personal website, meant to
-    force myself to speed along some coding projects I've had in the
-    back-burner throughout the past year.
+description: My personal website
+author: Mauricio Cáceres Bravo
+logo: /jekyll-hcz-blog/static/img/avatar.png
+github: https://github.com/mcaceresb
+about: Research Assistant at Yale SOM
 
-    I double-majored in mathematics and economics at the University
-    of Utah and I have a Master's degree in economics from Columbia
-    University in New York.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: https://mcaceresb.github.io # the base hostname & protocol for your site, e.g. http://example.com
-github_username: mcaceresb
+baseurl: ""
+url: ""
+
+allowsearch: true
+
 medium_username: mcaceresb
-google_analytics: UA-91854317-1
 # google_tags: GTM-5JHMCV7
-# highlighter: pygments
-highlighter: rouge
+google_analytics: UA-91854317-1
 
-# Build settings
+share:
+  twitter_username: \#
+  fb_appid: 000000000000
+
+
+enableTags: true
+tagarray: []
+
+paginate: 20
+per_page: 20
+paginate_path: "blog/page:num/"
 markdown: kramdown
-theme: minima
-gems:
-  - jekyll-gist
-  - jekyll-sitemap
-  - jekyll-feed
-exclude:
-  - Gemfile
-  - Gemfile.lock
+gems: [jekyll-paginate, jekyll-gist]

@@ -1,32 +1,73 @@
+.cv-spanlist {
+    float: left;
+    width: 33.3%;
+}
+
+.cv-div-spanlist {
+    height: 525px;
+}
+
+@media only screen and (max-width: 768px) {
+    .cv-spanlist {
+        float: none;
+        width: 100%;
+    }
+
+    .cv-div-spanlist {
+        height: auto;
+    }
+}
+
+.adj-ul-nav-width {
+    margin-right:6px!important;
+    padding-right:6px!important;
+}
+
+.adj-li-nav-width {
+    margin-left:0px!important;
+    padding-left:0px!important;
+}
+
+@media (max-width:992px){
+    .adj-ul-nav-width {
+        margin-right:-12px!important;
+        padding-right:6px!important;
+    }
+}
+
+/************************
+ *  Section Separator!  *
+ ************************/
+
 .cv-heading {
     font-size:39px;
 }
 
 .cv-item {
-    font-size: 17px;
+    font-size: 16px!important;
 }
 
 .cv-bolditem {
-    font-size: 16px;
+    font-size: 15px;
     font-weight:500;
 }
 
 .cv-listitem {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .cv-position {
     font-style:italic;
-    font-size: 17px;
+    font-size: 16px;
     margin-bottom: 6px;
 }
 
 .cv-date{
     position: absolute;
     right: 16px;
-    top: 0;
+    top: 6px;
     color: rgba(0,0,0,.54);
-    font-size: 16px
+    font-size: 15px
 }
 
 .cv-shorten{

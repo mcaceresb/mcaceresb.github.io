@@ -7,6 +7,16 @@
 /*********************************************************************
  *                            Main styles                            *
  *********************************************************************/
+.title-size {
+  font-size: 39px; }
+
+.home-subtitle {
+  font-size: 39px;
+  margin-bottom: 32px;
+  margin-top: 5px;
+  color: #263238;
+  font-weight: 300; }
+
 .header-panel.shadow-z-2 {
   background-color: #212121;
   padding: 50px 0 15px 0;
@@ -44,13 +54,6 @@ li.current-menu-item:before {
   vertical-align: middle;
   background: #212121; }
 
-.home-subtitle {
-  font-size: 26px;
-  margin-bottom: 32px;
-  margin-top: 5px;
-  color: #263238;
-  font-weight: 300; }
-
 a, a:focus, a:hover {
   color: #006064; }
 
@@ -60,8 +63,14 @@ a .material-icons, a:focus .material-icons, a:hover .material-icons {
 /*********************************************************************
  *                           Coding stuff                            *
  *********************************************************************/
+.gh-target {
+  width: 48px; }
+
+.gh-api-size {
+  font-size: 16px; }
+
 .gh-listitem {
-  font-size: 16px;
+  font-size: 16px !important;
   padding: 3px; }
 
 .gh-btn-size {

@@ -7,7 +7,7 @@ layout: default
 <!--  -->
     <div class="list-group">
         {% if page.subtitle %}
-        <h4 class="home-subtitle" style="font-size:39px">
+        <h4 class="home-subtitle">
           {{ page.subtitle }}
         </h4>
         {% endif %}
@@ -47,22 +47,19 @@ layout: default
                    repo="{{ project.repo }}"
                    class="ghbtn">
                   <a target="_blank"
-                     style="width: 48px;font-size:16px;"
                      href="https://github.com/{{ project.gh_user }}/{{ project.repo }}"
-                     class="btn btn-white btn-xs"
-                  ><i class="fa fa-github">
+                     class="gh-target btn btn-white btn-xs"
+                  ><i class="gh-api-size fa fa-github">
                     </i></a>
                   <a target="_blank"
-                     style="width: 48px;font-size:12px;"
                      href="https://github.com/{{ project.gh_user }}/{{ project.repo }}/stargazers"
-                     class="btn btn-white btn-xs star"
-                  ><i class="fa fa-star">
+                     class="gh-target btn btn-white btn-xs star"
+                  ><i class="gh-api-size fa fa-star">
                     </i> ...</a>
                   <a target="_blank"
-                     style="width: 48px;font-size:12px;"
                      href="https://github.com/{{ project.gh_user }}/{{ project.repo }}/network"
-                     class="btn btn-white btn-xs fork"
-                  ><i class="fa fa-code-fork">
+                     class="gh-target btn btn-white btn-xs fork"
+                  ><i class="gh-api-size fa fa-code-fork">
                     </i> ...</a>
                   <div style="height: 10px;"></div>
               </div>
@@ -95,7 +92,8 @@ layout: default
         <!-- <div class="row&#45;action&#45;primary"> -->
         <!--   <i class="fa fa&#45;code"></i> -->
         <!-- </div> -->
-        <div class="row-content">
+        <!-- <div class="row&#45;content"> -->
+        <div>
           <div class="least-content"></div>
           <h4 class="list-group-item-heading">{{ project.name }}</h4>
           <!-- <br/> -->

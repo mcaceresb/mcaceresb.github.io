@@ -1,4 +1,5 @@
-<ul class="list-separator nav navbar-nav well well-primary {{ page.layout }}" style="margin-right:6px;padding-right:6px;min-width:20px">
+<!-- style="margin&#45;right:6px;padding&#45;right:6px" -->
+<ul class="adj-ul-nav-width list-separator nav navbar-nav well well-primary {{ page.layout }}">
 {% for i in site.data.urls %}
 	{% assign current = nil %}
 	{% assign pageurl = page.url | split:'/' | last %}
@@ -13,8 +14,8 @@
     {% unless target %} {% assign target = '_self' %} {% endunless %}
 	{% if pageurl == menuurl or page.layout == i.layout %} {% assign current = 'current-menu-item' %} {% endif %}
 	<!-- <li class="col&#45;lg&#45;12 col&#45;md&#45;12 col&#45;sm&#45;4 col&#45;xs&#45;12 {{ current }} {{ pageurl }}"><a href="{{ linkurl }}" target="{{ target }}"><i class="fa {{ i.icon }}"></i> {{ i.text }}</a></li> -->
-	<li class="col-lg-12 col-md-12 col-sm-4 col-xs-12 {{ current }} {{ pageurl }}"
-        style="margin-left:0px;padding-left:0px;">
+     <!-- style="margin&#45;left:0px;padding&#45;left:0px;" -->
+	<li class="adj-li-nav-width col-lg-12 col-md-12 col-sm-4 col-xs-12 {{ current }} {{ pageurl }}">
         <a href="{{ linkurl }}" target="{{ target }}">
             <i class="fa {{ i.icon }}" style="width:42px;"></i>
             {{ i.text }}

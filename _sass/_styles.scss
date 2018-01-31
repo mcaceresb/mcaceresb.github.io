@@ -2,6 +2,19 @@
  *                            Main styles                            *
  *********************************************************************/
 
+.title-size {
+    font-size: $mc-font-size-title;
+}
+
+
+.home-subtitle {
+    font-size: $mc-font-size-title;
+    margin-bottom: 32px;
+    margin-top: 5px;
+    color: $mc-title-color;
+    font-weight: 300;
+}
+
 .header-panel.shadow-z-2 {
     background-color: $mc-background-color-top;
     padding: 50px 0 15px 0;
@@ -44,14 +57,6 @@ li.current-menu-item:before {
     background: $mc-background-color-nav;
 }
 
-.home-subtitle {
-    font-size: 26px;
-    margin-bottom: 32px;
-    margin-top: 5px;
-    color: $mc-title-color;
-    font-weight: 300;
-}
-
 a,a:focus,a:hover{
     color:$mc-highlight-color-link
 }
@@ -64,8 +69,16 @@ a .material-icons,a:focus .material-icons,a:hover .material-icons{
  *                           Coding stuff                            *
  *********************************************************************/
 
+.gh-target {
+    width: 48px;
+}
+
+.gh-api-size {
+    font-size:16px;
+}
+
 .gh-listitem {
-    font-size: 16px;
+    font-size: 16px!important;
     padding: 3px
 }
 

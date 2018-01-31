@@ -1,4 +1,4 @@
-<ul class="list-separator nav navbar-nav well well-primary {{ page.layout }}" style="margin-right:6px;padding-right:6px;">
+<ul class="list-separator nav navbar-nav well well-primary {{ page.layout }}" style="margin-right:6px;padding-right:6px;min-width:20px">
 {% for i in site.data.urls %}
 	{% assign current = nil %}
 	{% assign pageurl = page.url | split:'/' | last %}

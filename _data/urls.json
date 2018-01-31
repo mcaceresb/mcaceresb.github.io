@@ -29,10 +29,5 @@
     "text": "About",
     "url": "/about/",
     "icon": "fa-user"
-  },
-  {
-    "text": "Github",
-    "url": "https://github.com/mcaceresb",
-    "icon": "fa-github"
   }
 ]

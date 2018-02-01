@@ -6,16 +6,6 @@ categories: stata plugins
 ---
 
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
 I'm not the biggest fan of Stata. Though I use it every day for RA work,
 and Stata does shine when all you want to do is explore one data set (or
 a series of data sets that are easy to merge), it's become increasingly

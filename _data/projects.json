@@ -15,11 +15,11 @@
 		"url": "https://sites.google.com/view/alogit/",
 		"_date": "June 2017",
 		"date": "2017-06-30",
-        "desc": "I helped code the <a href='https://ideas.repec.org/c/boc/bocode/s458341.html'><code>alogit</code></a> stata command to estimate the model detailed by Abaluck and Adams' working paper, <a href='http://www.nber.org/papers/w23566'> 'What Do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses' </a>",
+        "desc": "I coded the <a href='https://ideas.repec.org/c/boc/bocode/s458341.html'><code>alogit</code></a> stata command to estimate the model detailed by Abaluck and Adams' working paper, <a href='http://www.nber.org/papers/w23566'> 'What Do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses' </a>",
 		"tags": ["Stata","C"]
 	},
 	{
-		"name": "Stata Power",
+		"name": "Power Tools",
 		"image": "/static/projects/power-icon/power-icon.svg",
 		"url": "https://github.com/mcaceresb/stata-power",
 		"_date": "Feb 2016",

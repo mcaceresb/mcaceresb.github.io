@@ -5,7 +5,7 @@ subtitle: Research
 permalink: /research/
 ---
 
-I am an aspiring researcher and intend to pursue a PhD in economics. Some areas of interest to me are applied micro, public econ, and development. My first discrete piece of research was an undergraduate research project with Professor Kenneth P. Jameson, published in the Southern Economic Journal.
+I am an aspiring researcher and intend to pursue a PhD. Some areas of interest to me are public economics, labor, and development. My first discrete piece of research was an undergraduate research project with Professor Kenneth P. Jameson, published in the Southern Economic Journal.
 
 ### Publications
 

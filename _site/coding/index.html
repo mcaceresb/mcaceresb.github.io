@@ -80,15 +80,6 @@ I double-majored in mathematics and economics at the University of Utah and I ha
           var tb_pathToImage = "/static/img/loadingAnimation.gif";
         </script>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          processEscapes: true
-        }
-      });
-    </script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   </head>
 
   <body class="home overflow-hidden">
@@ -331,7 +322,7 @@ I double-majored in mathematics and economics at the University of Utah and I ha
               <h4 class="list-group-item-heading">
                 <a href="https://sites.google.com/view/alogit/">alogit</a>
               </h4>
-              <p class="list-group-item-text">I helped code the <a href='https://ideas.repec.org/c/boc/bocode/s458341.html'><code>alogit</code></a> stata command to estimate the model detailed by Abaluck and Adams' working paper, <a href='http://www.nber.org/papers/w23566'> 'What Do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses' </a></p>
+              <p class="list-group-item-text">I coded the <a href='https://ideas.repec.org/c/boc/bocode/s458341.html'><code>alogit</code></a> stata command to estimate the model detailed by Abaluck and Adams' working paper, <a href='http://www.nber.org/papers/w23566'> 'What Do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses' </a></p>
             </div>
           </div>
             
@@ -355,7 +346,7 @@ I double-majored in mathematics and economics at the University of Utah and I ha
             <div class="row-content">
               <div class="least-content">Feb 2016</div>
               <h4 class="list-group-item-heading">
-                <a href="https://github.com/mcaceresb/stata-power">Stata Power</a>
+                <a href="https://github.com/mcaceresb/stata-power">Power Tools</a>
               </h4>
               <p class="list-group-item-text">Personal notes and Stata programs to aid in power analysis (parametric and simulation; clustering and stratification).</p>
             </div>
@@ -440,9 +431,10 @@ I double-majored in mathematics and economics at the University of Utah and I ha
   <br/>
 
   <p>
-  I rather like coding and it's proved to be a somewhat useful hobby.
-  I keep all my projects in <a href="https://github.com/mcaceresb">my github page</a>,
-  and feedback is always welcome! 
+  I really like programming and it's proved to be very useful in
+  my work and daily life. I keep several of my projects in <a
+  href="https://github.com/mcaceresb">my github page</a>, and feedback
+  is always welcome!
   </p>
 
   <br/>
@@ -456,23 +448,38 @@ I double-majored in mathematics and economics at the University of Utah and I ha
         <!-- <div class="row&#45;content"> -->
         <div>
           <div class="least-content"></div>
-          <h4 class="list-group-item-heading">Other Stata Projects</h4>
+          <h4 class="list-group-item-heading">Stata Projects</h4>
           <!-- <br/> -->
           <p class="list-group-item-text">
             <ul>
               
               <li class="gh-listitem">
-                <a href="https://github.com/mcaceresb/stata-benchmark">stata-benchmark</a>:
-                  Simple hack to benchmark (time) Stata programs.
+                <a href="https://github.com/mcaceresb/stata-parquet">parquet</a>:
+                  Import and export parquet files from Stata using Arrow's C++ API.
               </li>
               
               <li class="gh-listitem">
-                <a href="https://github.com/mcaceresb/stata-todatetime">stata-todatetime</a>:
+                <a href="https://github.com/mcaceresb/stata-diffiv">diffiv</a>:
+                  Fast implementation of Gandhi and Houde (2016) style instruments.
+              </li>
+              
+              <li class="gh-listitem">
+                <a href="https://github.com/mcaceresb/stata-shasum">shasum</a>:
+                  Wrapper for OpenSSL implementation of various cryptographic hash functions (SHA1, etc.).
+              </li>
+              
+              <li class="gh-listitem">
+                <a href="https://github.com/mcaceresb/stata-benchmark">benchmark</a>:
+                  Simple hack to benchmark (time) Stata commands.
+              </li>
+              
+              <li class="gh-listitem">
+                <a href="https://github.com/mcaceresb/stata-todatetime">todatetime</a>:
                   Simple wrapper to convert Stata strings to date-time.
               </li>
               
               <li class="gh-listitem">
-                <a href="https://github.com/mcaceresb/stata-matrix-tools">stata-matrix-tools</a>:
+                <a href="https://github.com/mcaceresb/stata-matrix-tools">matrix-tools</a>:
                   Various utilities to work with Stata matrices.
               </li>
               
@@ -490,7 +497,7 @@ I double-majored in mathematics and economics at the University of Utah and I ha
         <!-- <div class="row&#45;content"> -->
         <div>
           <div class="least-content"></div>
-          <h4 class="list-group-item-heading">Other Interesting Projects</h4>
+          <h4 class="list-group-item-heading">Other Projects</h4>
           <!-- <br/> -->
           <p class="list-group-item-text">
             <ul>
@@ -508,6 +515,30 @@ I double-majored in mathematics and economics at the University of Utah and I ha
               <li class="gh-listitem">
                 <a href="https://github.com/mcaceresb/highlight-sas-stata">highlight-sas-stata</a>:
                   Various implementations highlighting SAS and Stata (pygments, listings, highlight.js)
+              </li>
+              
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="list-group">
+      <div class="list-group-item">
+        <!-- <div class="row&#45;action&#45;primary"> -->
+        <!--   <i class="fa fa&#45;code"></i> -->
+        <!-- </div> -->
+        <!-- <div class="row&#45;content"> -->
+        <div>
+          <div class="least-content"></div>
+          <h4 class="list-group-item-heading">Contributor</h4>
+          <!-- <br/> -->
+          <p class="list-group-item-text">
+            <ul>
+              
+              <li class="gh-listitem">
+                <a href="https://github.com/kylebarron/stata_kernel">stata_kernel</a>:
+                  Cross-platform Jupyter kernel for Stata.
               </li>
               
             </ul>

@@ -323,20 +323,24 @@
   ],
   "presentations": [
     {
+        "description": "16th International Industrial Organization Conferences",
+        "_date":       "Apr 2018"
+    },
+    {
         "description": "Southern Economic Association 83rd Annual Meetings",
-        "_date":        "Nov 2013"
+        "_date":       "Nov 2013"
     },
     {
         "description": "University of Utah Spring 2012 Undergraduate Research Symposium",
-        "_date":        "Apr 2012"
+        "_date":       "Apr 2012"
     },
     {
         "description": "National Conference on Undergraduate Research 2012",
-        "_date":        "Mar 2012"
+        "_date":       "Mar 2012"
     },
     {
         "description": "Rice University Summer Institute of Statistics Research Presentations",
-        "_date":        "Jul 2011"
+        "_date":       "Jul 2011"
     }
   ],
   "interests": [

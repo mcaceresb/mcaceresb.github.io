@@ -1,26 +1,41 @@
 [
 	{
-		"name": "Other Stata Projects",
+		"name": "Stata Projects",
 		"subprojects": [
             {
-                "name": "stata-benchmark",
-                "url": "https://github.com/mcaceresb/stata-benchmark",
-                "desc": "Simple hack to benchmark (time) Stata programs."
+                "name": "parquet",
+                "url": "https://github.com/mcaceresb/stata-parquet",
+                "desc": "Import and export parquet files from Stata using Arrow's C++ API."
             },
             {
-                "name": "stata-todatetime",
+                "name": "diffiv",
+                "url": "https://github.com/mcaceresb/stata-diffiv",
+                "desc": "Fast implementation of Gandhi and Houde (2016) style instruments."
+            },
+            {
+                "name": "shasum",
+                "url": "https://github.com/mcaceresb/stata-shasum",
+                "desc": "Wrapper for OpenSSL implementation of various cryptographic hash functions (SHA1, etc.)."
+            },
+            {
+                "name": "benchmark",
+                "url": "https://github.com/mcaceresb/stata-benchmark",
+                "desc": "Simple hack to benchmark (time) Stata commands."
+            },
+            {
+                "name": "todatetime",
                 "url": "https://github.com/mcaceresb/stata-todatetime",
                 "desc": "Simple wrapper to convert Stata strings to date-time."
             },
             {
-                "name": "stata-matrix-tools",
+                "name": "matrix-tools",
                 "url": "https://github.com/mcaceresb/stata-matrix-tools",
                 "desc": "Various utilities to work with Stata matrices."
             }
         ]
     },
 	{
-		"name": "Other Interesting Projects",
+		"name": "Other Projects",
 		"subprojects": [
             {
                 "name": "gmail-download",
@@ -36,6 +51,16 @@
                 "name": "highlight-sas-stata",
                 "url":  "https://github.com/mcaceresb/highlight-sas-stata",
                 "desc": "Various implementations highlighting SAS and Stata (pygments, listings, highlight.js)"
+            }
+        ]
+	},
+	{
+		"name": "Contributor",
+		"subprojects": [
+            {
+                "name": "stata_kernel",
+                "url":  "https://github.com/kylebarron/stata_kernel",
+                "desc": "Cross-platform Jupyter kernel for Stata."
             }
         ]
 	}

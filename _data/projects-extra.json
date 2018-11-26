@@ -18,14 +18,9 @@
                 "desc": "Wrapper for OpenSSL implementation of various cryptographic hash functions (SHA1, etc.)."
             },
             {
-                "name": "benchmark",
-                "url": "https://github.com/mcaceresb/stata-benchmark",
-                "desc": "Simple hack to benchmark (time) Stata commands."
-            },
-            {
-                "name": "todatetime",
-                "url": "https://github.com/mcaceresb/stata-todatetime",
-                "desc": "Simple wrapper to convert Stata strings to date-time."
+                "name": "mcmisc",
+                "url": "https://github.com/mcaceresb/stata-misc",
+                "desc": "Collection of miscellaneous Stata snippets and utilities."
             },
             {
                 "name": "matrix-tools",

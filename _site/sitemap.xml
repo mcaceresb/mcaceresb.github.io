@@ -7,9 +7,9 @@ I double-majored in mathematics and economics at the University of Utah and I ha
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 26 Nov 2018 02:10:50 -0500</pubDate>
-    <lastBuildDate>Mon, 26 Nov 2018 02:10:50 -0500</lastBuildDate>
-    <generator>Jekyll v3.4.3</generator>
+    <pubDate>Mon, 26 Nov 2018 02:15:00 -0500</pubDate>
+    <lastBuildDate>Mon, 26 Nov 2018 02:15:00 -0500</lastBuildDate>
+    <generator>Jekyll v3.8.5</generator>
     
       <item>
         <title>Writing my first Stata plugin: A real world use case</title>
@@ -70,8 +70,8 @@ functionality of their plugins, and I will not repeat all of it here.&lt;/p&gt;
   &lt;li&gt;Now from the command line, run&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;gcc -shared -fPIC -DSYSTEM&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OPUNIX stplugin.c hello.c -o hello.plugin &lt;span class=&quot;c&quot;&gt;# Linux&lt;/span&gt;
-gcc -bundle -DSYSTEM&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;APPLEMAC stplugin.c hello.c -o hello.plugin     &lt;span class=&quot;c&quot;&gt;# Mac&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;gcc &lt;span class=&quot;nt&quot;&gt;-shared&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-fPIC&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DSYSTEM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OPUNIX stplugin.c hello.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; hello.plugin &lt;span class=&quot;c&quot;&gt;# Linux&lt;/span&gt;
+gcc &lt;span class=&quot;nt&quot;&gt;-bundle&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DSYSTEM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;APPLEMAC stplugin.c hello.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; hello.plugin     &lt;span class=&quot;c&quot;&gt;# Mac&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Last, from Stata navigate to your working directory and run&lt;/li&gt;
@@ -327,9 +327,9 @@ Scientific Library. Noting the 0-based indexing:&lt;/p&gt;
 #include &amp;lt;gsl/gsl_rng.h&amp;gt;
 #include &quot;stplugin.h&quot;
 &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// These functions are to be used after reading Stata data into X, y.
-// Crucially, in this example the first column of X must be empty.
-&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// These functions are to be used after reading Stata data into X, y.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Crucially, in this example the first column of X must be empty.&lt;/span&gt;
+
 &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;simci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
            &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
            &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -337,18 +337,18 @@ Scientific Library. Noting the 0-based indexing:&lt;/p&gt;
            &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sim_ols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// This function would read the data from stata
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;STDLL&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stata_call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// This function would read the data from stata&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;STDLL&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;stata_call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Initialize the variables to use
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ST_int&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Initialize the variables to use&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ST_int&lt;/span&gt;      &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;ST_double&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;ST_retcode&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Get P and number of reps. Note the 0-based indexing! So the
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// functiona ssumes P and reps were the 2nd and 3rd argument.
-&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strtod&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Get P and number of reps. Note the 0-based indexing! So the&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// functiona ssumes P and reps were the 2nd and 3rd argument.&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strtod&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strtod&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;size_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_in2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
@@ -356,50 +356,50 @@ Scientific Library. Noting the 0-based indexing:&lt;/p&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Not sure if there is another way to read data vs the double loop.
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// Again, careful with the 0-based indexing!
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_in1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_in2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Not sure if there is another way to read data vs the double loop.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Again, careful with the 0-based indexing!&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_in1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_in2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SF_ifobs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-            &lt;span class=&quot;c1&quot;&gt;// Variables 2 through k are covariates
-&lt;/span&gt;            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;c1&quot;&gt;// Note we leave the first column empty
-&lt;/span&gt;                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_vdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Variables 2 through k are covariates&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// Note we leave the first column empty&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_vdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
                 &lt;span class=&quot;n&quot;&gt;gsl_matrix_set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-            &lt;span class=&quot;c1&quot;&gt;// Note we add the constant
-&lt;/span&gt;            &lt;span class=&quot;n&quot;&gt;gsl_matrix_set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Note we add the constant&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;gsl_matrix_set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-            &lt;span class=&quot;c1&quot;&gt;// Variable 1 is the dependent variable
-&lt;/span&gt;            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_vdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Variable 1 is the dependent variable&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SF_vdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;gsl_vector_set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Now we call the simulation function and output the results into b
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Now we call the simulation function and output the results into b&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;simci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
     &lt;span class=&quot;n&quot;&gt;gsl_matrix_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_vector_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Note the first argument passed to the plugin call must be the
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// name of a matrix that exists in Stata.
-&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Note the first argument passed to the plugin call must be the&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// name of a matrix that exists in Stata.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;SF_mat_store&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_get&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// The method above is a hassle because Stata limits matrix size and
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// the matrix has to exist. Some workarounds:
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// - Space-delimited local macro, then read using mata: tokens()
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// - Write to a temporary file then read using mata: cat()
-&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// The method above is a hassle because Stata limits matrix size and&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// the matrix has to exist. Some workarounds:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// - Space-delimited local macro, then read using mata: tokens()&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// - Write to a temporary file then read using mata: cat()&lt;/span&gt;
+
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// This will output the results into b
-&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;simci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// This will output the results into b&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;simci&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
            &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
            &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
            &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -410,47 +410,47 @@ Scientific Library. Noting the 0-based indexing:&lt;/p&gt;
     &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Set the random seed based on the time of day (seconds)
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;srand&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Set the random seed based on the time of day (seconds)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;srand&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_rng&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rng&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_rng_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsl_rng_default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_rng_set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rng&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rand&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Get vector of 1s and 0s
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Get vector of 1s and 0s&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_vector_set_zero&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;gsl_vector_set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Initialize elements for parallel loop
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Initialize elements for parallel loop&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xp&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Parallelize execution
-&lt;/span&gt;    &lt;span class=&quot;cp&quot;&gt;#pragma omp parallel private(Xp, Tp) shared(y, b)
+    &lt;span class=&quot;c1&quot;&gt;// Parallelize execution&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#pragma omp parallel private(Xp, Tp) shared(y, b)
 &lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// Allocate to each therad their own copy
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Allocate to each therad their own copy&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;Xp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
         &lt;span class=&quot;n&quot;&gt;gsl_vector_memcpy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;gsl_matrix_memcpy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-        &lt;span class=&quot;c1&quot;&gt;// Parallel for loop through simulation
-&lt;/span&gt;        &lt;span class=&quot;cp&quot;&gt;#pragma omp for
+        &lt;span class=&quot;c1&quot;&gt;// Parallel for loop through simulation&lt;/span&gt;
+        &lt;span class=&quot;cp&quot;&gt;#pragma omp for
 &lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;gsl_ran_shuffle&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rng&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;size_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;gsl_matrix_set_col&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;gsl_vector_set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sim_ols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-        &lt;span class=&quot;c1&quot;&gt;// Cleanup
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;gsl_matrix_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Cleanup&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;gsl_matrix_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;gsl_vector_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Cleanup
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_vector_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Cleanup&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_vector_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_rng_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rng&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -459,21 +459,21 @@ Scientific Library. Noting the 0-based indexing:&lt;/p&gt;
 &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sim_ols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Allocate memory to express the system as Ax = b
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Allocate memory to express the system as Ax = b&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_matrix_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_vector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gsl_vector_alloc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Set A = X' X and b = X' y
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_blas_dgemm&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CblasTrans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CblasNoTrans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Set A = X' X and b = X' y&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_blas_dgemm&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CblasTrans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CblasNoTrans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_blas_dgemv&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CblasTrans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Cholesky decomposition
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_linalg_cholesky_decomp1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Cholesky decomposition&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_linalg_cholesky_decomp1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_linalg_cholesky_solve&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;// Cleanup
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;gsl_matrix_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Cleanup&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;gsl_matrix_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;gsl_vector_free&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gsl_vector_get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
@@ -489,18 +489,18 @@ of &lt;code class=&quot;highlighter-rouge&quot;&gt;gcc&lt;/code&gt; and the SPI,
 &lt;p&gt;Again, you should have &lt;code class=&quot;highlighter-rouge&quot;&gt;stplugin.c&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;stplugin.h&lt;/code&gt; in the same directory. Now on Linux/Unix, run&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;CFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-Wall -fopenmp -shared -fPIC -DSYSTEM=OPUNIX&quot;&lt;/span&gt;
-gcc &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; -c -o stplugin.o    stplugin.c
-gcc &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; -c -o pluginSimci.o pluginSimci.c
+gcc &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; stplugin.o    stplugin.c
+gcc &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; pluginSimci.o pluginSimci.c
 gcc &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; stplugin.o pluginSimci.o &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -lgsl -lgslcblas -lm -o pluginSimci.plugin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+    &lt;span class=&quot;nt&quot;&gt;-lgsl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lgslcblas&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; pluginSimci.plugin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Depending on your system, you may also need to add &lt;code class=&quot;highlighter-rouge&quot;&gt;-std=c99&lt;/code&gt; as a flag and point to the location of the &lt;code class=&quot;highlighter-rouge&quot;&gt;libgsl*so&lt;/code&gt; files. For instance, I regularly SSH into a RedHat server, and to compile I ran&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;CFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-Wall -std=c99 -fopenmp -shared -fPIC -DSYSTEM=OPUNIX&quot;&lt;/span&gt;
-gcc -I/usr/local/lib &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; -c -o stplugin.o    stplugin.c
-gcc -I/usr/local/lib &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; -c -o pluginSimci.o pluginSimci.c
-gcc -L/usr/local/lib &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt;  stplugin.o pluginSimci.o &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    -lgsl -lgslcblas -lm -o pluginSimci.plugin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+gcc &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/lib &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; stplugin.o    stplugin.c
+gcc &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/lib &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; pluginSimci.o pluginSimci.c
+gcc &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/lib &lt;span class=&quot;nv&quot;&gt;$CFLAGS&lt;/span&gt;  stplugin.o pluginSimci.o &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;-lgsl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lgslcblas&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; pluginSimci.plugin&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;To compile in other system, you should consult &lt;a href=&quot;http://www.stata.com/plugins&quot;&gt;Stata’s documentation&lt;/a&gt;. Once compiled, from Stata:&lt;/p&gt;
 
@@ -598,16 +598,15 @@ in &lt;code class=&quot;highlighter-rouge&quot;&gt;[standatd]&lt;/code&gt; tags 
 
 &lt;p&gt;Some basic sanity checks&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls /sys/firmware/efi/efivars &lt;span class=&quot;c&quot;&gt;# Should be populated&lt;/span&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; /sys/firmware/efi/efivars &lt;span class=&quot;c&quot;&gt;# Should be populated&lt;/span&gt;
 wifi-menu                    &lt;span class=&quot;c&quot;&gt;# Will connect automatically&lt;/span&gt;
-timedatectl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-ntp &lt;span class=&quot;nb&quot;&gt;true
+timedatectl set-ntp &lt;span class=&quot;nb&quot;&gt;true
 &lt;/span&gt;timedatectl status
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Now partition the disk (EFI)&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# I use parted; alternatively use gdisk or cdisk&lt;/span&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# I use parted; alternatively use gdisk or cdisk&lt;/span&gt;
 parted /dev/sda
 mklabel gpt
 mkpart ESP fat32 1MiB 513MiB
@@ -624,18 +623,17 @@ mkpart primary ext4 8.5GiB 100%
 
 quit
 mkfs.vfat /dev/sda1
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Format drive and mount&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
 cryptsetup luksFormat /dev/sda2
-cryptsetup open --type luks /dev/sda2 lvm
+cryptsetup open &lt;span class=&quot;nt&quot;&gt;--type&lt;/span&gt; luks /dev/sda2 lvm
 pvcreate /dev/mapper/lvm
 vgcreate vol0 /dev/mapper/lvm
-lvcreate --name lvswap -L 6GB vol0
-lvcreate --name lvroot -l 100%FREE vol0
+lvcreate &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; lvswap &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; 6GB vol0
+lvcreate &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; lvroot &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; 100%FREE vol0
 mkswap /dev/mapper/vol0-lvswap
 swapon /dev/mapper/vol0-lvswap
 mkfs.ext4 /dev/mapper/vol0-lvroot
@@ -649,55 +647,53 @@ swapon /dev/sda2
 mount /dev/sda3 /mnt
 &lt;span class=&quot;c&quot;&gt;# [standard]&lt;/span&gt;
 
-mkdir /mnt/boot
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; /mnt/boot
 mount /dev/sda1 /mnt/boot
-pacstrap -i /mnt base base-devel
+pacstrap &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; /mnt base base-devel
 &lt;span class=&quot;c&quot;&gt;# If you get a PGP key error, do&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# dirmngr &amp;lt;/dev/null&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# pacman-key --populate archlinux&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# pacman-key --refresh-keys&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# Then retun pacstrap&lt;/span&gt;
-genfstab -U /mnt &amp;gt; /mnt/etc/fstab
-cp /etc/netctl/yournetworkname /mnt/etc/netctl/yournetworkname
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+genfstab &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt; /mnt &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /mnt/etc/fstab
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; /etc/netctl/yournetworkname /mnt/etc/netctl/yournetworkname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you want to mount extra partitions, make sure you mounted them here. For instance, &lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir  /mnt/mnt/large &amp;amp;&amp;amp; mount /dev/sdY1 /mnt/mnt/large&lt;/code&gt; or something, &lt;em&gt;BEFORE&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;genfstab&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;step-2-chroot-and-install-base-system&quot;&gt;Step 2: Chroot and install base system&lt;/h2&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arch-chroot /mnt /bin/bash
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arch-chroot /mnt /bin/bash
 
 locale-gen
-localectl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-locale &lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
+localectl set-locale &lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
 vi /etc/locale.gen &lt;span class=&quot;c&quot;&gt;# Uncomment en_US.UTF-8&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8 &amp;gt; /etc/locale.conf
-&lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cat /etc/locale.conf&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /etc/locale.conf
+&lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/locale.conf&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
 locale-gen
 
 tzselect
-ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
-hwclock --systohc --utc
+&lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /usr/share/zoneinfo/America/New_York /etc/localtime
+hwclock &lt;span class=&quot;nt&quot;&gt;--systohc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--utc&lt;/span&gt;
 
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;vm.swappiness&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10 &amp;gt; /etc/sysctl.d/99-sysctl.conf
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;vm.swappiness&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /etc/sysctl.d/99-sysctl.conf
 vi /etc/pacman.conf &lt;span class=&quot;c&quot;&gt;# Uncomment multilib&lt;/span&gt;
 
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;hostname &amp;gt; /etc/hostname
+&lt;span class=&quot;nb&quot;&gt;echo hostname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /etc/hostname
 vi /etc/hosts
 &lt;span class=&quot;c&quot;&gt;# Copy the 127.0.0.1 and replace localhost with hostname&lt;/span&gt;
 
-pacman -Sy
-pacman -S iw wpa_supplicant dialog intel-ucode
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+pacman &lt;span class=&quot;nt&quot;&gt;-Sy&lt;/span&gt;
+pacman &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; iw wpa_supplicant dialog intel-ucode
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;step-3-configure-the-boot-loader&quot;&gt;Step 3: Configure the boot loader&lt;/h2&gt;
 
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Pro-tip:&lt;/strong&gt;&lt;/em&gt; I have occasionally messed up my bootloader; when that happens I fire up a live arch USB, mount my partitions (using lvm if applicable), chroot into the system, and fix the bootloader here.&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bootctl install
-cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;blkid /dev/sdb2&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &amp;gt;&amp;gt; /boot/loader/entries/arch.conf
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bootctl &lt;span class=&quot;nb&quot;&gt;install
+cp&lt;/span&gt; /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;blkid /dev/sdb2&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; /boot/loader/entries/arch.conf
 &lt;span class=&quot;c&quot;&gt;# File should look like this&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#   title   Arch Lnux&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;#   linux   /vmlinuz-linux&lt;/span&gt;
@@ -716,47 +712,44 @@ bootctl update
 &lt;span class=&quot;c&quot;&gt;#   HOOKS=&quot;base udev autodetect modconf block keymap encrypt lvm2 resume filesystems keyboard fsck&quot;&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# [encryption-lvm]&lt;/span&gt;
 
-mkinitcpio -p linux
+mkinitcpio &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; linux
 passwd
 &lt;span class=&quot;nb&quot;&gt;exit
-&lt;/span&gt;umount -R /mnt/boot
-umount -R /mnt
+&lt;/span&gt;umount &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; /mnt/boot
+umount &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; /mnt
 reboot
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;step-4-set-up-your-own-user-account&quot;&gt;Step 4: Set up your own user account&lt;/h2&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;useradd -m -s /bin/bash user
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;useradd &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /bin/bash user
 passwd user
 visudo &lt;span class=&quot;c&quot;&gt;# Add to end of file: user ALL=(ALL) ALL&lt;/span&gt;
-pacman -S sudo bash-completion git rfkill
+pacman &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;bash-completion git rfkill
 &lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Log in and install install pacaur. You can use &lt;code class=&quot;highlighter-rouge&quot;&gt;pacaur&lt;/code&gt; (though I think using &lt;code class=&quot;highlighter-rouge&quot;&gt;yaourt&lt;/code&gt; is more standard) to query the &lt;a href=&quot;aur.archlinux.org&quot;&gt;Arch User Repositories (AUR)&lt;/a&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir ~/Documents
-mkdir ~/Downloads
-mkdir ~/Pictures
-mkdir ~/Music
-mkdir ~/Videos
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Documents
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Downloads
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Pictures
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Music
+&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Videos
 
 &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Downloads
 git clone https://aur.archlinux.org/package-query
 git clone https://aur.archlinux.org/yaourt
 &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;package-query
-makepkg -si
+makepkg &lt;span class=&quot;nt&quot;&gt;-si&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ../yaourt
-makepkg -si
+makepkg &lt;span class=&quot;nt&quot;&gt;-si&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# yaourt is supposedly standard but can be very annoying.&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# I've been trying out pacaur&lt;/span&gt;
-gpg --recv-keys 1EB2638FF56C0C53
-yaourt -S pacaur
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--recv-keys&lt;/span&gt; 1EB2638FF56C0C53
+yaourt &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; pacaur
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;You can now follow my preferred setup or go to &lt;a href=&quot;http://https://wiki.archlinux.org/index.php/General_recommendations&quot;&gt;the recommendations page&lt;/a&gt;&lt;/p&gt;
 </description>

@@ -101,7 +101,7 @@ a .material-icons, a:focus .material-icons, a:hover .material-icons {
 
 .list-group .list-group-item .gh-row-action-primary img,
 .list-group .list-group-item .gh-row-picture img {
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
   padding: 1px; }
 
 .list-group .list-group-item .gh-row-action-primary img.circle,
@@ -536,7 +536,7 @@ button.gh-btn-danger.dim:active {
   border-radius: 15px;
   text-align: center;
   font-size: 12px;
-  line-height: 1.42857; }
+  line-height: 1.428571429; }
 
 .gh-btn-circle.gh-btn-lg {
   width: 50px;

@@ -336,8 +336,8 @@ functionality of their plugins, and I will not repeat all of it here.</p>
   <li>Now from the command line, run</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gcc -shared -fPIC -DSYSTEM<span class="o">=</span>OPUNIX stplugin.c hello.c -o hello.plugin <span class="c"># Linux</span>
-gcc -bundle -DSYSTEM<span class="o">=</span>APPLEMAC stplugin.c hello.c -o hello.plugin     <span class="c"># Mac</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gcc <span class="nt">-shared</span> <span class="nt">-fPIC</span> <span class="nt">-DSYSTEM</span><span class="o">=</span>OPUNIX stplugin.c hello.c <span class="nt">-o</span> hello.plugin <span class="c"># Linux</span>
+gcc <span class="nt">-bundle</span> <span class="nt">-DSYSTEM</span><span class="o">=</span>APPLEMAC stplugin.c hello.c <span class="nt">-o</span> hello.plugin     <span class="c"># Mac</span></code></pre></figure>
 
 <ul>
   <li>Last, from Stata navigate to your working directory and run</li>
@@ -593,9 +593,9 @@ Scientific Library. Noting the 0-based indexing:</p>
 #include &lt;gsl/gsl_rng.h&gt;
 #include "stplugin.h"
 </span>
-<span class="c1">// These functions are to be used after reading Stata data into X, y.
-// Crucially, in this example the first column of X must be empty.
-</span>
+<span class="c1">// These functions are to be used after reading Stata data into X, y.</span>
+<span class="c1">// Crucially, in this example the first column of X must be empty.</span>
+
 <span class="kt">int</span> <span class="n">simci</span> <span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span>
            <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
            <span class="k">const</span> <span class="kt">double</span> <span class="n">P</span><span class="p">,</span>
@@ -603,18 +603,18 @@ Scientific Library. Noting the 0-based indexing:</p>
            <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">b</span><span class="p">);</span>
 <span class="kt">double</span> <span class="n">sim_ols</span><span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span> <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">);</span>
 
-<span class="c1">// This function would read the data from stata
-</span><span class="n">STDLL</span> <span class="nf">stata_call</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="c1">// This function would read the data from stata</span>
+<span class="n">STDLL</span> <span class="nf">stata_call</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
 
-    <span class="c1">// Initialize the variables to use
-</span>    <span class="n">ST_int</span>      <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="p">;</span>
+    <span class="c1">// Initialize the variables to use</span>
+    <span class="n">ST_int</span>      <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="p">;</span>
     <span class="n">ST_double</span>   <span class="n">z</span> <span class="p">;</span>
     <span class="n">ST_retcode</span>  <span class="n">rc</span> <span class="p">;</span>
 
-    <span class="c1">// Get P and number of reps. Note the 0-based indexing! So the
-</span>    <span class="c1">// functiona ssumes P and reps were the 2nd and 3rd argument.
-</span>    <span class="kt">double</span> <span class="n">P</span>    <span class="o">=</span> <span class="n">strtod</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="c1">// Get P and number of reps. Note the 0-based indexing! So the</span>
+    <span class="c1">// functiona ssumes P and reps were the 2nd and 3rd argument.</span>
+    <span class="kt">double</span> <span class="n">P</span>    <span class="o">=</span> <span class="n">strtod</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
     <span class="kt">double</span> <span class="n">reps</span> <span class="o">=</span> <span class="n">strtod</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">);</span>
 
     <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">SF_in2</span><span class="p">();</span>
@@ -622,50 +622,50 @@ Scientific Library. Noting the 0-based indexing:</p>
     <span class="n">gsl_matrix</span> <span class="o">*</span><span class="n">X</span>  <span class="o">=</span> <span class="n">gsl_matrix_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
     <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">y</span>  <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
 
-    <span class="c1">// Not sure if there is another way to read data vs the double loop.
-</span>    <span class="c1">// Again, careful with the 0-based indexing!
-</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">SF_in1</span><span class="p">();</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">SF_in2</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Not sure if there is another way to read data vs the double loop.</span>
+    <span class="c1">// Again, careful with the 0-based indexing!</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">SF_in1</span><span class="p">();</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">SF_in2</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">SF_ifobs</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="p">{</span>
 
-            <span class="c1">// Variables 2 through k are covariates
-</span>            <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// Note we leave the first column empty
-</span>                <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="n">SF_vdata</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">z</span><span class="p">))</span> <span class="p">)</span> <span class="k">return</span><span class="p">(</span><span class="n">rc</span><span class="p">);</span>
+            <span class="c1">// Variables 2 through k are covariates</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Note we leave the first column empty</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="n">SF_vdata</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">z</span><span class="p">))</span> <span class="p">)</span> <span class="k">return</span><span class="p">(</span><span class="n">rc</span><span class="p">);</span>
                 <span class="n">gsl_matrix_set</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
             <span class="p">}</span>
 
-            <span class="c1">// Note we add the constant
-</span>            <span class="n">gsl_matrix_set</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span>  <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
+            <span class="c1">// Note we add the constant</span>
+            <span class="n">gsl_matrix_set</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span>  <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
 
-            <span class="c1">// Variable 1 is the dependent variable
-</span>            <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="n">SF_vdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">z</span><span class="p">))</span> <span class="p">)</span> <span class="k">return</span><span class="p">(</span><span class="n">rc</span><span class="p">);</span>
+            <span class="c1">// Variable 1 is the dependent variable</span>
+            <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">rc</span> <span class="o">=</span> <span class="n">SF_vdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">z</span><span class="p">))</span> <span class="p">)</span> <span class="k">return</span><span class="p">(</span><span class="n">rc</span><span class="p">);</span>
             <span class="n">gsl_vector_set</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span>  <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">z</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="c1">// Now we call the simulation function and output the results into b
-</span>    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">reps</span><span class="p">);</span>
+    <span class="c1">// Now we call the simulation function and output the results into b</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">reps</span><span class="p">);</span>
     <span class="n">simci</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">reps</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 
     <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">X</span><span class="p">);</span>
     <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">y</span><span class="p">);</span>
 
-    <span class="c1">// Note the first argument passed to the plugin call must be the
-</span>    <span class="c1">// name of a matrix that exists in Stata.
-</span>    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Note the first argument passed to the plugin call must be the</span>
+    <span class="c1">// name of a matrix that exists in Stata.</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">SF_mat_store</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">gsl_vector_get</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
     <span class="p">}</span>
 
-    <span class="c1">// The method above is a hassle because Stata limits matrix size and
-</span>    <span class="c1">// the matrix has to exist. Some workarounds:
-</span>    <span class="c1">// - Space-delimited local macro, then read using mata: tokens()
-</span>    <span class="c1">// - Write to a temporary file then read using mata: cat()
-</span>
+    <span class="c1">// The method above is a hassle because Stata limits matrix size and</span>
+    <span class="c1">// the matrix has to exist. Some workarounds:</span>
+    <span class="c1">// - Space-delimited local macro, then read using mata: tokens()</span>
+    <span class="c1">// - Write to a temporary file then read using mata: cat()</span>
+
     <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="c1">// This will output the results into b
-</span><span class="kt">int</span> <span class="nf">simci</span> <span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span>
+<span class="c1">// This will output the results into b</span>
+<span class="kt">int</span> <span class="nf">simci</span> <span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span>
            <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span>
            <span class="k">const</span> <span class="kt">double</span> <span class="n">P</span><span class="p">,</span>
            <span class="k">const</span> <span class="kt">int</span> <span class="n">reps</span><span class="p">,</span>
@@ -676,47 +676,47 @@ Scientific Library. Noting the 0-based indexing:</p>
     <span class="k">const</span> <span class="kt">int</span> <span class="n">k</span>    <span class="o">=</span> <span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">;</span>
     <span class="k">const</span> <span class="kt">int</span> <span class="n">np</span>   <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">P</span><span class="p">);</span>
 
-    <span class="c1">// Set the random seed based on the time of day (seconds)
-</span>    <span class="n">srand</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+    <span class="c1">// Set the random seed based on the time of day (seconds)</span>
+    <span class="n">srand</span> <span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
     <span class="n">gsl_rng</span> <span class="o">*</span><span class="n">rng</span> <span class="o">=</span> <span class="n">gsl_rng_alloc</span> <span class="p">(</span><span class="n">gsl_rng_default</span><span class="p">);</span>
     <span class="n">gsl_rng_set</span> <span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">rand</span><span class="p">());</span>
 
-    <span class="c1">// Get vector of 1s and 0s
-</span>    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">T</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="c1">// Get vector of 1s and 0s</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">T</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
     <span class="n">gsl_vector_set_zero</span> <span class="p">(</span><span class="n">T</span><span class="p">);</span>
     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">gsl_vector_set</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="c1">// Initialize elements for parallel loop
-</span>    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">Tp</span> <span class="p">;</span>
+    <span class="c1">// Initialize elements for parallel loop</span>
+    <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">Tp</span> <span class="p">;</span>
     <span class="n">gsl_matrix</span> <span class="o">*</span><span class="n">Xp</span> <span class="p">;</span>
 
-    <span class="c1">// Parallelize execution
-</span>    <span class="cp">#pragma omp parallel private(Xp, Tp) shared(y, b)
+    <span class="c1">// Parallelize execution</span>
+    <span class="cp">#pragma omp parallel private(Xp, Tp) shared(y, b)
 </span>    <span class="p">{</span>
-        <span class="c1">// Allocate to each therad their own copy
-</span>        <span class="n">Tp</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="c1">// Allocate to each therad their own copy</span>
+        <span class="n">Tp</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">);</span>
         <span class="n">Xp</span> <span class="o">=</span> <span class="n">gsl_matrix_alloc</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
 
         <span class="n">gsl_vector_memcpy</span> <span class="p">(</span><span class="n">Tp</span><span class="p">,</span> <span class="n">T</span><span class="p">);</span>
         <span class="n">gsl_matrix_memcpy</span> <span class="p">(</span><span class="n">Xp</span><span class="p">,</span> <span class="n">X</span><span class="p">);</span>
 
-        <span class="c1">// Parallel for loop through simulation
-</span>        <span class="cp">#pragma omp for
+        <span class="c1">// Parallel for loop through simulation</span>
+        <span class="cp">#pragma omp for
 </span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">reps</span><span class="p">;</span> <span class="n">r</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">gsl_ran_shuffle</span> <span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">Tp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">size_t</span><span class="p">));</span>
             <span class="n">gsl_matrix_set_col</span> <span class="p">(</span><span class="n">Xp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Tp</span><span class="p">);</span>
             <span class="n">gsl_vector_set</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">sim_ols</span><span class="p">(</span><span class="n">Xp</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
         <span class="p">}</span>
 
-        <span class="c1">// Cleanup
-</span>        <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">Xp</span><span class="p">);</span>
+        <span class="c1">// Cleanup</span>
+        <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">Xp</span><span class="p">);</span>
         <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">Tp</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="c1">// Cleanup
-</span>    <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">T</span><span class="p">);</span>
+    <span class="c1">// Cleanup</span>
+    <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">T</span><span class="p">);</span>
     <span class="n">gsl_rng_free</span> <span class="p">(</span><span class="n">rng</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
@@ -725,21 +725,21 @@ Scientific Library. Noting the 0-based indexing:</p>
 <span class="kt">double</span> <span class="nf">sim_ols</span><span class="p">(</span><span class="k">const</span> <span class="n">gsl_matrix</span> <span class="o">*</span> <span class="n">X</span><span class="p">,</span> <span class="k">const</span> <span class="n">gsl_vector</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
 <span class="p">{</span>
 
-    <span class="c1">// Allocate memory to express the system as Ax = b
-</span>    <span class="n">gsl_matrix</span> <span class="o">*</span><span class="n">A</span> <span class="o">=</span> <span class="n">gsl_matrix_alloc</span> <span class="p">(</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">,</span> <span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">);</span>
+    <span class="c1">// Allocate memory to express the system as Ax = b</span>
+    <span class="n">gsl_matrix</span> <span class="o">*</span><span class="n">A</span> <span class="o">=</span> <span class="n">gsl_matrix_alloc</span> <span class="p">(</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">,</span> <span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">);</span>
     <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">);</span>
     <span class="n">gsl_vector</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="n">gsl_vector_alloc</span> <span class="p">(</span><span class="n">X</span><span class="o">-&gt;</span><span class="n">size2</span><span class="p">);</span>
 
-    <span class="c1">// Set A = X' X and b = X' y
-</span>    <span class="n">gsl_blas_dgemm</span> <span class="p">(</span><span class="n">CblasTrans</span><span class="p">,</span> <span class="n">CblasNoTrans</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span>
+    <span class="c1">// Set A = X' X and b = X' y</span>
+    <span class="n">gsl_blas_dgemm</span> <span class="p">(</span><span class="n">CblasTrans</span><span class="p">,</span> <span class="n">CblasNoTrans</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">A</span><span class="p">);</span>
     <span class="n">gsl_blas_dgemv</span> <span class="p">(</span><span class="n">CblasTrans</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 
-    <span class="c1">// Cholesky decomposition
-</span>    <span class="n">gsl_linalg_cholesky_decomp1</span> <span class="p">(</span><span class="n">A</span><span class="p">);</span>
+    <span class="c1">// Cholesky decomposition</span>
+    <span class="n">gsl_linalg_cholesky_decomp1</span> <span class="p">(</span><span class="n">A</span><span class="p">);</span>
     <span class="n">gsl_linalg_cholesky_solve</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
 
-    <span class="c1">// Cleanup
-</span>    <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">A</span><span class="p">);</span>
+    <span class="c1">// Cleanup</span>
+    <span class="n">gsl_matrix_free</span> <span class="p">(</span><span class="n">A</span><span class="p">);</span>
     <span class="n">gsl_vector_free</span> <span class="p">(</span><span class="n">b</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">gsl_vector_get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
@@ -755,18 +755,18 @@ of <code class="highlighter-rouge">gcc</code> and the SPI, you will need</p>
 <p>Again, you should have <code class="highlighter-rouge">stplugin.c</code> and <code class="highlighter-rouge">stplugin.h</code> in the same directory. Now on Linux/Unix, run</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-Wall -fopenmp -shared -fPIC -DSYSTEM=OPUNIX"</span>
-gcc <span class="nv">$CFLAGS</span> -c -o stplugin.o    stplugin.c
-gcc <span class="nv">$CFLAGS</span> -c -o pluginSimci.o pluginSimci.c
+gcc <span class="nv">$CFLAGS</span> <span class="nt">-c</span> <span class="nt">-o</span> stplugin.o    stplugin.c
+gcc <span class="nv">$CFLAGS</span> <span class="nt">-c</span> <span class="nt">-o</span> pluginSimci.o pluginSimci.c
 gcc <span class="nv">$CFLAGS</span> stplugin.o pluginSimci.o <span class="se">\</span>
-    -lgsl -lgslcblas -lm -o pluginSimci.plugin</code></pre></figure>
+    <span class="nt">-lgsl</span> <span class="nt">-lgslcblas</span> <span class="nt">-lm</span> <span class="nt">-o</span> pluginSimci.plugin</code></pre></figure>
 
 <p>Depending on your system, you may also need to add <code class="highlighter-rouge">-std=c99</code> as a flag and point to the location of the <code class="highlighter-rouge">libgsl*so</code> files. For instance, I regularly SSH into a RedHat server, and to compile I ran</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">"-Wall -std=c99 -fopenmp -shared -fPIC -DSYSTEM=OPUNIX"</span>
-gcc -I/usr/local/lib <span class="nv">$CFLAGS</span> -c -o stplugin.o    stplugin.c
-gcc -I/usr/local/lib <span class="nv">$CFLAGS</span> -c -o pluginSimci.o pluginSimci.c
-gcc -L/usr/local/lib <span class="nv">$CFLAGS</span>  stplugin.o pluginSimci.o <span class="se">\</span>
-    -lgsl -lgslcblas -lm -o pluginSimci.plugin</code></pre></figure>
+gcc <span class="nt">-I</span>/usr/local/lib <span class="nv">$CFLAGS</span> <span class="nt">-c</span> <span class="nt">-o</span> stplugin.o    stplugin.c
+gcc <span class="nt">-I</span>/usr/local/lib <span class="nv">$CFLAGS</span> <span class="nt">-c</span> <span class="nt">-o</span> pluginSimci.o pluginSimci.c
+gcc <span class="nt">-L</span>/usr/local/lib <span class="nv">$CFLAGS</span>  stplugin.o pluginSimci.o <span class="se">\</span>
+    <span class="nt">-lgsl</span> <span class="nt">-lgslcblas</span> <span class="nt">-lm</span> <span class="nt">-o</span> pluginSimci.plugin</code></pre></figure>
 
 <p>To compile in other system, you should consult <a href="http://www.stata.com/plugins">Stata’s documentation</a>. Once compiled, from Stata:</p>
 

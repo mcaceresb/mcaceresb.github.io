@@ -14,8 +14,9 @@ degree in economics from Columbia University.
 
 After New York I became a research assistant at the National Bureau of
 Economic Research in Cambridge, MA, and I worked there for two years.
-These days, however, I am working as a research assistant at the Yale
-School of Management in New Haven.
+These days I am working as a research assistant at the Yale School of
+Management in New Haven. However, I will be starting Brown's Economics
+PhD program in the fall of 2019.
 
 This is my personal website, meant to force myself to speed along some
 projects I've had in the back-burner throughout the past year. However,

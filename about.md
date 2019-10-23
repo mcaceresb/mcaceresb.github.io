@@ -12,11 +12,10 @@ After college I worked as a credit risk analyst for a local bank for a
 year before moving to New York for graduate school. I have a Master's
 degree in economics from Columbia University.
 
-After New York I became a research assistant at the National Bureau of
-Economic Research in Cambridge, MA, and I worked there for two years.
-These days I am working as a research assistant at the Yale School of
-Management in New Haven. However, I will be starting Brown's Economics
-PhD program in the fall of 2019.
+I worked as a research assistant at the National Bureau of Economic
+Research in Cambridge, MA, for two years, and then at the Yale School of
+Management in New Haven, CT, for another two years. This fall, however,
+I will be starting Brown's Economics PhD program.
 
 This is my personal website, meant to force myself to speed along some
 projects I've had in the back-burner throughout the past year. However,

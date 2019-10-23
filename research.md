@@ -18,6 +18,8 @@ My first discrete piece of research was an undergraduate project that was eventu
 
 I am currently working on a few projects in health economics and industrial organization, including:
 
+_Mortality Effects and Choice Across Health Plans_ (with Jason Abaluck, Peter Hull, and Amanda Starc).
+
 _What is Driving Rising Pharmaceutical Prices in the US?_ (with Craig Garthwaite and Fiona Scott Morton).
 
 _Product Variety Across Retail Chains_ (with Kevin R. Williams and Thomas W. Quan).

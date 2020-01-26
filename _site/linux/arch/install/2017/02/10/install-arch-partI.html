@@ -21,7 +21,7 @@
           <meta content="article" property="og:type">
         
         
-          <meta content="Hi! I am a research assistant at the Yale School of Management, based in New Haven, CT. This is my personal website, meant to force myself to speed along some coding projects I've had in the back-burner throughout the past year.
+          <meta content="Hi! I am an Economics PhD candidate at Brown University, based in Providence, RI. This is my personal website, meant to force myself to speed along some coding projects I've had in the back-burner throughout the past year.
 I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University in New York.
 " property="og:description">
         
@@ -53,7 +53,7 @@ I double-majored in mathematics and economics at the University of Utah and I ha
           <meta name="twitter:url" content="http://localhost:4000/linux/arch/install/2017/02/10/install-arch-partI.html">
         
         
-          <meta name="twitter:description" content="Hi! I am a research assistant at the Yale School of Management, based in New Haven, CT. This is my personal website, meant to force myself to speed along some coding projects I've had in the back-burner throughout the past year.
+          <meta name="twitter:description" content="Hi! I am an Economics PhD candidate at Brown University, based in Providence, RI. This is my personal website, meant to force myself to speed along some coding projects I've had in the back-burner throughout the past year.
 I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University in New York.
 ">
         
@@ -78,6 +78,15 @@ I double-majored in mathematics and economics at the University of Utah and I ha
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/static/css/syntax.css">
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/stata.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/python.min.js">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+
+        <!-- <link rel="stylesheet" href="/static/highlight.js/styles/isbl&#45;editor&#45;dark.css"> -->
+        <link rel="stylesheet" href="/static/highlight.js/styles/github.css">
+        <script src="/static/highlight.js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
         <!-- Custom CSS -->        
         <link rel="stylesheet" href="/static/css/thickbox.css">
         <link rel="stylesheet" href="/static/css/main.css">
@@ -99,7 +108,7 @@ I double-majored in mathematics and economics at the University of Utah and I ha
             <div class="row-picture"></div>
             <div class="row-details">
               <h1 class="list-group-item-heading">Mauricio Cáceres Bravo</h1>
-              <p class="list-group-item-text" style="font-size:18px;">Research Assistant at Yale SOM</p>
+              <p class="list-group-item-text" style="font-size:18px;">Economics PhD candidate at Brown University</p>
               <!-- <div class="social-icons">
 	
         <a class="icon" target="_blank" href=""><i class="fa fa-facebook"></i></a>
@@ -296,9 +305,9 @@ guide</a>
 available. However, there is a specific setup I like most and this is
 meant to summarize that setup into an easy-to-follow step-by-step guide.</p>
 
-<p>Commands between <code class="highlighter-rouge">[encryption-lvm]</code> tags need only be run if you want
+<p>Commands between <code>[encryption-lvm]</code> tags need only be run if you want
 to set up encryption with LVM and they are run in lieu of commands
-in <code class="highlighter-rouge">[standatd]</code> tags (LVM is recommended; easiest guide I found is
+in <code>[standatd]</code> tags (LVM is recommended; easiest guide I found is
 <a href="http://www.brandonkester.com/tech/2013/03/16/full-disk-encryption
 -in-arch-linux-with-uefi.html">here</a>).</p>
 
@@ -306,158 +315,158 @@ in <code class="highlighter-rouge">[standatd]</code> tags (LVM is recommended; e
 
 <p>Some basic sanity checks</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> /sys/firmware/efi/efivars <span class="c"># Should be populated</span>
-wifi-menu                    <span class="c"># Will connect automatically</span>
-timedatectl set-ntp <span class="nb">true
-</span>timedatectl status
-</code></pre></div></div>
+<pre><code class="language-bash">ls /sys/firmware/efi/efivars # Should be populated
+wifi-menu                    # Will connect automatically
+timedatectl set-ntp true
+timedatectl status
+</code></pre>
 
 <p>Now partition the disk (EFI)</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># I use parted; alternatively use gdisk or cdisk</span>
+<pre><code class="language-bash"># I use parted; alternatively use gdisk or cdisk
 parted /dev/sda
 mklabel gpt
 mkpart ESP fat32 1MiB 513MiB
-<span class="nb">set </span>1 boot on
+set 1 boot on
 
-<span class="c"># [encryption-lvm]</span>
+# [encryption-lvm]
 mkpart primary ext4 513MiB 100%
-<span class="c"># [encryption-lvm]</span>
+# [encryption-lvm]
 
-<span class="c"># [standard]</span>
+# [standard]
 mkpart primary linux-swap 513MiB 8.5GiB
 mkpart primary ext4 8.5GiB 100%
-<span class="c"># [standard]</span>
+# [standard]
 
 quit
 mkfs.vfat /dev/sda1
-</code></pre></div></div>
+</code></pre>
 
 <p>Format drive and mount</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># [encryption-lvm]</span>
+<pre><code class="language-bash"># [encryption-lvm]
 cryptsetup luksFormat /dev/sda2
-cryptsetup open <span class="nt">--type</span> luks /dev/sda2 lvm
+cryptsetup open --type luks /dev/sda2 lvm
 pvcreate /dev/mapper/lvm
 vgcreate vol0 /dev/mapper/lvm
-lvcreate <span class="nt">--name</span> lvswap <span class="nt">-L</span> 6GB vol0
-lvcreate <span class="nt">--name</span> lvroot <span class="nt">-l</span> 100%FREE vol0
+lvcreate --name lvswap -L 6GB vol0
+lvcreate --name lvroot -l 100%FREE vol0
 mkswap /dev/mapper/vol0-lvswap
 swapon /dev/mapper/vol0-lvswap
 mkfs.ext4 /dev/mapper/vol0-lvroot
 mount /dev/mapper/vol0-lvroot /mnt
-<span class="c"># [encryption-lvm]</span>
+# [encryption-lvm]
 
-<span class="c"># [standard]</span>
+# [standard]
 mkfs.ext4 /dev/sda3
 mkswap /dev/sda2
 swapon /dev/sda2
 mount /dev/sda3 /mnt
-<span class="c"># [standard]</span>
+# [standard]
 
-<span class="nb">mkdir</span> /mnt/boot
+mkdir /mnt/boot
 mount /dev/sda1 /mnt/boot
-pacstrap <span class="nt">-i</span> /mnt base base-devel
-<span class="c"># If you get a PGP key error, do</span>
-<span class="c"># dirmngr &lt;/dev/null</span>
-<span class="c"># pacman-key --populate archlinux</span>
-<span class="c"># pacman-key --refresh-keys</span>
-<span class="c"># Then retun pacstrap</span>
-genfstab <span class="nt">-U</span> /mnt <span class="o">&gt;</span> /mnt/etc/fstab
-<span class="nb">cp</span> /etc/netctl/yournetworkname /mnt/etc/netctl/yournetworkname
-</code></pre></div></div>
+pacstrap -i /mnt base base-devel
+# If you get a PGP key error, do
+# dirmngr &lt;/dev/null
+# pacman-key --populate archlinux
+# pacman-key --refresh-keys
+# Then retun pacstrap
+genfstab -U /mnt &gt; /mnt/etc/fstab
+cp /etc/netctl/yournetworkname /mnt/etc/netctl/yournetworkname
+</code></pre>
 
-<p><strong>NOTE:</strong> If you want to mount extra partitions, make sure you mounted them here. For instance, <code class="highlighter-rouge">mkdir  /mnt/mnt/large &amp;&amp; mount /dev/sdY1 /mnt/mnt/large</code> or something, <em>BEFORE</em> <code class="highlighter-rouge">genfstab</code>.</p>
+<p><strong>NOTE:</strong> If you want to mount extra partitions, make sure you mounted them here. For instance, <code>mkdir  /mnt/mnt/large &amp;&amp; mount /dev/sdY1 /mnt/mnt/large</code> or something, <em>BEFORE</em> <code>genfstab</code>.</p>
 
 <h2 id="step-2-chroot-and-install-base-system">Step 2: Chroot and install base system</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arch-chroot /mnt /bin/bash
+<pre><code class="language-bash">arch-chroot /mnt /bin/bash
 
 locale-gen
-localectl set-locale <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
-vi /etc/locale.gen <span class="c"># Uncomment en_US.UTF-8</span>
-<span class="nb">echo </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8 <span class="o">&gt;</span> /etc/locale.conf
-<span class="nb">export</span> <span class="sb">`</span><span class="nb">cat</span> /etc/locale.conf<span class="sb">`</span>
+localectl set-locale LANG=en_US.UTF-8
+vi /etc/locale.gen # Uncomment en_US.UTF-8
+echo LANG=en_US.UTF-8 &gt; /etc/locale.conf
+export `cat /etc/locale.conf`
 locale-gen
 
 tzselect
-<span class="nb">ln</span> <span class="nt">-s</span> /usr/share/zoneinfo/America/New_York /etc/localtime
-hwclock <span class="nt">--systohc</span> <span class="nt">--utc</span>
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
+hwclock --systohc --utc
 
-<span class="nb">echo </span>vm.swappiness<span class="o">=</span>10 <span class="o">&gt;</span> /etc/sysctl.d/99-sysctl.conf
-vi /etc/pacman.conf <span class="c"># Uncomment multilib</span>
+echo vm.swappiness=10 &gt; /etc/sysctl.d/99-sysctl.conf
+vi /etc/pacman.conf # Uncomment multilib
 
-<span class="nb">echo hostname</span> <span class="o">&gt;</span> /etc/hostname
+echo hostname &gt; /etc/hostname
 vi /etc/hosts
-<span class="c"># Copy the 127.0.0.1 and replace localhost with hostname</span>
+# Copy the 127.0.0.1 and replace localhost with hostname
 
-pacman <span class="nt">-Sy</span>
-pacman <span class="nt">-S</span> iw wpa_supplicant dialog intel-ucode
-</code></pre></div></div>
+pacman -Sy
+pacman -S iw wpa_supplicant dialog intel-ucode
+</code></pre>
 
 <h2 id="step-3-configure-the-boot-loader">Step 3: Configure the boot loader</h2>
 
 <p><em><strong>Pro-tip:</strong></em> I have occasionally messed up my bootloader; when that happens I fire up a live arch USB, mount my partitions (using lvm if applicable), chroot into the system, and fix the bootloader here.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootctl <span class="nb">install
-cp</span> /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
-<span class="nb">echo</span> <span class="sb">`</span>blkid /dev/sdb2<span class="sb">`</span> <span class="o">&gt;&gt;</span> /boot/loader/entries/arch.conf
-<span class="c"># File should look like this</span>
-<span class="c">#   title   Arch Lnux</span>
-<span class="c">#   linux   /vmlinuz-linux</span>
-<span class="c">#   initrd  /initramfs-linux.img</span>
-<span class="c"># [encryption-lvm]</span>
-<span class="c">#   options cryptdevice=UUID=&lt;INSERT-UUID-HERE&gt;:lvm:allow-discards resume=/dev/mapper/vol0-lvswap root=/dev/mapper/vol0-lvroot rw quiet</span>
-<span class="c"># [encryption-lvm]</span>
-<span class="c"># [standard]</span>
-<span class="c">#   options root=PARTUUID=&lt;INSERT-PARTUUID-HERE&gt; rootfstype=ext4 rw</span>
-<span class="c"># [standard]</span>
+<pre><code class="language-bash">bootctl install
+cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
+echo `blkid /dev/sdb2` &gt;&gt; /boot/loader/entries/arch.conf
+# File should look like this
+#   title   Arch Lnux
+#   linux   /vmlinuz-linux
+#   initrd  /initramfs-linux.img
+# [encryption-lvm]
+#   options cryptdevice=UUID=&lt;INSERT-UUID-HERE&gt;:lvm:allow-discards resume=/dev/mapper/vol0-lvswap root=/dev/mapper/vol0-lvroot rw quiet
+# [encryption-lvm]
+# [standard]
+#   options root=PARTUUID=&lt;INSERT-PARTUUID-HERE&gt; rootfstype=ext4 rw
+# [standard]
 
 bootctl update
-<span class="c"># [encryption-lvm]</span>
-<span class="c"># vi /etc/mkinitcpio.conf</span>
-<span class="c">#   Add "keymap encrypt lvm2 resume" to HOOKS="..."</span>
-<span class="c">#   HOOKS="base udev autodetect modconf block keymap encrypt lvm2 resume filesystems keyboard fsck"</span>
-<span class="c"># [encryption-lvm]</span>
+# [encryption-lvm]
+# vi /etc/mkinitcpio.conf
+#   Add "keymap encrypt lvm2 resume" to HOOKS="..."
+#   HOOKS="base udev autodetect modconf block keymap encrypt lvm2 resume filesystems keyboard fsck"
+# [encryption-lvm]
 
-mkinitcpio <span class="nt">-p</span> linux
+mkinitcpio -p linux
 passwd
-<span class="nb">exit
-</span>umount <span class="nt">-R</span> /mnt/boot
-umount <span class="nt">-R</span> /mnt
+exit
+umount -R /mnt/boot
+umount -R /mnt
 reboot
-</code></pre></div></div>
+</code></pre>
 
 <h2 id="step-4-set-up-your-own-user-account">Step 4: Set up your own user account</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>useradd <span class="nt">-m</span> <span class="nt">-s</span> /bin/bash user
+<pre><code class="language-bash">useradd -m -s /bin/bash user
 passwd user
-visudo <span class="c"># Add to end of file: user ALL=(ALL) ALL</span>
-pacman <span class="nt">-S</span> <span class="nb">sudo </span>bash-completion git rfkill
-<span class="nb">exit</span>
-</code></pre></div></div>
+visudo # Add to end of file: user ALL=(ALL) ALL
+pacman -S sudo bash-completion git rfkill
+exit
+</code></pre>
 
-<p>Log in and install install pacaur. You can use <code class="highlighter-rouge">pacaur</code> (though I think using <code class="highlighter-rouge">yaourt</code> is more standard) to query the <a href="aur.archlinux.org">Arch User Repositories (AUR)</a>.</p>
+<p>Log in and install install pacaur. You can use <code>pacaur</code> (though I think using <code>yaourt</code> is more standard) to query the <a href="aur.archlinux.org">Arch User Repositories (AUR)</a>.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/Documents
-<span class="nb">mkdir</span> ~/Downloads
-<span class="nb">mkdir</span> ~/Pictures
-<span class="nb">mkdir</span> ~/Music
-<span class="nb">mkdir</span> ~/Videos
+<pre><code class="language-bash">mkdir ~/Documents
+mkdir ~/Downloads
+mkdir ~/Pictures
+mkdir ~/Music
+mkdir ~/Videos
 
-<span class="nb">cd</span> ~/Downloads
+cd ~/Downloads
 git clone https://aur.archlinux.org/package-query
 git clone https://aur.archlinux.org/yaourt
-<span class="nb">cd </span>package-query
-makepkg <span class="nt">-si</span>
-<span class="nb">cd</span> ../yaourt
-makepkg <span class="nt">-si</span>
+cd package-query
+makepkg -si
+cd ../yaourt
+makepkg -si
 
-<span class="c"># yaourt is supposedly standard but can be very annoying.</span>
-<span class="c"># I've been trying out pacaur</span>
-gpg <span class="nt">--recv-keys</span> 1EB2638FF56C0C53
-yaourt <span class="nt">-S</span> pacaur
-</code></pre></div></div>
+# yaourt is supposedly standard but can be very annoying.
+# I've been trying out pacaur
+gpg --recv-keys 1EB2638FF56C0C53
+yaourt -S pacaur
+</code></pre>
 
 <p>You can now follow my preferred setup or go to <a href="http://https://wiki.archlinux.org/index.php/General_recommendations">the recommendations page</a></p>
 </div>

@@ -7,7 +7,7 @@
 		"date": "2017-05-31",
 		"gh_user": "mcaceresb",
 		"repo": "stata-gtools",
-        "desc": "Faster (3-50x) implementation of collapse, pctile, xtile, contract, egen, isid, levelsof, distinct, and more using C plugins.",
+        "desc": "Faster (3-50x) implementation of collapse, reshape, xtile, contract, egen, isid, levelsof, distinct, and more using C plugins.",
 		"tags": ["Stata","C"]
     },
 	{

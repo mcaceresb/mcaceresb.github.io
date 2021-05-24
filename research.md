@@ -5,7 +5,7 @@ subtitle: Research
 permalink: /research/
 ---
 
-I am an aspiring researcher am working towards earning a PhD from Brown University.  My fields of interest include health economics, labor economics, and industrial organization.
+I am an aspiring researcher am working towards earning a PhD from Brown University.  My fields of interest are health economics, labor economics, and industrial organization.
 
 ### Publications
 

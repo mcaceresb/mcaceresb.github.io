@@ -5,11 +5,11 @@
     <description>Hi! I am an Economics PhD candidate at Brown University, based in Providence, RI. This is my personal website, meant to force myself to speed along some coding projects I've had in the back-burner throughout the past year.
 I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University in New York.
 </description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 07 Feb 2020 15:54:07 -0500</pubDate>
-    <lastBuildDate>Fri, 07 Feb 2020 15:54:07 -0500</lastBuildDate>
-    <generator>Jekyll v4.0.0</generator>
+    <link>https://mcaceresb.github.io/</link>
+    <atom:link href="https://mcaceresb.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 24 May 2021 14:36:58 -0400</pubDate>
+    <lastBuildDate>Mon, 24 May 2021 14:36:58 -0400</lastBuildDate>
+    <generator>Jekyll v4.2.0</generator>
     
       <item>
         <title>Writing my first Stata plugin: A real world use case</title>
@@ -122,7 +122,7 @@ parametric calculations can be inaccurate.&lt;/p&gt;
 rationale (&lt;a href=&quot;https://github.com/mcaceresb/stata-power/blob/master/notes/power-simulation-notes.pdf&quot;&gt;read about it here&lt;/a&gt;), but the crux of the idea is to simulate a large number of
 coefficients $b$ for the equation:&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;Y_{ij} = a + b T_{ij} + g X_{ij} + e_{ij}&lt;/script&gt;
+\[Y_{ij} = a + b T_{ij} + g X_{ij} + e_{ij}\]
 
 &lt;p&gt;where at each step of the simulation, $T_{ij}$ is simulated so that
 there are $NP$ individuals/clusters in treatment and $(1 - P)N$
@@ -562,8 +562,8 @@ overall. Running this in Mata took on the order of days. To have it run
 in hours was a massive boon.&lt;/p&gt;
 </description>
         <pubDate>Tue, 14 Feb 2017 20:13:24 -0500</pubDate>
-        <link>http://localhost:4000/stata/plugins/2017/02/14/writing-stata-plugins-example.html</link>
-        <guid isPermaLink="true">http://localhost:4000/stata/plugins/2017/02/14/writing-stata-plugins-example.html</guid>
+        <link>https://mcaceresb.github.io/stata/plugins/2017/02/14/writing-stata-plugins-example.html</link>
+        <guid isPermaLink="true">https://mcaceresb.github.io/stata/plugins/2017/02/14/writing-stata-plugins-example.html</guid>
         
         
         <category>stata</category>
@@ -754,8 +754,8 @@ yaourt -S pacaur
 &lt;p&gt;You can now follow my preferred setup or go to &lt;a href=&quot;http://https://wiki.archlinux.org/index.php/General_recommendations&quot;&gt;the recommendations page&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 10 Feb 2017 08:28:24 -0500</pubDate>
-        <link>http://localhost:4000/linux/arch/install/2017/02/10/install-arch-partI.html</link>
-        <guid isPermaLink="true">http://localhost:4000/linux/arch/install/2017/02/10/install-arch-partI.html</guid>
+        <link>https://mcaceresb.github.io/linux/arch/install/2017/02/10/install-arch-partI.html</link>
+        <guid isPermaLink="true">https://mcaceresb.github.io/linux/arch/install/2017/02/10/install-arch-partI.html</guid>
         
         
         <category>linux</category>

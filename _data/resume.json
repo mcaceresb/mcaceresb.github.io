@@ -4,17 +4,17 @@
     "label": "Researcher",
     "picture": "mauricio-wm-ch.jpg",
     "email": "mauricio.caceres.bravo@gmail.com",
-    "_phone": "(801) 835-4677",
+    "_phone": "",
     "phone": "",
     "website": "https://mcaceresb.github.io",
-    "summary": "I am a research assistant at the Yale School of Management, based in New Haven, CT. I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University in New York. I am an aspiring researcher and intend to pursue a PhD in economics. I am specially interested in public and development economics.",
+    "summary": "I a second-year Economics PhD student at Brown University. I have previously I worked as a research assistant at Yale, NBER, and MIT.  I double-majored in mathematics and economics at the University of Utah and I have a Master's degree in economics from Columbia University. My fields of interest are Health, Labor, and IO.",
     "location": {
-      "_address": "109 Church St",
+      "_address": "",
       "address": "",
-      "postalCode": "CT 06510",
-      "city": "New Haven",
+      "postalCode": "",
+      "city": "Providence",
       "countryCode": "US",
-      "region": "Connecticut"
+      "region": "Rhode Island"
     },
     "profiles": [
       {
@@ -29,16 +29,121 @@
       }
     ]
   },
+  "education": [
+    {
+      "institution": "Brown University",
+      "area": "Economics",
+      "degrees": "Ph.D. in Economics",
+      "studyType": "Doctor of Philosophy",
+      "start_Date": "Sep 2019",
+      "end_Date": "May 2024 (Expected)",
+      "_gpa": "0",
+      "gpa": "",
+      "awards": [
+          "Honorable W. Randolph Burgess Fellowship"
+      ],
+      "courses": [
+        "XX"
+      ]
+    },
+    {
+      "institution": "Columbia University",
+      "area": "Economics",
+      "degrees": "M.A. in Economics",
+      "studyType": "Master of Arts",
+      "start_Date": "Sep 2013",
+      "end_Date": "May 2015",
+      "_gpa": "3.428",
+      "gpa": "",
+      "awards": [
+          "Dean's Fellow",
+          "Provost Diversity Fellowship"
+      ],
+      "courses": [
+        "ECON G6410; Math Methods for Economists",
+        "ECON G6211; Micro I (Choice Theory, GE Theory)",
+        "ECON G6212; Micro II (Game Theory, Contract Theory)",
+        "ECON G6215; Macro I (Growth, DSGE New Keynesian Models)",
+        "ECON G6216; Macro II (Fluctuations, New Keynesian Models)",
+        "ECON G6411; Metrics I (Regression, Time Series)",
+        "ECON G6412; Metrics II (GLM, Endogeneity, Non-Linear Models)",
+        "ECON G6930; Perspectives On Economic Studies",
+        "ECON G6905; Topics in Trade and Development: Regional and Urban Economics",
+        "ECON G6226; Applied Macroeconomics and Finance"
+      ]
+    },
+    {
+      "institution": "University of Utah",
+      "area": "Economics and Mathematics (Statistics)",
+      "degrees": ["B.S. in Mathematics (Statistics)", "B.S. in Economics"],
+      "studyType": "Bachelor",
+      "start_Date": "Aug 2009",
+      "end_Date": "Aug 2012",
+      "gpa": "3.972",
+      "awards": [
+          "Magna Cum Laude",
+          "Student Commencement Speaker",
+          "Undergraduate Research Scholar",
+          "Francis Family Foundation Assistantship Award",
+          "Mathematics Continuing Departmental Scholarship",
+          "Dean's list"
+      ],
+      "courses": [
+        "MATH 5080 & 5090; Statistical Inference I & II",
+        "MATH 5075; Time Series Analysis",
+        "MATH 5040 & 5050; Stochastic Processes and Simulation I & II",
+        "ECON 3210 & 3220; Foundations of Analysis I & II (Real Analysis)",
+        "MATH 5010; Intro to Probability",
+        "MATH 3070 & 3080; Applied Statistics I & II",
+        "MATH 2270; Linear Algebra",
+        "MATH 2200; Discrete Mathematics",
+        "MATH 2210; Calculus III (Multivariate Calculus)",
+        "ECON 5960; Special Topics: Why Business Fails",
+        "ECON 4650; Principles of Econometrics",
+        "ECON 5470; American Industry and Economic Development",
+        "ECON 5180; Poverty and Inequality",
+        "ECON 5530; Principles of Economic Development"
+      ]
+    }
+  ],
   "work": [
+    {
+      "company": "Brown University",
+      "position": "Research Assistant",
+      "location": "Providence, RI",
+      "website": "https://economics.brown.edu/",
+      "start_Date": "May 2020",
+      "end_Date": "Aug 2021",
+      "summary_short": "I worked as a research assistant for Professor Jesse Shapiro on various projects.",
+      "summary": "I worked as a research assistant for Professor Jesse Shapiro on various projects.",
+      "highlights": [
+        "",
+        ""
+      ]
+    },
+    {
+      "company": "Brown University",
+      "position": "Teaching Assistant",
+      "location": "Providence, RI",
+      "website": "https://economics.brown.edu/",
+      "start_Date": "Sep 2020",
+      "end_Date": "Dec 2020",
+      "summary_short": "Professor Alex Poterack. Graduate-level Mathematics for Economists.",
+      "summary": "Professor Alex Poterack. Graduate-level Mathematics for Economists.",
+      "highlights": [
+        "",
+        ""
+      ]
+    },
     {
       "company": "Yale School of Management",
       "position": "Research Assistant",
       "location": "New Haven, CT",
-      "website": "http://som.yale.edu/",
+      "website": "https://som.yale.edu/",
       "start_Date": "Jul 2017",
       "end_Date": "Present",
-      "summary_short": "I am currently working as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
-      "summary": "I am currently working as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
+      "summary_short": "I worked as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
+      "summary": "I worked as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
       "highlights": [
         "",
         ""
@@ -147,67 +252,6 @@
       ]
     }
   ],
-  "education": [
-    {
-      "institution": "Columbia University",
-      "area": "Economics",
-      "degrees": "M.A. in Economics",
-      "studyType": "Master of Arts",
-      "start_Date": "Sep 2013",
-      "end_Date": "May 2015",
-      "_gpa": "3.428",
-      "gpa": "",
-      "awards": [
-          "Dean's Fellow",
-          "Provost Diversity Fellowship"
-      ],
-      "courses": [
-        "ECON G6410; Math Methods for Economists",
-        "ECON G6211; Micro I (Choice Theory, GE Theory)",
-        "ECON G6212; Micro II (Game Theory, Contract Theory)",
-        "ECON G6215; Macro I (Growth, DSGE New Keynesian Models)",
-        "ECON G6216; Macro II (Fluctuations, New Keynesian Models)",
-        "ECON G6411; Metrics I (Regression, Time Series)",
-        "ECON G6412; Metrics II (GLM, Endogeneity, Non-Linear Models)",
-        "ECON G6930; Perspectives On Economic Studies",
-        "ECON G6905; Topics in Trade and Development: Regional and Urban Economics",
-        "ECON G6226; Applied Macroeconomics and Finance"
-      ]
-    },
-    {
-      "institution": "University of Utah",
-      "area": "Economics and Mathematics (Statistics)",
-      "degrees": ["B.S. in Mathematics (Statistics)", "B.S. in Economics"],
-      "studyType": "Bachelor",
-      "start_Date": "Aug 2009",
-      "end_Date": "Aug 2012",
-      "gpa": "3.972",
-      "awards": [
-          "Magna Cum Laude",
-          "Student Commencement Speaker",
-          "Undergraduate Research Scholar",
-          "Francis Family Foundation Assistantship Award",
-          "Mathematics Continuing Departmental Scholarship",
-          "Dean's list"
-      ],
-      "courses": [
-        "MATH 5080 & 5090; Statistical Inference I & II",
-        "MATH 5075; Time Series Analysis",
-        "MATH 5040 & 5050; Stochastic Processes and Simulation I & II",
-        "ECON 3210 & 3220; Foundations of Analysis I & II (Real Analysis)",
-        "MATH 5010; Intro to Probability",
-        "MATH 3070 & 3080; Applied Statistics I & II",
-        "MATH 2270; Linear Algebra",
-        "MATH 2200; Discrete Mathematics",
-        "MATH 2210; Calculus III (Multivariate Calculus)",
-        "ECON 5960; Special Topics: Why Business Fails",
-        "ECON 4650; Principles of Econometrics",
-        "ECON 5470; American Industry and Economic Development",
-        "ECON 5180; Poverty and Inequality",
-        "ECON 5530; Principles of Economic Development"
-      ]
-    }
-  ],
   "awards": [
     {
       "title": "Dean's Fellow",
@@ -268,15 +312,15 @@
         "R",
         "SAS",
         "Python",
-        "Julia",
-        "LaTeX"
+        "LaTeX",
+        "MATLAB"
       ]
     },
     {
       "name": "Other",
       "level": "Intermediate",
       "keywords": [
-        "MATLAB",
+        "Julia",
         "VBA (Excel)",
         "MS Word",
         "MS Excel",
@@ -304,11 +348,18 @@
   ],
   "publications": [
     {
+      "name": "Mortality Effects and Choice Across Private Health Insurance Plans*",
+      "publisher": "The Quarterly Journal of Economics",
+      "releaseDate": "2021-05-06",
+      "website": "https://academic.oup.com/qje/advance-article-abstract/doi/10.1093/qje/qjab017/6270892",
+      "summary": "Competition in health insurance markets may fail to improve health outcomes if consumers are not able to identify high-quality plans. We develop and apply a novel instrumental variables framework to quantify the variation in causal mortality effects across plans and how much consumers attend to this variation. We first document large differences in the observed mortality rates of Medicare Advantage plans within local markets. We then show that when plans with high (low) mortality rates exit these markets, enrollees tend to switch to more typical plans and subsequently experience lower (higher) mortality. We derive and validate a novel “fallback condition” governing the subsequent choices of those affected by plan exits. When the fallback condition is satisfied, plan terminations can be used to estimate the relationship between observed plan mortality rates and causal mortality effects. Applying the framework, we find that mortality rates unbiasedly predict causal mortality effects. We then extend our framework to study other predictors of plan mortality effects and estimate consumer willingness to pay. Higher-spending plans tend to reduce enrollee mortality, but existing quality ratings are uncorrelated with plan mortality effects. Consumers place little weight on mortality effects when choosing plans. Good insurance plans dramatically reduce mortality, and redirecting consumers to such plans could improve beneficiary health."
+    },
+    {
       "name": "The effects on insurance costs of restricting undocumented immigrants' access to driver licenses",
       "publisher": "Southern Economic Journal",
       "releaseDate": "2015-02-26",
       "website": "http://onlinelibrary.wiley.com/doi/10.1002/soej.12022/abstract",
-      "summary": "This paper uses panel data on US states to examine the impact of imposing documented presence and social security number requirements to obtain a driver's license."
+      "summary": "Proponents of issuing driver licenses to undocumented immigrants argue that the number of uninsured motorists and car accidents would decrease, thus improving public safety and lowering costs associated with car insurance. This study gives an overview of competing cost reduction and public safety arguments and examines the issues surrounding undocumented immigrants and driver licenses. It empirically assesses the effect on the average cost of auto insurance of restricting undocumented access to legal driving documents. We use a fixed effects model for panel data to test the effects on real average insurance expenditures of restricting undocumented immigrants' access to driver licenses, while controlling for other relevant factors suggested in the literature. Our main finding is that on net such restrictions raise the average annual cost of auto insurance by an estimated $17.22 ($2009) across states that have enacted such restrictions."
     }
   ],
   "languages": [

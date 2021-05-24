@@ -7,7 +7,7 @@
 		"date": "2017-05-31",
 		"gh_user": "mcaceresb",
 		"repo": "stata-gtools",
-        "desc": "Faster (3-50x) implementation of collapse, reshape, xtile, contract, egen, isid, levelsof, distinct, and more using C plugins.",
+        "desc": "Faster (3-50x) implementation of collapse, reshape, xtile, tabstat, contract, egen, isid, winsor, levelsof, distinct, and more using C plugins.",
 		"tags": ["Stata","C"]
     },
 	{
@@ -15,7 +15,7 @@
 		"url": "https://sites.google.com/view/alogit/",
 		"_date": "June 2017",
 		"date": "2017-06-30",
-        "desc": "I coded the <a href='https://ideas.repec.org/c/boc/bocode/s458341.html'><code>alogit</code></a> stata command to estimate the model detailed by Abaluck and Adams' working paper, <a href='http://www.nber.org/papers/w23566'> 'What Do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses' </a>",
+        "desc": "I coded the <a href='https://ideas.repec.org/c/boc/bocode/s458341.html'><code>alogit</code></a> stata command to estimate the model detailed by Abaluck and Adams-Prassl' paper, <a href='https://academic.oup.com/qje/advance-article-abstract/doi/10.1093/qje/qjab008/6169736?redirectedFrom=fulltext'> 'What do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses' </a>",
 		"tags": ["Stata","C"]
 	},
 	{

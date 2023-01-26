@@ -113,9 +113,39 @@
       "location": "Providence, RI",
       "website": "https://economics.brown.edu/",
       "start_Date": "May 2020",
-      "end_Date": "Aug 2021",
-      "summary_short": "I worked as a research assistant for Professor Jesse Shapiro on various projects.",
-      "summary": "I worked as a research assistant for Professor Jesse Shapiro on various projects.",
+      "end_Date": "Present",
+      "summary_short": [
+          "Jesse Shapiro, Summer 2020 to Summer 2021, various projects.",
+          "Peter Hull, Fall 2021 to present. Various projects, including companion Stata package for Goldsmith-Pinkham, Hull, and Michal Kolesar (2022).",
+          "Jon Roth, Summer 2022 to present. Stata version of HonestDiD package (Rambachan and Roth, 2022)."
+      ],
+      "summary": [
+          "Jesse Shapiro, Summer 2020 to Summer 2021, various projects.",
+          "Peter Hull, Fall 2021 to present. Various projects, including companion Stata package for Goldsmith-Pinkham, Hull, and Michal Kolesar (2022).",
+          "Jon Roth, Summer 2022 to present. Stata version of HonestDiD package (Rambachan and Roth, 2022)."
+      ],
+      "highlights": [
+        "",
+        ""
+      ]
+    },
+    {
+      "company": "Brown University",
+      "position": "Instructor",
+      "location": "Providence, RI",
+      "website": "https://economics.brown.edu/",
+      "start_Date": "Sep 2021",
+      "end_Date": "Present",
+      "summary_short": [
+          "Aug 2021: Math Camp for incoming economics PhD class.",
+          "Summer 2022: Introduction to Econometrics for Summer@Brown Pre-College program.",
+          "Aug 2022: Math Camp for incoming economics PhD class."
+      ],
+      "summary": [
+          "Aug 2021: Math Camp for incoming economics PhD class.",
+          "Summer 2022: Introduction to Econometrics for Summer@Brown Pre-College program.",
+          "Aug 2022: Math Camp for incoming economics PhD class."
+      ],
       "highlights": [
         "",
         ""
@@ -141,7 +171,7 @@
       "location": "New Haven, CT",
       "website": "https://som.yale.edu/",
       "start_Date": "Jul 2017",
-      "end_Date": "Present",
+      "end_Date": "Aug 2019",
       "summary_short": "I worked as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
       "summary": "I worked as a research assistant for Professors Fiona Scott Morton, Jason Abaluck, Kevin Williams, and Michael Sinkinson on various projects related to health economics and IO.",
       "highlights": [
@@ -158,7 +188,7 @@
       "end_Date": "Jun 2017",
       "summary_short": [
           "Joseph J. Doyle (MIT). Returns to medicare spending; various RCTs.",
-          "Jason Abaluck (Yale). Inattention in discrete choice models with consideration sets."
+          "Jason Abaluck (Yale). Inattention in discrete choice models with consideration sets; including companion Stata package to Abaluck and Adams-Prassl (2021)."
       ],
       "summary": [
           "Worked for Joseph J. Doyle (MIT) on various projects investigating the returns to medicare spending, as well as several RCTs.",
@@ -373,6 +403,10 @@
     }
   ],
   "presentations": [
+    {
+        "description": "Banco de Portugal Workshop on Empirical Research with Large Datasets",
+        "_date":       "Dec 2022"
+    },
     {
         "description": "16th International Industrial Organization Conferences",
         "_date":       "Apr 2018"

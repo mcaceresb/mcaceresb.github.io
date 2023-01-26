@@ -15,7 +15,7 @@ degree in economics from Columbia University.
 I worked as a research assistant at the National Bureau of Economic
 Research in Cambridge, MA, for two years, and then at the Yale School
 of Management in New Haven, CT, for another two years. I am currently a
-2nd-year Economics PhD student at Brown University.
+4th-year Economics PhD candidate at Brown University.
 
 This is my personal website, meant to force myself to speed along some
 projects I've had in the back-burner throughout the past year. However,

@@ -5,7 +5,7 @@ subtitle: About
 permalink: /about/
 ---
 
-My name is Mauricio Cáceres Bravo. I was born in Lima, Peru, and moved
+My name is Mauricio M. Cáceres Bravo. I was born in Lima, Peru, and moved
 to Utah when I was 17. I completed my undergraduate studies at the
 University of Utah, where I double-majored in economics and mathematics.
 After college I worked as a credit risk analyst for a local bank for a

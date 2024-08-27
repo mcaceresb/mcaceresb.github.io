@@ -16,6 +16,6 @@ I am an aspiring researcher am working towards earning a PhD from Brown Universi
 
 ### Projects in Progress
 
-_Prison Effects on Inmate Misconduct: Evidence from Transfers_
-
 _How do Different Prison Environments Affect Inmate Outcomes?_
+
+_Design-Based Estimation of Structural Parameters, with an Application to Demand (with Kirill Borusyak and Peter Hull)_

@@ -1,21 +1,36 @@
 [
 	{
-		"name": "Contributor",
+		"name": "Joint Projects",
 		"subprojects": [
             {
                 "name": "HonestDiD",
                 "url":  "https://github.com/mcaceresb/stata-honestdid",
-                "desc": "Stata version of R's HonestDiD package (Rambachan and Roth, 2022)."
+                "desc": "Stata version of R's HonestDiD package (<a href='https://academic.oup.com/restud/article/90/5/2555/7039335'>Rambachan and Roth, 2022</a>)."
             },
             {
                 "name": "MulTE",
                 "url":  "https://github.com/gphk-metrics/stata-multe",
-                "desc": "Companion Stata package for Goldsmith-Pinkham, Hull, and Michal Kolesar (2022)."
+                "desc": "Companion Stata package for <a href='https://www.nber.org/papers/w30108'>Goldsmith-Pinkham, Hull, and Michal Kolesar (2022)</a>."
+            },
+            {
+                "name": "staggered",
+                "url":  "https://github.com/mcaceresb/stata-staggered",
+                "desc": "Stata version of R's staggered package (<a href='https://www.journals.uchicago.edu/doi/abs/10.1086/726581'>Roth and Sant'Anna, 2023</a>)."
+            },
+            {
+                "name": "pretrends",
+                "url":  "https://github.com/mcaceresb/stata-staggered",
+                "desc": "Stata version of R's pretrends package (<a href='https://www.aeaweb.org/articles?id=10.1257/aeri.20210236'>Roth, 2022</a>)."
+            },
+            {
+                "name": "alogit",
+                "url":  "https://sites.google.com/view/alogit/",
+                "desc": "Companion stata command for the model in <a href='https://academic.oup.com/qje/article/136/3/1611/6169736'>Abaluck and Adams-Prassl (2021)</a>."
             },
             {
                 "name": "stata_kernel",
                 "url":  "https://github.com/kylebarron/stata_kernel",
-                "desc": "Cross-platform Jupyter kernel for Stata."
+                "desc": "Cross-platform Jupyter kernel for Stata. (Maintainer.)"
             }
         ]
 	},
@@ -28,6 +43,11 @@
                 "desc": "Import and export parquet files from Stata using Arrow's C++ API."
             },
             {
+                "name": "power",
+                "url": "https://github.com/mcaceresb/stata-power",
+                "desc": "Personal notes and Stata programs to aid in power analysis (parametric and simulation; clustering and stratification)."
+            },
+            {
                 "name": "diffiv",
                 "url": "https://github.com/mcaceresb/stata-diffiv",
                 "desc": "Fast implementation of Gandhi and Houde (2016) style instruments."
@@ -36,11 +56,6 @@
                 "name": "shasum",
                 "url": "https://github.com/mcaceresb/stata-shasum",
                 "desc": "Wrapper for OpenSSL implementation of various cryptographic hash functions (SHA1, etc.)."
-            },
-            {
-                "name": "stata-bigdata",
-                "url": "https://mcaceresb.github.io/stata-bigdata/",
-                "desc": "Stata tips for working with large datasets."
             },
             {
                 "name": "mcmisc",
@@ -55,7 +70,7 @@
         ]
     },
 	{
-		"name": "Other Projects",
+		"name": "Misc",
 		"subprojects": [
             {
                 "name": "gmail-download",

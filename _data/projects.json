@@ -11,22 +11,14 @@
 		"tags": ["Stata","C"]
     },
 	{
-		"name": "alogit",
-		"url": "https://sites.google.com/view/alogit/",
-		"_date": "June 2017",
-		"date": "2017-06-30",
-        "desc": "I coded the <a href='https://ideas.repec.org/c/boc/bocode/s458341.html'><code>alogit</code></a> stata command to estimate the model detailed by Abaluck and Adams-Prassl' paper, <a href='https://academic.oup.com/qje/advance-article-abstract/doi/10.1093/qje/qjab008/6169736?redirectedFrom=fulltext'> 'What do Consumers Consider Before They Choose? Identification from Asymmetric Demand Responses' </a>",
-		"tags": ["Stata","C"]
-	},
-	{
-		"name": "Power Tools",
-		"image": "/static/projects/power-icon/power-icon.svg",
-		"url": "https://github.com/mcaceresb/stata-power",
+		"name": "Stata and Big Data",
+		"image": "/static/projects/bigdata-icon/bigdata-icon.svg",
+		"url": "https://github.com/mcaceresb/stata-bigdata",
 		"_date": "Feb 2016",
-		"date": "2016-02-28",
+		"date": "2022-12-20",
 		"gh_user": "mcaceresb",
-		"repo": "stata-power",
-        "desc": "Personal notes and Stata programs to aid in power analysis (parametric and simulation; clustering and stratification).",
+		"repo": "stata-bigdata",
+        "desc": "Stata tips for working with large datasets, based on my presentation for Banco de Portual's <a href='https://www.bportugal.pt/en/evento/workshop-empirical-research-large-datasets '>2022 Workshop on Empirical Research with Large Datasets</a>.",
 		"tags": ["Stata","C"]
 	},
 	{ 

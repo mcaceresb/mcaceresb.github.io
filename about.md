@@ -5,21 +5,19 @@ subtitle: About
 permalink: /about/
 ---
 
-My name is Mauricio M. Cáceres Bravo. I was born in Lima, Peru, and moved
-to Utah when I was 17. I completed my undergraduate studies at the
-University of Utah, where I double-majored in economics and mathematics.
-After college I worked as a credit risk analyst for a local bank for a
-year before moving to New York for graduate school. I have a Master's
-degree in economics from Columbia University.
+I was born in Lima, Peru, and moved to Utah when I was 17. I completed my
+undergraduate studies at the University of Utah, where I double-majored in
+economics and mathematics.  After college I worked as a credit risk analyst
+for a local bank for a year before moving to New York for graduate school. (I
+have a Master's degree in economics from Columbia University.)
 
-I worked as a research assistant at the National Bureau of Economic
-Research in Cambridge, MA, for two years, and then at the Yale School
-of Management in New Haven, CT, for another two years. I am currently a
-4th-year Economics PhD candidate at Brown University.
+I'm currently also a US citizen. I've worked as a research assistant at the
+National Bureau of Economic Research in Cambridge, MA, for two years, and then
+at the Yale School of Management in New Haven, CT, for another two years. I am
+a Ph.D. Candidate in Economics at Brown University, and I'm on the 2024-2025
+job market.
 
-This is my personal website, meant to force myself to speed along some
-projects I've had in the back-burner throughout the past year. However,
-the idea is to eventually host a blog and all my research projects.
+My hobbies include Chess, Tae Kwon-Do, and computer programming.
 
 <head>
 <style>

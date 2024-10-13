@@ -6,28 +6,28 @@
     "layout": "post"
   },
   {
-    "text": "Coding",
-    "url": "/coding",
-    "icon": "fa-code"
-  },
-  {
-    "text": "Resume",
-    "url": "/resume/",
+    "text": "CV",
+    "url": "/cv/",
     "icon": "fa-graduation-cap"
   },
   {
     "text": "Research",
     "url": "/research",
+    "icon": "fa-book"
+  },
+  {
+    "text": "Teaching",
+    "url": "/teaching",
     "icon": "fa-university"
+  },
+  {
+    "text": "Coding",
+    "url": "/coding",
+    "icon": "fa-code"
   },
   {
     "text": "Blog",
     "url": "/blog/",
     "icon": "fa-comments"
-  },
-  {
-    "text": "About",
-    "url": "/about/",
-    "icon": "fa-user"
   }
 ]

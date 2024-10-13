@@ -23,3 +23,32 @@
     </li>
 {% endfor %}
 </ul>
+
+<!-- <ul  -->
+<!--     class="adj-ul-nav-width list-separator nav navbar-nav well well-primary {{ page.layout }}" -->
+<!--     style="list-style-type: none; margin-left:-15px; margin-rigt:12; padding: 0; display: flex; justify-content: space-around; width: 100%;"> -->
+<!-- {% for i in site.data.urls %} -->
+<!-- 	{% assign current = nil %} -->
+<!-- 	{% assign pageurl = page.url | split:'/' | last %} -->
+<!-- 	{% assign menuurl = i.url | split:'/' | last %} -->
+<!-- 	{% assign linkurl = nil %} -->
+<!-- 	{% if i.url contains '://' %} -->
+<!-- 	{% assign linkurl = i.url %} -->
+<!-- 	{% else %} -->
+<!-- 	{% assign linkurl = i.url | prepend: site.baseurl %} -->
+<!-- 	{% endif %} -->
+<!-- 	{% assign target = i.target %} -->
+<!--     {% unless target %} {% assign target = '_self' %} {% endunless %} -->
+<!-- 	{% if pageurl == menuurl or page.layout == i.layout %} {% assign current = 'current-menu-item' %} {% endif %} -->
+<!-- col-lg-12 col-md-12 col-sm-4 col-xs-12 -->
+<!-- 	<li  -->
+<!--         class="adj-li-nav-width col-lg-12 col-sm-4 col-xs-12 {{ current }} {{ pageurl }}"  -->
+<!--         style=" flex-grow: 1;text-align: center;" > -->
+<!--         <a href="{{ linkurl }}" target="{{ target }}" -->
+<!--             style="display:block;"> -->
+<!--             <i class="fa {{ i.icon }}" style="width:24px;"></i> -->
+<!--             {{ i.text }} -->
+<!--         </a> -->
+<!--     </li> -->
+<!-- {% endfor %} -->
+<!-- </ul> -->

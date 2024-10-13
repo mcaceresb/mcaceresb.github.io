@@ -1,6 +1,6 @@
 ---
 layout: coding
-title: Coding
-subtitle: Coding
+title: Coding and Software
+subtitle: Coding and Software
 permalink: /coding/
 ---

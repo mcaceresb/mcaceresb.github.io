@@ -7,7 +7,8 @@
   },
   {
     "text": "CV",
-    "url": "/cv/",
+    "url": "/assets/CV_CaceresBravo.pdf",
+    "target": "_blank",
     "icon": "fa-graduation-cap"
   },
   {

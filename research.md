@@ -7,12 +7,12 @@ permalink: /research/
 
 ### Job Market Paper
 
-Prison Misconduct Effects and Inmate Outcomes (Draft soon!)
+The Effects of Prisons on Inmate Misconduct and Later Outcomes (Draft soon!)
 
 <!-- <small></small> -->
 <!-- 
 
-[Prison Misconduct Effects and Inmate Outcomes](https://www.dropbox.com/scl/fi/6wbsdfzrnhj2ha9wwshuo/Caceres-Bravo-JMP-Draft.pdf?rlkey=3zcsr6p0k32px8e0mnieoxxac&st=vqh4lgws&dl=0)
+[The Effects of Prisons on Inmate Misconduct and Later Outcomes](https://www.dropbox.com/scl/fi/6wbsdfzrnhj2ha9wwshuo/Caceres-Bravo-JMP-Draft.pdf?rlkey=3zcsr6p0k32px8e0mnieoxxac&st=vqh4lgws&dl=0)
 
 Inmates in the US are assigned to different government-run facilities to serve their sentences and can face highly heterogeneous environments. I study how being assigned to different prisons affects short- and long-term inmate outcomes. Using data from the Pennsylvania Department of Corrections, I estimate the effect of different prisons on inmate misconduct while incarcerated, controlling for a rich set of sentencing and assessment variables used to assign inmates to prisons. I test for bias in my estimates in two ways. First, I show balance across inmate demographics. Second, I leverage inmate transfers between prisons in a "movers" design to show misconduct effects accurately reflect causal prison treatment effects. Being assigned to a prison in the highest vs. lowest decile of misconduct effects approximately doubles the inmate's misconduct, increases additional months in prison by 9%, and increases prison reentry from serious crime by 11%. Over-crowding and the criminality of peers are most predictive of misconduct effects. A policy that assigns 20% of new inmates to the prisons that most reduce misconduct can decrease their misconduct by up to 40%, time in prison by 4%, and reentry from serious crime by 5%.
 

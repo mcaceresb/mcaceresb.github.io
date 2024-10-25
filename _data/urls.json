@@ -25,10 +25,5 @@
     "text": "Coding",
     "url": "/coding",
     "icon": "fa-code"
-  },
-  {
-    "text": "Blog",
-    "url": "/blog/",
-    "icon": "fa-comments"
   }
 ]

@@ -31,6 +31,6 @@ Inmates in the US are assigned to different government-run facilities to serve t
 
 ### Projects in Progress
 
-_Design-Based Estimation of Structural Parameters, with an Application to Demand_ (with Kirill Borusyak and Peter Hull).
+_Estimating Structural Models of Demand with Recentered Instruments_ (with Kirill Borusyak and Peter Hull).
 
 _Killer Ride: Mortality and Cost Implications of Ambulance Ownership_ (with Joseph Doyle, John Graves, and Jonathan Gruber).

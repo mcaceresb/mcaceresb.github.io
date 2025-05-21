@@ -674,4 +674,63 @@ LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/OpenSansLight(0)/m/n --> TU/OpenSansLight(0)/b/n on 
 input line 30.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/Op
+(Font)                  OT1/cmr/bx/it --> TU/OpenSansLight(0)/b/it on input lin
+e 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 30.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(0.0pt, 241.84842pt, 0.0pt)
+* v-part:(T,H,B)=(21.33955pt, 220.50887pt, 0.0pt)
+* \paperwidth=241.84842pt
+* \paperheight=241.84842pt
+* \textwidth=241.84842pt
+* \textheight=220.50887pt
+* \oddsidemargin=-72.26999pt
+* \evensidemargin=-72.26999pt
+* \topmargin=-87.93044pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
+ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into 
+your preamble.
+ on input line 30.
+
+[1
+
+] (./icon-testing.aux) ) 
+Here is how much of TeX's memory you used:
+ 25991 strings out of 476683
+ 723481 string characters out of 5809790
+ 1845018 words of memory out of 5000000
+ 45814 multiletter control sequences out of 15000+600000
+ 512479 words of font info for 56 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 99i,5n,94p,727b,558s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on icon-testing.pdf (1 page).

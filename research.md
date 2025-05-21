@@ -22,6 +22,6 @@ Inmates in the US are assigned to different government-run prisons to serve thei
 
 ### Projects in Progress
 
-_Estimating Structural Models of Demand with Recentered Instruments_ (with Kirill Borusyak and Peter Hull).
+[_Estimating Demand with Recentered Instruments_](https://arxiv.org/pdf/2504.04056) (with [Kirill Borusyak](https://sites.google.com/view/borusyak/home) and [Peter Hull](https://about.peterhull.net)).
 
 _Killer Ride: Mortality and Cost Implications of Ambulance Ownership_ (with Joseph Doyle, John Graves, and Jonathan Gruber).

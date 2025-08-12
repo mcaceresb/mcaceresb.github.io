@@ -79,24 +79,23 @@ img {
 
 <div class="mycontainer">
 <div class="mycol-text">
-    <p>I'm a Ph.D. candidate in the Department of Economics at Brown University.
-    Starting in August of 2025, I am thrilled to join the Department of Economics
-    and Finance at the Zicklin School of Business in Baruch College as an
-    Assistant Professor.</p>
+    <p>Starting August of 2025, I am thrilled to join the Department of
+    Economics and Finance at the Zicklin School of Business in Baruch College
+    as an Assistant Professor.</p>
     
     <p>I am an applied microeconomist. My primary fields of interest are
     criminal justice, applied econometrics, and healthcare.</p>
     
-    <p>I have a MA in Economics from Columbia University, and BS in Economics
-    and a BS in Mathematics from the University of Utah. I worked as a
-    research assistant at the National Bureau of Economic Research for two
-    years and at the Yale School of Management for two years. I've also worked
-    as a credit risk analyst at Zions Bancorporation in Utah and as a data
-    analyst for the Veteran's Administration in Boston.</p>
+    <p>I received a Ph.D. in Economics from Brown University. I have an
+    M.A. in Economics from Columbia University and undergraduate degrees
+    in Economics and in Mathematics from the University of Utah. For
+    other details, see my <a href="/cv/">CV</a>.</p>
+
+    <p>You can reach me at <a href="mailto:mauricio.caceresbravo@baruch.cuny.edu">mauricio.caceresbravo@baruch.cuny.edu</a>.</p>
 </div>
 
 <!-- 4 or 5; 7278 -->
 <div class="mycol-image-cropper">
-    <img src="{{ "/assets/mauricio-rect5.jpg" | relateive_url }}" alt="Mauricio Portrait" class="rounded" >
+    <img src="{{ "/assets/mauricio-rect8.jpg" | relateive_url }}" alt="Mauricio Portrait" class="rounded" >
 </div>
 </div>
